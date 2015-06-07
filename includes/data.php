@@ -59,12 +59,22 @@ $_ginfo["action_constrain"]=array(
 	"logout"=>array("need"=>array()),
 	"sendmsg"=>array("need"=>array("msg","rid","type","formid"),"users"=>"au","isfilter"=>"sisi"),
 	"loadmsg"=>array("need"=>array("uid","num_msg","minid","maxid","is_load_newer"),"users"=>"au","isfilter"=>""),
-	"addcontent"=>array("need"=>array("title","data","catg"),"isfilter"=>"ssi")
+	"addcontent"=>array("need"=>array("title","data","catg"),"isfilter"=>"ssi"),
+	"addform"=>array("need"=>array("formjson","title","catg"),"isfilter"=>"ssi"),
+	"addingroup"=>array("need"=>array("gid","uids")),
+	"creategroup"=>array("need"=>array("uids","name")),
+	"addgoal"=>array("need"=>array("title","expiredate","type")),
+	"set_goalstatus"=>array("need"=>array("gid","status")),
+	"get_goals"=>array("need"=>array("type")),
+	"get_allpastgoals"=>array(),
+	"addexercise"=>array("needs"=>array("title","content"))
 );
 
 
 $_ginfo["autoinsert"]=array(
-	"addcontent"=>array("fixed"=>array("time","uid"))
+	"addcontent"=>array("fixed"=>array("time","uid"),"table"=>"content"),
+	"addform"=>array("fixed"=>array("time"),"table"=>"forms"),
+	"addexercise"=>array("fixed"=>array("time","uid"),"table"=>"exercise")
 );
 
 

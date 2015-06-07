@@ -65,5 +65,7 @@ class Actions{
 		$query=array("select users.name,users.profilepic, msgdata.msg, msgdata.type, msgdata.formid, msgdata.time, msg.* from msg left join msgdata on msg.msgid=msgdata.id left join users on users.id=(case when msg.aid=msg.sid then msg.rid else msg.sid end) where aid=? AND rid=? order by msg.id desc",'ii',array(&$loginid,&$data["uid"]));
 		return array("ec"=>1,"data"=>Sqle::loadtables($query,'id'));
 	}
+
+
 }
 ?>

@@ -9,7 +9,7 @@ function dt($tn){
 
 
 function drop_tables(){
-	$tl=array("users","questions","conv","notf","sol","solndb","expert","mytopics","soln","subs","alltopics");
+	$tl=array("users","msg","forms","msgdata","formsoln","content","catg");
 	foreach($tl as $i=>$val){
 		dt($val);
 	}
@@ -40,17 +40,21 @@ function make_table(){
 
 	echo Sql::query("CREATE TABLE catg (id int NOT NULL AUTO_INCREMENT, name varchar(100), type varchar(1), p int, PRIMARY KEY ( id) ) ");	
 	//p for parent catg , catg type : 'c'=> content type catg, 'f' => form type catgs
+
+	echo Sql::query("CREATE TABLE groups (id int NOT NULL AUTO_INCREMENT, name varchar(500), time int , PRIMARY KEY ( id) ) ");
+	echo Sql::query("CREATE TABLE groupmember (gid int , uid int, time int) ");
+
+	echo Sql::query("CREATE TABLE exercise (id int NOT NULL AUTO_INCREMENT, title varchar(100), content varchar(2000), uid int, time int, PRIMARY KEY ( id) )");
+
+	echo Sql::query("CREATE TABLE goals (id int NOT NULL AUTO_INCREMENT, title varchar(100), expiredate int, status varchar(1), uid int, type varchar(1), PRIMARY KEY ( id) )");
+	echo Sql::query("ALTER TABLE goals add time int NULL ");
 }
 
 
 
 
-//drop_table();
-//dt("questions");
-//dt("conv");
-//dt("expert");
+drop_tables();
 make_table();
-//drop_all();
 
 closedb();
 

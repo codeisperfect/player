@@ -81,6 +81,10 @@
 		}
 		return true;
 	}
+	function getmyneed($fname){
+		global $_ginfo;
+		return $_ginfo["action_constrain"][$fname]["need"];
+	}
 
 	function handle_request($post_data){
 		global $_ginfo;
@@ -102,16 +106,20 @@
 					$outp=$a->$func($post_data);
 				else if( method_exists($b,$post_data["action"]))
 					$outp=$b->$func($post_data);
-				else if(islset($_ginfo,array("autoinsert","addcontent"]))){
-					$action_spec=$_ginfo["autoinsert"]["addcontent"];
+				else if(islset($_ginfo,array("autoinsert",$post_data["action"]))) {
+					$action_spec=$_ginfo["autoinsert"][$post_data["action"]];
 					$action_spec=Fun::mergeifunset($action_spec,array("fixed"=>array(),"add"=>array()));
+					$ins_data=Fun::getflds(getmyneed($post_data["action"]) , $post_data );
+					$ins_data=Fun::mergeifunset($ins_data,$action_spec["add"]);
+					$fixvalues=array("time"=>time(),"uid"=>User::loginId());
+					foreach($action_spec["fixed"] as $i=>$val){
+						$ins_data[$val]=$fixvalues[$val];
+					}
+					$outp["data"]=Sqle::insertVal($action_spec["table"],$ins_data);
+					$outp["ec"]=1;
 				}
 			}
 		}
 		return $outp;
-	}
-	function getmyneed($fname){
-		global $_ginfo;
-		return $_ginfo["action_constrain"][$fname]["need"];
 	}
 ?>
