@@ -22,9 +22,10 @@ from BeautifulSoup import BeautifulSoup
 def remf(inp,outp):
 	slist=[];
 	soup=BeautifulSoup(read_file(inp));
-	for s in soup('script'):
-		slist.append(s);
-		s.extract();
+	if(0):
+		for s in soup('script'):
+			slist.append(s);
+			s.extract();
 	data=str(soup.prettify());
 	write_file(outp,data);
 

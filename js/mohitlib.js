@@ -433,4 +433,19 @@ function extend(jobj,cfunc){
 	}
 }
 
+function remove(list1,e,fsatis){
+	var outp=[];
+	for(var i=0;i<list1.length;i++){
+		if( (fsatis==null && list1[i]!=e) || (fsatis!=null && fsatis(list1[i],e))  ){
+			outp.push(list1[i]);
+		}
+	}
+	return outp;
+}
 
+
+function doforall(list1,f){
+	for(var i=0;i<list1.length;i++){
+		f(list1[i]);
+	}
+}

@@ -43,7 +43,7 @@ var checkValidInput={
 
 function checkValid(obj,e){
 	if(e.keyCode!=9){
-		signObj=$(obj).parent().children("span");
+		signObj=$(obj).parent().children("span.tick");
 		var classes=["glyphicon-remove","glyphicon-ok","glyphicon-warning-sign"];
 		function removeSign(){
 			for(i=0;i<classes.length;i++){
@@ -53,7 +53,7 @@ function checkValid(obj,e){
 		removeSign();
 		if( obj.getAttribute('data-condition')!=null &&  checkValidInput[ obj.getAttribute('data-condition') ](obj) ){
 			signObj.addClass(classes[1]);
-			signObj.parent().removeClass("has-error");
+			$(obj).parent().removeClass("has-error");
 		}
 		else
 			signObj.addClass(classes[0]);

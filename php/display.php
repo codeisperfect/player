@@ -7,7 +7,9 @@
 		$keys=array_keys($data);
 		for($i=0;$i<count($keys);$i++){
 			if( in_array($keys[$i],$temp) || substr($keys[$i],0,5)=="data-" || substr($keys[$i],0,2)=="on" ){
-				$params.=(" ".(isset($keymap[$keys[$i]])?$keymap[$keys[$i]]:$keys[$i])."='".$data[$keys[$i]]."' ");
+				if(!($data[$keys[$i]]=="" && in_array($keys[$i],$_ginfo["shoudnotnull"])  )){
+					$params.=(" ".(isset($keymap[$keys[$i]])?$keymap[$keys[$i]]:$keys[$i])."='".$data[$keys[$i]]."' ");
+				}
 			}
 		}
 		return $params;
@@ -317,11 +319,59 @@
 		ocloset("script",'',array("type"=>"text/javascript","src"=>$src));
 		echo "\n";
 	}
+	function addall_js($arr){
+		foreach($arr as $i=>$src)
+			addjs($src);
+	}
+	function addall_css($arr){
+		foreach($arr as $i=>$src)
+			addcss($src);
+	}
 	function disp_olist($inp,$option=array()){
-		$olist=Fun::create_olist($inp,$option);
+		$option=Fun::mergeifunset($option,array('selected'=>''));
+		$olist=$inp;
 		foreach($olist as $key=>$val){
-			ocloset("option",$val["disptext"],array("value"=>$val["val"]));
+			$param=array("value"=>$val["val"]);
+			if($option["selected"]==$val["val"])
+				$param["selected"]="";
+			ocloset("option",$val["disptext"],$param);
 		}
 	}
-
+	function addmycss(){
+		addcss("css/lib.css");
+		addcss("css/main.css");
+	}
+	function addmyjs(){
+		//Assuming Bootstrap & Jquery are already added
+		addall_js(array("js/lib.js","js/mohit.js","js/errorcodes.js","js/mohitlib.js","js/main.js"));
+	}
+	function readmorecontent($content,$len=100){//assuming $content is not changed to smily already ! 
+		$llen=(strlen($content)>$len ? $len-10:$len);
+		$fhalf=Fun::smilymsg(substr($content,0,$llen));
+		opent("span");
+		ocloset("span",$fhalf);
+		if(strlen($content)>$len){
+			ocloset("a"," Read more",array("onclick"=>"a.readmore(this);"));
+			$shalf=Fun::smilymsg(substr($content,$llen));
+			ocloset("span",$shalf,array("style"=>"display:none;"));
+		}
+		closet("span");
+?>
+<?php	
+	}
+	function rating($name,$n=5,$total=5){
+		opent("div",array("data-selected"=>$n,"onmouseout"=>"rating.goout(this);","style"=>"cursor:pointer;"));
+		for($i=1;$i<=$total;$i++){
+?>
+     <i class="fa fa-star" <?php if($i<=$n) echo "style='color:#FFD700;'"; ?> onmouseover='rating.selectn($(this).parent()[0],<?php echo $i; ?>);' >
+     </i>
+<?php			
+		}
+		hidinp($name,$n);
+		closet("div");
+	}
+	function resimg($img,$params=array()){
+		$params=Fun::mergeifunset($params,array("src"=>$img,"class"=>"img-responsive"));
+		opent("img",$params);
+	}
 ?>

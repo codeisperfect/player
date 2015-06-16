@@ -1,0 +1,427 @@
+<?php
+load_view("template/topnew.php",array("addcss"=>array("assets/css/login.css"),"title"=>"User Profile","closehead"=>false));
+?>
+
+  <link href="assets/icons/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen" />
+  <link href="assets/icons/ionicons/css/ionicons.min.css" rel="stylesheet" media="screen" />
+  <link rel="stylesheet" href="assets/icons/flags/flags.css" />
+  <link rel="stylesheet" href="assets/lib/select2/select2.css" />
+  <link href="assets/lib/bootstrap-switch/build/css/bootstrap3/bootstrap-switch.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" media="screen" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400&amp;subset=latin-ext,latin" rel="stylesheet" type="text/css" />
+  <script src="assets/lib/moment-js/moment.min.js">
+  </script>
+ </head>
+ <body>
+<?php
+load_view("template/header.php");
+?>
+  <div id="main_wrapper">
+   <div class="page_bar clearfix" style="background-color:#FDC589;">
+    <div class="row">
+     <div class="col-md-12">
+      <div class="media">
+       <img class="img-thumbnail pull-left" src="assets/img/avatars/avatar_3.jpg" alt="" />
+       <div class="media-body">
+        <h1 class="page_title">
+         Monalisha
+        </h1>
+        <p>
+         Change Photo
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="page_content">
+    <div class="container-fluid">
+     <div class="row">
+      <div class="col-md-12">
+       <div class="panel panel-default">
+        <div class="panel-body">
+         <div class="user_profile">
+          <form class="form-horizontal">
+           <div class="tabbable tabs-right">
+            <ul class="nav nav-tabs">
+             <li class="active">
+              <a data-toggle="tab" href="#profile_general_pane" class="tab-default">
+               General Info
+              </a>
+             </li>
+             <li>
+              <a data-toggle="tab" href="#profile_contact_pane" class="tab-default">
+               Contact Info
+              </a>
+             </li>
+             <li>
+              <a data-toggle="tab" href="#profile_other_pane" class="tab-default">
+               Other Info
+              </a>
+             </li>
+            </ul>
+            <div class="tab-content">
+             <div id="profile_general_pane" class="tab-pane active">
+              <div class="form-group">
+               <label for="profile_username" class="col-md-2 control-label">
+                Username
+               </label>
+               <div class="col-md-10">
+                <input type="text" id="profile_username" class="form-control" value="rowland_wunsch" />
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="user_fname" class="col-md-2 control-label">
+                First Name
+               </label>
+               <div class="col-md-10">
+                <input type="text" id="user_fname" class="form-control" value="Rowland" />
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="user_lname" class="col-md-2 control-label">
+                Last Name
+               </label>
+               <div class="col-md-10">
+                <input type="text" id="user_lname" class="form-control" value="Wunsch" />
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="user_password" class="col-md-2 control-label">
+                Password
+               </label>
+               <div class="col-md-10">
+                <input type="password" id="user_password" class="form-control" value="password" />
+               </div>
+              </div>
+             </div>
+             <div id="profile_contact_pane" class="tab-pane">
+              <div class="form-group">
+               <div class="col-md-12">
+                <div class="heading_b">
+                 Address
+                </div>
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="profile_city" class="col-md-2 control-label">
+                City
+               </label>
+               <div class="col-md-10">
+                <input type="text" id="profile_city" class="form-control" />
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="profile_country" class="col-md-2 control-label">
+                Country
+               </label>
+               <div class="col-md-10">
+                <input type="text" id="profile_country" class="form-control" />
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="profile_street" class="col-md-2 control-label">
+                Street
+               </label>
+               <div class="col-md-10">
+                <input type="text" id="profile_street" class="form-control" />
+               </div>
+              </div>
+              <div class="form-group">
+               <div class="col-md-12">
+                <div class="heading_b">
+                 Social
+                </div>
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="profile_email" class="col-md-2 control-label">
+                Email
+               </label>
+               <div class="col-md-10">
+                <input type="text" id="profile_email" class="form-control" value="lenny34@yahoo.com" />
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="profile_skype" class="col-md-2 control-label">
+                Skype
+               </label>
+               <div class="col-md-10">
+                <input type="text" id="profile_skype" class="form-control" value="rowland_wunsch" />
+               </div>
+              </div>
+             </div>
+             <div id="profile_other_pane" class="tab-pane">
+              <div class="form-group">
+               <label for="user_languages" class="col-md-2 control-label">
+                Signature
+               </label>
+               <div class="col-md-10">
+                <textarea name="user_signature" id="user_signature" cols="30" rows="4" class="form-control">
+                </textarea>
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="user_languages" class="col-md-2 control-label">
+                Languages
+               </label>
+               <div class="col-md-10">
+                <input type="text" name="user_languages" id="user_languages" class="form-control" value="English,French" />
+               </div>
+              </div>
+              <div class="form-group">
+               <label for="user_languages" class="col-md-2 control-label">
+                Newsletter
+               </label>
+               <div class="col-md-10">
+                <input type="checkbox" class="bs_switch" data-on-color="success" data-on-text="Yes" data-off-text="No" />
+               </div>
+              </div>
+             </div>
+            </div>
+            <hr />
+            <div class="text-center">
+             <button class="btn btn-success">
+              <i class="fa fa-save">
+              </i>
+              Save profile
+             </button>
+             <button class="btn btn-default">
+              <i class="fa fa-trash-o fa-lg">
+              </i>
+              Delete
+             </button>
+            </div>
+           </div>
+          </form>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- side navigation -->
+  <nav id="side_nav">
+   <ul>
+    <li>
+     <a href="user_profile.html">
+      <span class="ion-search">
+      </span>
+      <span class="nav_title">
+       Explore
+      </span>
+     </a>
+    </li>
+    <li>
+     <a href="user_profile.html">
+      <span class="ion-android-social-user">
+      </span>
+      <span class="nav_title">
+       Profile
+      </span>
+     </a>
+    </li>
+    <li>
+     <a href="calendar.html">
+      <span class="ion-calendar">
+      </span>
+      <span class="nav_title">
+       Calendar
+      </span>
+     </a>
+    </li>
+    <li>
+     <a href="#">
+      <span class="ion-clipboard">
+      </span>
+      <span class="nav_title">
+       Track
+      </span>
+     </a>
+     <div class="sub_panel">
+      <div class="side_inner">
+       <h4 class="panel_heading panel_heading_first">
+        Logs
+       </h4>
+       <ul>
+        <li>
+         <a href="daily-log.html">
+          Daily Log
+         </a>
+        </li>
+        <li>
+         <a href="weekly-review-from.html">
+          Weekly Review
+         </a>
+        </li>
+        <li>
+         <a href="misc-form.html">
+          Misc. Forms
+         </a>
+        </li>
+        <li>
+         <a href="graph.html">
+          Graphs
+         </a>
+        </li>
+       </ul>
+       <h4 class="panel_heading">
+        Reference
+       </h4>
+       <ul>
+        <li class="add_label">
+         <a href="goal.html">
+          Goals
+         </a>
+        </li>
+        <li class="add_label">
+         <a href="exercise.html">
+          Exercises
+         </a>
+        </li>
+        <li class="add_label">
+         <a href="routines.html">
+          Routines
+         </a>
+        </li>
+        <li class="add_label">
+         <a href="training-history.html">
+          History
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </li>
+    <li>
+     <a href="#">
+      <span class="ion-game-controller-a">
+      </span>
+      <span class="nav_title">
+       Train
+      </span>
+     </a>
+     <div class="sub_panel">
+      <div class="side_inner">
+       <h4 class="panel_heading">
+        Pages
+       </h4>
+       <ul>
+        <li>
+         <a href="#">
+          N Bach
+         </a>
+        </li>
+        <li>
+         <a href="#">
+          Intractive Metro
+         </a>
+        </li>
+        <li>
+         <a href="#">
+          Breathing Practice
+         </a>
+        </li>
+        <li>
+         <a href="#">
+          Meditation
+         </a>
+        </li>
+        <li>
+         <a href="#">
+          Sound Track
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </li>
+    <li>
+     <a href="#">
+      <span class="ion-android-friends">
+      </span>
+      <span class="nav_title">
+       Consult
+      </span>
+     </a>
+     <div class="sub_panel">
+      <div class="side_inner">
+       <h4 class="panel_heading">
+        Pages
+       </h4>
+       <ul>
+        <li>
+         <a href="chat.html">
+          Instant Massenger
+         </a>
+        </li>
+        <li>
+         <a href="post.html">
+          Post A Question
+         </a>
+        </li>
+        <li>
+         <a href="challenges.html">
+          Thinking Review Forms
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </li>
+    <li>
+     <a href="chat.html">
+      <span class="ion-chatbubble">
+      </span>
+      <span class="nav_title">
+       Chat
+      </span>
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <!-- right slidebar -->
+  <!-- jQuery -->
+  <script src="assets/js/jquery.min.js">
+  </script>
+  <!-- easing -->
+  <script src="assets/js/jquery.easing.1.3.min.js">
+  </script>
+  <!-- bootstrap js plugins -->
+  <script src="assets/bootstrap/js/bootstrap.min.js">
+  </script>
+  <!-- top dropdown navigation -->
+  <script src="assets/js/tinynav.js">
+  </script>
+  <!-- perfect scrollbar -->
+  <script src="assets/lib/perfect-scrollbar/min/perfect-scrollbar-0.4.8.with-mousewheel.min.js">
+  </script>
+  <!-- common functions -->
+  <script src="assets/js/tisa_common.js">
+  </script>
+  <!-- style switcher -->
+  <!-- page specific plugins -->
+  <!-- multiselect, tagging -->
+  <script src="assets/lib/select2/select2.min.js">
+  </script>
+  <!--  bootstrap switches -->
+  <script src="assets/lib/bootstrap-switch/build/js/bootstrap-switch.min.js">
+  </script>
+  <!-- user profile functions -->
+  <script src="assets/js/apps/tisa_user_profile.js">
+  </script>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49181536-1']);
+		_gaq.push(['_trackPageview']);
+	  
+		(function() {
+		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+  </script>
+ </body>
+</html>

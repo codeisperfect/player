@@ -122,4 +122,113 @@
 		}
 		return $outp;
 	}
+	function mergeifunset(&$a,$b){
+		$keys=array_keys($b);
+		for($i=0;$i<count($keys);$i++){
+			if(!isset($a[$keys[$i]]))
+				$a[$keys[$i]]=$b[$keys[$i]];
+		}
+		return $a;
+	}
+	function myexplode($n,$st){
+		$temp=explode($n,$st);
+		return (count($temp)==1 && $temp[0]=="") ? array() : $temp;
+	}
+	function intexplode($ex,$inp){
+		$temp=myexplode($ex,$inp);
+		foreach($temp as $i=>$val){
+			$temp[$i]=0+$val;
+		}
+		return $temp;
+	}
+	function daystarttime($ts=null){
+		setifnn($ts,time());
+		return strtotime(Fun::timetodate($ts));
+	}
+	function resizeimg($filename,$tosave, $max_width, $max_height){
+		$imginfo=getimagesize($filename);
+		list($orig_width, $orig_height) = $imginfo;
+		$type=$imginfo[2];
+
+
+		$crop_width=$orig_width;
+		$crop_height=$orig_height;
+		if($orig_width*$max_height <= $orig_height*$max_width){
+			$crop_height=$orig_width*$max_height/$max_width;
+		}
+		else{
+			$crop_width=$orig_height*$max_width/$max_height;
+		}
+
+		$image_p = imagecreatetruecolor($max_width, $max_height);
+		switch($type){
+			case "1": 
+				$image = imagecreatefromgif($filename); 
+				$transparent = imagecolorallocatealpha($image_p, 0, 0, 0, 127);
+				imagefill($image_p, 0, 0, $transparent);
+				imagealphablending($image_p, true); 				
+				break;
+			case "2": $image = imagecreatefromjpeg($filename);break;
+			case "3": 
+				$image = imagecreatefrompng($filename);
+				imagealphablending($image_p, false);
+				imagesavealpha($image_p, true);
+				break;
+			default:  $image = imagecreatefromjpeg($filename);
+		}
+		imagecopyresampled($image_p, $image, 0, 0, ($orig_width-$crop_width)/2, ($orig_height-$crop_height)/2, $max_width, $max_height, $crop_width, $crop_height);
+
+		$ext=pathinfo($tosave, PATHINFO_EXTENSION);
+
+		switch($ext){
+			case "gif": imagegif($image_p,$tosave); break;
+			case "jpg": imagejpeg($image_p,$tosave,100); break;
+			case "jpeg": imagejpeg($image_p,$tosave,100); break;
+			case "png": imagepng($image_p,$tosave,0);break;
+			default: imagejpeg($image_p,$tosave,100);
+		}
+		chmod($tosave,0777);
+	}
+	function getrefarr(&$inp){
+		$outp=array();
+		foreach($inp as $i=>$val){
+			$outp[]=&$inp[$i];
+		}
+		return $outp;
+	}
+	function gtable($name){
+		global $_ginfo;
+		return $_ginfo["query"][$name];
+	}
+	function grouplist($inp,$gap=1){
+		$outp=array();
+		$started=0;
+		$ended=0;
+		for($i=0;$i<count($inp);$i++){
+			if($started==null){
+				$started=$inp[$i];
+				$ended=$started;
+			}
+			else if($inp[$i]-$ended==$gap){
+				$ended=$inp[$i];
+			}
+			else{
+				$outp[]=array($started,($ended-$started)/$gap+1);
+				$started=null;
+				$i--;
+			}
+		}
+		if($started!=null){
+			$outp[]=array($started,($ended-$started)/$gap+1 );
+		}
+		return $outp;
+	}
+	function sql2dict($data,$key){
+		$outp=array();
+		foreach($data as $i=>$row){
+			$outp[$row[$key]]=$row;
+		}
+		return $outp;
+	}
+
 ?>
