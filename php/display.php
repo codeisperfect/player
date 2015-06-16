@@ -374,4 +374,7 @@
 		$params=Fun::mergeifunset($params,array("src"=>$img,"class"=>"img-responsive"));
 		opent("img",$params);
 	}
+	function dit($cond=false){
+		echo ((!$cond)?"display:none;":"");
+	}
 ?>

@@ -12,19 +12,29 @@
 			Sql::init($DB);
 		}
 	}
+
 	function closedb(){
 		global $DB;
 		if($DB!=null)
 			$DB->close();
 	}
-	function getval($key,$arr){
-		 return (isset($arr[$key]) ? $arr[$key] : null );
+	function getval($key,$arr,$default=null){
+		 return (isset($arr[$key]) ? $arr[$key] : $default );
 	}
-	function post($key){
-		return getval($key,$_POST);
+	function post($key,$default=null){
+		return getval($key,$_POST,$default);
 	}
-	function get($key){
-		return getval($key,$_GET);
+	function isget($key){
+		return isset($_GET[$key]);
+	}
+	function ispost($key){
+		return isset($_POST[$key]);
+	}
+	function isses($key){
+		return isset($_SESSION[$key]);
+	}
+	function get($key,$default=null){
+		return getval($key,$_GET,$default);
 	}
 	function sets($key,$val){
 		$_SESSION[$key]=$val;
@@ -32,6 +42,8 @@
 	function gets($key){
 		return $_SESSION[$key];
 	}
+
+
 	function load_view($view,$inp=array()){
 		global $view_default;
 		if(isset($view_default[$view]))
@@ -229,6 +241,21 @@
 			$outp[$row[$key]]=$row;
 		}
 		return $outp;
+	}
+	function lastelm($arr){
+		if(count($arr)==0)
+			return null;
+		else
+			return $arr[count($arr)-1];
+	}
+	function firstelm($arr){
+		if(count($arr)==0)
+			return null;
+		else
+			return $arr[0];
+	}
+	function curfilename(){
+		return firstelm(explode(".",lastelm(explode("/",$_SERVER['SCRIPT_FILENAME']))));
 	}
 
 ?>

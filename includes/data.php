@@ -51,7 +51,11 @@ $view_default=array(
 		"label"=>"Enter",
 		"name"=>"",
 		"type"=>"",
-		"closediv"=>true
+		"closediv"=>true,
+		"dc"=>"simple"
+		),
+	"login.php"=>array(
+		"defopen"=>"signup"
 		)
 	);
 
