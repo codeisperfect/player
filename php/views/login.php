@@ -3,7 +3,7 @@ load_view("template/topnew.php",array("addcss"=>array("assets/css/login.css"),"t
 ?>
  <body>
   <div class="login_container">
-   <form id="login_form"  method="post" onsubmit='return submitForm(this);' action="" style='<?php dit($defopen=="login"); ?>' >
+   <form id="login_form"  method="post" onsubmit='return form.valid.action(this);' action="" style='<?php dit($defopen=="login"); ?>' >
     <h1 class="login_heading">
      Login
      <span>
@@ -13,6 +13,7 @@ load_view("template/topnew.php",array("addcss"=>array("assets/css/login.css"),"t
       </a>
      </span>
     </h1>
+    <div style="margin-top:-10px;margin-bottom:10px;color:red;" ><?php echo errormsg($ec); ?></div>
     <?php
     load_view("template/input.php",array("name"=>"email","label"=>"Username","dc"=>"email"));
     load_view("template/input.php",array("name"=>"password","label"=>"Password","type"=>"password","closediv"=>false));
@@ -52,7 +53,7 @@ load_view("template/topnew.php",array("addcss"=>array("assets/css/login.css"),"t
      </button>
     </div>
    </form>
-   <form id="register_form" style="<?php dit($defopen=="signup"); ?>" action="profile.php" onsubmit="return submitForm(this);" >
+   <form id="register_form" style="<?php dit($defopen=="signup"); ?>" action="profile.php" onsubmit="return form.valid.action(this);" >
     <h1 class="login_heading">
      Register
      <span>
@@ -64,12 +65,12 @@ load_view("template/topnew.php",array("addcss"=>array("assets/css/login.css"),"t
     </h1>
     <?php
       load_view("template/input.php",array("label"=>"Full Name","name"=>"name"));
-      load_view("template/input.php",array("label"=>"Email ID","name"=>"signup_email","dc"=>"email"));
-      load_view("template/input.php",array("label"=>"Password","name"=>"signup_password","type"=>"password"));
+      load_view("template/input.php",array("label"=>"Email ID","name"=>"email","dc"=>"email"));
+      load_view("template/input.php",array("label"=>"Password","name"=>"password","type"=>"password"));
     ?>
     <div class="form-group">
      <label class="checkbox-inline">
-      <input type="checkbox" name="register_terms" id="register_terms" />
+      <input type="checkbox" name="tnc" id="register_terms" data-condition='checkcheckbox' data-unfilled='Terms & Conditions' />
       Agree to
       <a href="javascript:void(0)" data-toggle="modal" data-target="#terms_modal">
        terms&conitions;
@@ -77,7 +78,7 @@ load_view("template/topnew.php",array("addcss"=>array("assets/css/login.css"),"t
      </label>
     </div>
     <div class="submit_section">
-     <button type="submit" class="btn btn-lg btn-success btn-block">
+     <button type="submit" class="btn btn-lg btn-success btn-block" name="signup" >
       Continue
      </button>
     </div>

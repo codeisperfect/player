@@ -15,8 +15,16 @@ function add_catg(){
 	return Sql::query("insert into catg (name,type) ".Fun::makeDummyTableColumns($ins_data,null,'ss')."");
 }
 
+function makesomeaccounts(){
+	print_r(User::signUp(array("email"=>"admin@admin.com","password"=>"p","type"=>"a")));
+	print_r(User::signUp(array("email"=>"mohit@t.com","password"=>"p","type"=>"u")));
+	print_r(User::signUp(array("email"=>"mohit@s.com","password"=>"p","type"=>"f")));
+}
 
-echo add_catg();
+
+
+//echo add_catg();
+echo makesomeaccounts();
 
 
 closedb();

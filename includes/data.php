@@ -55,7 +55,18 @@ $view_default=array(
 		"dc"=>"simple"
 		),
 	"login.php"=>array(
-		"defopen"=>"signup"
+		"defopen"=>"login"
+		),
+	"template/popup.php"=>array(
+		"title"=>"this popup is made in India",
+		"body"=>"",
+		"bodyinfo"=>array(),
+		"footer"=>"",
+		"footerinfo"=>array(),
+		"name"=>"",
+		'stylebody'=>'',
+		'stylemain'=>'min-width:200px;',
+		'defaultfooter'=>true
 		)
 	);
 
@@ -87,6 +98,30 @@ $_ginfo["autoinsert"]=array(
 	"addform"=>array("fixed"=>array("time"),"table"=>"forms"),
 	"addexercise"=>array("fixed"=>array("time","uid"),"table"=>"exercise")
 );
+
+$_ginfo["error"]=array(
+	"-1"=>"Session expired",
+	"-2"=>"You are not right person to perform this action.",
+	"-3"=>"Incorrect formate of input",
+	"-4"=>"Password incorrect",
+	"-5"=>"Username doesn't exist",
+	"-6"=>"Email id not registered",
+	"-7"=>"Action handler not defined",
+	"-8"=>"Session expired or You are not right person to perform this action.",
+	"-9"=>"Not sufficient arguments.",
+	"-16"=>"This email id used Already",
+	"-17"=>"OTP is incorrect",
+	"-19"=>"You cannot choose slot of past.",
+	"-20"=>"You Cannot generate link",
+	"-21"=>"Your account deactivated",
+	"-22"=>"Nobody is login",
+	"-23"=>"File not uploaded",
+	"-24"=>"You cannot do so much repeatition.",
+	"-25"=>"Error",
+	"-25"=>"Subject Already Added",
+	"1"=>"Positive"
+);
+
 
 
 ?>

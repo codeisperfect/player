@@ -275,6 +275,41 @@ var form={
 			}
 			
 		}});
+	},
+	valid:{
+		is:function (obj){
+			var errorlist=[];
+			var inputs=['INPUT','TEXTAREA','SELECT'];
+			var problem=false;
+			for(i=0;i<inputs.length;i++){
+				var ilist=$(obj).find(inputs[i]);
+				for(j=0;j<ilist.length;j++){
+					if(checkValidInput.isChecked( ilist[j]  ) ){
+						$(ilist[j]).parent().removeClass("has-error");
+					}
+					else{
+						$(ilist[j]).parent().addClass("has-error");
+						var errormsg=$(ilist[j]).attr("data-unfilled") || $(ilist[j]).attr("name") || null;
+						errorlist.push(errormsg);
+						if(!problem)
+							$(ilist[j]).focus();
+						problem=true;
+					}
+				}
+			}
+			return errorlist;
+		},
+		action:function(obj){
+			var errors=form.valid.is(obj);
+			if(errors.length>0){
+				for(var i=0;i<errors.length;i++){
+					errors[i]=(i+1)+". "+errors[i];
+				}
+				var dispmsg="You have to fill:<br>"+errors.join("<br>");
+				mohit.alert(dispmsg);
+			}
+			return !(errors.length>0);
+		}
 	}
 };
 

@@ -32,8 +32,9 @@ var checkValidInput={
 	'pint':function(obj){
 		return (checkValidInput.int(obj) && obj.value[0]!='-');//remember obj.value.length is >=1 in second term.
 	},
-
-
+	checkcheckbox:function(obj){
+		return obj.checked;
+	},
 	'isChecked':function (obj){
 		return (obj.getAttribute('data-condition')==null || this[ obj.getAttribute('data-condition') ](obj)) ;
 	}

@@ -257,5 +257,9 @@
 	function curfilename(){
 		return firstelm(explode(".",lastelm(explode("/",$_SERVER['SCRIPT_FILENAME']))));
 	}
+	function errormsg($ec,$cnd=true){
+		global $_ginfo;
+		return (($ec<0 && $cnd) ?getval($_ginfo["error"],$ec,""):"");
+	}
 
 ?>
