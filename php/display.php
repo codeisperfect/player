@@ -343,7 +343,13 @@
 	}
 	function addmyjs(){
 		//Assuming Bootstrap & Jquery are already added
-		addall_js(array("js/lib.js","js/mohit.js","js/errorcodes.js","js/mohitlib.js","js/main.js"));
+		global $_ginfo;//Assuming Bootstrap & Jquery are already added
+		opent("script");
+	?>
+			var ecn=<?php echo json_encode($_ginfo["error"]); ?>;
+	<?php
+		closet("script");
+		addall_js(array("js/lib.js","js/mohit.js","js/mohitlib.js","js/main.js"));
 	}
 	function readmorecontent($content,$len=100){//assuming $content is not changed to smily already ! 
 		$llen=(strlen($content)>$len ? $len-10:$len);

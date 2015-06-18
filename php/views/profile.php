@@ -1,7 +1,6 @@
 <?php
-load_view("template/topnew.php",array("addcss"=>array("assets/css/login.css"),"title"=>"User Profile","closehead"=>false));
+load_view("template/topnew.php",array("addcss"=>array(),"title"=>"User Profile","closehead"=>false));
 ?>
-
   <link href="assets/icons/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen" />
   <link href="assets/icons/ionicons/css/ionicons.min.css" rel="stylesheet" media="screen" />
   <link rel="stylesheet" href="assets/icons/flags/flags.css" />
@@ -24,7 +23,7 @@ load_view("template/header.php");
        <img class="img-thumbnail pull-left" src="assets/img/avatars/avatar_3.jpg" alt="" />
        <div class="media-body">
         <h1 class="page_title">
-         Monalisha
+         <?php echo $uinfo["smily_name"]; ?>
         </h1>
         <p>
          Change Photo
@@ -62,17 +61,18 @@ load_view("template/header.php");
             </ul>
             <div class="tab-content">
              <div id="profile_general_pane" class="tab-pane active">
-              <form onsubmit='form.valid.action(this);return false;' method='post' >
+              <form onsubmit='if(form.valid.action(this)){form.sendreq1(this,$(this).find("button[type=submit]")[0]);};return false;' method='post' data-action='saveuserdetails' data-res="success.push('All Details Saved ! ');" >
                 <?php
-                  load_view("template/input1.php",array('label'=>"Name","name"=>"name"));
-                  load_view("template/input1.php",array('label'=>"Email","name"=>"email"));
+                  hidinp("uid",$uid);
+                  load_view("template/input1.php",array('label'=>"Name","name"=>"name",'inpattr'=>array("value"=>$uinfo["smily_name"])));
+                  load_view("template/input1.php",array('label'=>"Email","name"=>"email","inpattr"=>array("value"=>$uinfo["smily_email"])));
                 ?>
                 <div class="form-group">
-                 <label for="user_languages" class="col-md-2 control-label">
+                 <label  class="col-md-2 control-label">
                   Signature
                  </label>
                  <div class="col-md-10">
-                  <textarea name="user_signature" id="user_signature" cols="30" rows="4" class="form-control"></textarea>
+                  <textarea name="sign" id="user_signature" cols="30" rows="4" class="form-control"><?php echo $uinfo["smily_sign"]; ?></textarea>
                  </div>
                 </div>
 
@@ -81,7 +81,7 @@ load_view("template/header.php");
                   Languages
                  </label>
                  <div class="col-md-10">
-                  <input type="text" name="user_languages" id="user_languages" class="form-control" value="" />
+                  <input type="text" name="lang" id="user_languages" class="form-control" value="" />
                  </div>
                 </div>
                 <div class="form-group">
@@ -89,7 +89,7 @@ load_view("template/header.php");
                   Newsletter
                  </label>
                  <div class="col-md-10">
-                  <input type="checkbox" class="bs_switch" data-on-color="success" data-on-text="Yes" data-off-text="No" />
+                  <input type="checkbox" class="bs_switch" data-on-color="success" data-on-text="Yes" data-off-text="No" name="news" value="" />
                  </div>
                 </div>
                 <?php
@@ -98,7 +98,7 @@ load_view("template/header.php");
               </form>
              </div>
              <div id="profile_contact_pane" class="tab-pane">
-              <form onsubmit='form.valid.action(this);return false;' method='post' >
+              <form onsubmit='if(form.valid.action(this)){form.sendreq1(this,$(this).find("button[type=submit]")[0]);};return false;' method='post' data-action='saveuserdetails' data-res="success.push('All Details Saved ! ');" >
                 <div class="form-group">
                  <div class="col-md-12">
                   <div class="heading_b">
@@ -107,9 +107,13 @@ load_view("template/header.php");
                  </div>
                 </div>
                 <?php
+                hidinp("uid",$uid);
+                if(false){
                   load_view("template/input1.php",array('label'=>"City","name"=>"city"));
                   load_view("template/input1.php",array('label'=>"Country","name"=>"country"));
                   load_view("template/input1.php",array('label'=>"Street","name"=>"street"));
+                }
+                 load_view("template/input1.php",array('label'=>"Full Address","name"=>"address"));
                 ?>
                 <div class="form-group">
                  <div class="col-md-12">
@@ -126,7 +130,7 @@ load_view("template/header.php");
               </form>
              </div>
              <div id="profile_account_pane" class="tab-pane">
-              <form>
+              <form onsubmit='if(form.valid.action(this)){form.sendreq1(this,$(this).find("button[type=submit]")[0]);};return false;' data-action='changepassword' data-res='success.push("Password Changed Successfully");' >
                 <div class="form-group">
                  <div class="col-md-12">
                   <div class="heading_b">
@@ -135,9 +139,9 @@ load_view("template/header.php");
                  </div>
                 </div>
                 <?php
-                  load_view("template/input1.php",array('label'=>"Old password","name"=>"opassword"));
-                  load_view("template/input1.php",array('label'=>"New password","name"=>"npassword"));
-                  load_view("template/input1.php",array('label'=>"Confirm","name"=>"rpassword"));
+                  load_view("template/input1.php",array('label'=>"Old password","name"=>"opassword","type"=>"password",'inpattr'=>array("data-unfilled"=>"Old password")));
+                  load_view("template/input1.php",array('label'=>"New password","name"=>"npassword","inpattr"=>array("id"=>"password","data-unfilled"=>"New password"),"type"=>"password"));
+                  load_view("template/input1.php",array('label'=>"Confirm","name"=>"rpassword",'dc'=>"password","type"=>"password",'inpattr'=>array("data-unfilled"=>"Correct Confirm password")));
                 ?>
                 <hr/>
                 <div class="text-center">

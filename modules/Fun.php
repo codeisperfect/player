@@ -54,12 +54,13 @@ abstract class Fun{
 		global $_POST;
 		return self::isAllSet( func_get_args() , $_POST );
 	}
-	public static function issetlogout(){
+
+
+	public static function issetlogout($goto=HOST){
 		if(isset($_GET['logout'])) {
-			closedb();
-			$_SESSION['login']=null;
-			header("Location: ".HOST);
-			exit(0);
+			User::logout();
+			if($goto!=null)
+				self::redirect($goto);
 		}
 	}
 	public static function redirect($url){
@@ -67,8 +68,10 @@ abstract class Fun{
 		header("Location: ".$url);
 		exit(0);
 	}
-	public static function redirectinv(){
-		Fun::redirect(HOST."invalid.php");
+	public static function redirectinv($page=null){
+		if($page==null)
+			$page=HOST."invalid.php";
+		Fun::redirect($page);
 	}
 	public static function getcururl($protocol='http://'){
 		return $protocol. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -76,19 +79,19 @@ abstract class Fun{
 	public static function gotohome($typec='',$force=false){
 		self::gotologin($typec,$force,"");
 	}
-	public static function gotologin($typec='',$force=false,$page='login.php'){
+	public static function gotologin($typec='',$force=false,$page='login'){
 		if( $force || ( !User::islogin() || ($typec!='' && $typec!=User::loginType()) )  ) {
 			Fun::redirect(BASE.$page."?url=".rawurlencode(self::getcururl()));
 		}
 	}
+
+
 	public static function getflds($arr,$data){
 		$temp=array();
 		for($i=0;$i<count($arr);$i++){
 			$k=$arr[$i];
 			if(isset($data[$k]))
 				$temp[$k]=$data[$k];
-			else
-				return null;
 		}
 		return $temp;
 	}

@@ -2,7 +2,10 @@
 include "includes/app.php";
 
 
-echo  "--".Fun::getloadviewname("template/input1.php")."--";
+print_r(gets("login"));
+
+
+
 
 
 if(0){

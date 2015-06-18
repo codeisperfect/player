@@ -26,6 +26,11 @@ function make_table(){
 	echo Sql::query("CREATE TABLE users (id int NOT NULL AUTO_INCREMENT,username varchar(100), password varchar(100) , email varchar(100) ,  name varchar(100) , address varchar(500) , phone varchar(13) , type varchar(3) , create_time int,update_time int , last_login int,last_ip varchar(20),conf varchar(1),econf varchar(1), PRIMARY KEY ( id) ) ");
 	echo Sql::query("ALTER TABLE users add profilepic varchar(100) NULL ");
 	echo Sql::query("ALTER TABLE users add dob int NULL ");
+	echo Sql::query("ALTER TABLE users add sign varchar(1000) NULL ");
+	echo Sql::query("ALTER TABLE users add lang varchar(500) NULL ");
+	echo Sql::query("ALTER TABLE users add news varchar(1) NULL ");
+	echo Sql::query("ALTER TABLE users add fbid varchar(100) NULL ");
+	echo Sql::query("ALTER TABLE users add skypeid varchar(100) NULL ");
 
 	echo Sql::query("CREATE TABLE msg (id int NOT NULL AUTO_INCREMENT, sid int, rid int, aid int, msgid int, isseen varchar(1), PRIMARY KEY ( id) ) ");
 	echo Sql::query("CREATE TABLE msgdata (id int NOT NULL AUTO_INCREMENT, msg varchar(1000), type varchar(1), formid int, time int, PRIMARY KEY ( id) ) ");
@@ -53,7 +58,7 @@ function make_table(){
 
 
 
-drop_tables();
+//drop_tables();
 make_table();
 
 closedb();

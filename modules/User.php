@@ -84,12 +84,14 @@ class User extends Sql{
 	}
 	public static function changePassword($oldp,$newp){
 		if(self::islogin())
-			return Sqle::updateVal('users',array('password'=>$newp),array('id'=>self::loginId(),'password'=>$oldp),1);
+			return Sqle::updateVal('users',array('password'=>$newp,"update_time"=>time()),array('id'=>self::loginId(),'password'=>$oldp),1);
 		else
 			return false;
 	}
-	public static function userProfile($uid){
-		return Sqle::selectVal("users","*",array('id'=>$uid),1);
+	public static function userProfile($uid, $selector=array()){
+		if($uid!=null)
+			setifunset($selector, "id", $uid);
+		return Sqle::selectVal("users", "*", $selector ,1);
 	}
 	public static function myprofile(){
 		if(User::islogin())

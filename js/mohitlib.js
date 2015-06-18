@@ -306,7 +306,7 @@ var form={
 					errors[i]=(i+1)+". "+errors[i];
 				}
 				var dispmsg="You have to fill:<br>"+errors.join("<br>");
-				mohit.alert(dispmsg);
+				success.push(dispmsg,true);
 			}
 			return !(errors.length>0);
 		}
@@ -538,7 +538,7 @@ function smilymsg(inp){
 var success={
 	id:0,
 	opentime:{},
-	hideafter:5000,//milli seconds
+	hideafter:3000,//milli seconds
 	push:function(msg,convert){
 		var sid=success.id;
 		success.opentime[sid]=time("m");

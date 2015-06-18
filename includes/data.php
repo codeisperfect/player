@@ -88,8 +88,8 @@ $_ginfo["action_constrain"]=array(
 	"signup"=>array("need"=>array("name","email","password","phone")),
 	"login"=>array("need"=>array("email","password")),
 	"logout"=>array("need"=>array()),
-	"sendmsg"=>array("need"=>array("msg","rid","type","formid"),"users"=>"au","isfilter"=>"sisi"),
-	"loadmsg"=>array("need"=>array("uid","num_msg","minid","maxid","is_load_newer"),"users"=>"au","isfilter"=>""),
+	"sendmsg"=>array("need"=>array("msg","rid","type","formid"),"users"=>array("a","u"),"isfilter"=>"sisi"),
+	"loadmsg"=>array("need"=>array("uid","num_msg","minid","maxid","is_load_newer"),"users"=>array("a", "u") ,"isfilter"=>""),
 	"addcontent"=>array("need"=>array("title","data","catg"),"isfilter"=>"ssi"),
 	"addform"=>array("need"=>array("formjson","title","catg"),"isfilter"=>"ssi"),
 	"addingroup"=>array("need"=>array("gid","uids")),
@@ -98,7 +98,9 @@ $_ginfo["action_constrain"]=array(
 	"set_goalstatus"=>array("need"=>array("gid","status")),
 	"get_goals"=>array("need"=>array("type")),
 	"get_allpastgoals"=>array(),
-	"addexercise"=>array("needs"=>array("title","content"))
+	"addexercise"=>array("need"=>array("title","content")),
+	"changepassword"=>array("need"=>array("opassword","npassword"),"users"=>"all"),
+	"saveuserdetails"=>array("need"=>array("uid"),"users"=>"all")
 );
 
 
@@ -128,9 +130,13 @@ $_ginfo["error"]=array(
 	"-24"=>"You cannot do so much repeatition.",
 	"-25"=>"Error",
 	"-25"=>"Subject Already Added",
+	"-26"=>"Unable to change password",
 	"1"=>"Positive"
 );
 
 $_ginfo['lang']=array("Hindi","English","Hinglish");
+
+$_ginfo["logouturl"]=HOST."login.php?logout";
+
 
 ?>

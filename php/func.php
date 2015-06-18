@@ -92,7 +92,7 @@
 		if(isset($_ginfo["action_constrain"][$post_data["action"]])){
 			$sarr=$_ginfo["action_constrain"][$post_data["action"]];
 			$sarr=Fun::mergeifunset($sarr,array("users"=>"","need"=>array()));
-			if($sarr["users"]!="" && strpos($sarr['users'], User::loginType() )===false)
+			if(!(($sarr["users"]=="all" && User::islogin()) || $sarr["users"]=="" || in_array(User::loginType(), $sarr["users"]) ))
 				return -2;
 			if(!Fun::isAllSet($sarr["need"], $post_data))
 				return -9;
@@ -121,7 +121,7 @@
 			$a=new Admin();
 		else
 			$a=$b;
-		$outp=array("ec"=>-11);
+		$outp=array("ec"=>-7);
 		if(isset($post_data["action"])  ){
 			$isvalid=isvalid_action($post_data);
 			if(!($isvalid>0))
@@ -148,6 +148,13 @@
 		}
 		return $outp;
 	}
+
+	function setifunset(&$data,$key,$val){
+		if(!isset($data[$key]))
+			$data[$key]=$val;
+		return $data;
+	}
+
 	function mergeifunset(&$a,$b){
 		$keys=array_keys($b);
 		for($i=0;$i<count($keys);$i++){
@@ -274,6 +281,12 @@
 	function errormsg($ec,$cnd=true){
 		global $_ginfo;
 		return (($ec<0 && $cnd) ?getval($ec, $_ginfo["error"], "Error : ".$ec):"");
+	}
+	function convdisp($row, $need, $add = 'smily_', $tosmily=false){
+		foreach($need as $val) {
+			$row[$add.$val] = ($tosmily ? Fun::smilymsg($row[$val]) : htmlspecialchars($row[$val]));
+		}
+		return $row;
 	}
 
 ?>
