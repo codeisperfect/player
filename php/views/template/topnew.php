@@ -11,6 +11,8 @@
 <?php
 
 addall_css($addcss);
+addmycss();
+
 if($closehead){
   closet("head");
 }

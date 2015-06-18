@@ -484,3 +484,99 @@ function doforall(list1,f){
 		f(list1[i]);
 	}
 }
+
+function time(ms){
+	var tms=new Date().getTime();
+	if(ms==null)
+		return Math.floor(tms/1000.0);
+	else
+		return tms;
+}
+
+
+
+
+setifunset=function(data,key,val){
+	if(typeof(data[key])=='undefined')
+		data[key]=val;
+}
+
+mergeifunset=function(dict1,dict2){
+	for(i in dict2){
+		setifunset(dict1,i,dict2[i]);
+	}
+}
+
+String.prototype.myreplace=function(findstr,repstr){
+	var regex=new RegExp(findstr,'g');
+	return this.replace(regex,repstr);
+}
+
+String.prototype.replaceall = function (repdict){
+	var inp=this;
+	for(var i in repdict){
+		inp=inp.myreplace(i,repdict[i]);
+	}
+	return inp;
+};
+
+
+function htmlspecialchars(str) {
+	return str.replaceall({"&":"&amp;", '"':"&quot;", "'":"&#039;", "<":"&lt;", ">":"&gt;"});
+}
+
+
+
+function smilymsg(inp){
+	inp=htmlspecialchars(inp);
+	inp=inp.replaceall({"\n":"<br>","\t":"&nbsp;&nbsp;&nbsp;","  ":"&nbsp;&nbsp;"});
+	return inp;
+}
+
+
+
+var success={
+	id:0,
+	opentime:{},
+	hideafter:5000,//milli seconds
+	push:function(msg,convert){
+		var sid=success.id;
+		success.opentime[sid]=time("m");
+		if(convert==null){
+			msg=smilymsg(msg);
+		}
+		else if(convert==false){
+
+		}
+		var addnew='<div id="alert_'+sid+'" class="success-msg" style="display:none;" ><span onclick="success.closeme($(this).parent());" class="closePopup closeSuccess" >&times;</span>'+msg+'</div>';
+		$("#success_alerts").append(addnew);
+		alobj=$("#alert_"+sid);
+		alobj.fadeIn(function(){
+			setTimeout(function(){
+				success.cleaner();
+			},success.hideafter);
+		});
+		success.id++;
+	},
+	closeme:function(alobj){
+		alobj.fadeOut(function(){
+			alobj.remove();
+		});
+	},
+	cleaner:function(){
+		var ot=success.opentime;
+		var zombies=[];
+		for(var i in ot){
+			if(time("m")-ot[i]>success.hideafter){
+				success.closeme($("#alert_"+i));
+				zombies.push(i);
+			}
+		}
+		for(var i in zombies){
+			if($("#alert_"+i).length<1){
+				delete success.opentime[i];
+			}
+		}
+	}
+};
+

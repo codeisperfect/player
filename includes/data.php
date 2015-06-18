@@ -1,7 +1,7 @@
 <?php
 $_ginfo=array();
 
-$_ginfo["default_user_type"]='u';
+$_ginfo["default_user_type"]='f';
 
 
 
@@ -54,6 +54,15 @@ $view_default=array(
 		"closediv"=>true,
 		"dc"=>"simple"
 		),
+	"template/input1.php"=>array(
+		"inpattr"=>array(),
+		"divattr"=>array(),
+		"diviattr"=>array(),
+		"label"=>"Enter",
+		"name"=>"",
+		"type"=>"",
+		"dc"=>"simple"
+		),
 	"login.php"=>array(
 		"defopen"=>"login"
 		),
@@ -76,7 +85,7 @@ $_ginfo["attrs_shortcut"]=array("ph"=>"placeholder","dc"=>"data-condition");
 $_ginfo["shoudnotnull"]=array("id","name","value","style","class","type");
 
 $_ginfo["action_constrain"]=array(
-	"signup"=>array("need"=>array("name","email","password")),
+	"signup"=>array("need"=>array("name","email","password","phone")),
 	"login"=>array("need"=>array("email","password")),
 	"logout"=>array("need"=>array()),
 	"sendmsg"=>array("need"=>array("msg","rid","type","formid"),"users"=>"au","isfilter"=>"sisi"),
@@ -122,6 +131,6 @@ $_ginfo["error"]=array(
 	"1"=>"Positive"
 );
 
-
+$_ginfo['lang']=array("Hindi","English","Hinglish");
 
 ?>

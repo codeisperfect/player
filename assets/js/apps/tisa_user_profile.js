@@ -8,8 +8,8 @@
 		if ($('#user_languages').length) {
 			$('#user_languages').select2({
 				placeholder: "Select language...",
-				tags:["English", "Chinese", "Dutch", "French", "German", "Hungarian", "Italian", "Lithuanian", "Russian", "Spanish", "Swedish", "Ukrainian"],
-				tokenSeparators: [",", " "]
+				tags:["English", "Hindi"],
+				tokenSeparators: [","]
 			});
 		}
 	})
