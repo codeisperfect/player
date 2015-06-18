@@ -415,6 +415,9 @@ abstract class Fun{
 		}
 		return $outp;
 	}
+	public static function getloadviewname($inp){
+		return firstelm(explode(".php",lastelm(explode("/",$inp))));
+	}
 }
 
 ?>

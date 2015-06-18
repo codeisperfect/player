@@ -45,17 +45,31 @@
 
 
 	function load_view($view,$inp=array()){
-		global $view_default;
+		global $view_default,$_ginfo;
 		if(isset($view_default[$view]))
 			$inp=Fun::mergeifunset($inp,$view_default[$view]);
-		foreach($inp as $key=>$val){
-			$$key=$val;
+		$inp=Fun::setifunset($inp,"page",$_ginfo["page"]);
+		$inp=Fun::setifunset($inp,"islogin",User::loginType());
+		$tem_name=Fun::getloadviewname($view);
+		$templates=new Templates();
+		if(method_exists($templates,$tem_name )){
+			$templates->$tem_name($inp);
+			return true;
 		}
-		$view="php/views/".$view;
-		if(file_exists($view))
-			include $view;
-		else
-			echo "MM Error : Unable to load view ".$view." Line ".__LINE__." in file ".__FILE__ ;
+		else{
+			$view="php/views/".$view;
+			if(file_exists($view)){
+				foreach($inp as $key=>$val){
+					$$key=$val;
+				}
+				include $view;
+				return true;
+			}
+			else{
+				echo "MM Error : Unable to load view ".$view." Line ".__LINE__." in file ".__FILE__ ;
+				return false;
+			}
+		}
 	}
 	function str2json($inp){
 		$temp=json_decode($inp);
@@ -256,6 +270,10 @@
 	}
 	function curfilename(){
 		return firstelm(explode(".",lastelm(explode("/",$_SERVER['SCRIPT_FILENAME']))));
+	}
+	function errormsg($ec,$cnd=true){
+		global $_ginfo;
+		return (($ec<0 && $cnd) ?getval($ec, $_ginfo["error"], "Error : ".$ec):"");
 	}
 
 ?>

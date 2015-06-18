@@ -139,7 +139,7 @@ var customform={
 
 
 
-function animreplce(e,showid,allids){
+function animreplce(e,showid,allids,call_back){
 	if(e!=null)
 		e.preventDefault();
 	showid1=showid;
@@ -153,5 +153,7 @@ function animreplce(e,showid,allids){
 			$('#'+elm).removeClass().hide();
 		});
 		$('#'+showid).show().addClass('animated fadeInUp');
+		if(call_back!=null)
+			call_back(showid);
 	}, 700);
 }
