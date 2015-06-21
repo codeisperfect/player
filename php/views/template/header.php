@@ -24,28 +24,9 @@
        </span>
       </a>
       <ul class="dropdown-menu dropdown-menu-right">
-       <li>
-        <a href="user_profile.html">
-         Profile
-        </a>
-       </li>
-       <li>
-        <a href="#">
-         My messages
-        </a>
-       </li>
-       <li>
-        <a href="#">
-         My tasks
-        </a>
-       </li>
-       <li class="divider">
-       </li>
-       <li>
-        <a href="login_page.html">
-         Log Out
-        </a>
-       </li>
+<?php
+        load_view("templates/headerdd.php", array("links"=>Funs::headerddlist()));
+?>
       </ul>
      </li>
     </ul>

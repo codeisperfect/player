@@ -18,5 +18,23 @@ abstract class Funs{
 		}
 		return $login;
 	}
+	public static function headerddlist(){
+		global $_ginfo;
+		return getval(User::loginType(), $_ginfo["headerddlist"], array());
+	}
+	public static function cansend(){
+		if(User::isloginas('u'))
+			$query="select id from users where type='a'";
+		else if(User::isloginas('a'))
+			$query="select id from users where type='u'";
+		else
+			$query="select * from users";
+
+		$query1="select users.name,users.id,users.profilepic from (".$query.")selectedpeople left join users on users.id=selectedpeople.id";
+		return Sqle::getArray($query1);
+	}
+	public static function mygrouplist(){
+		return Sqle::getA(gtable("mymsggroupdispordered"), array("uid"=>User::loginId()));
+	}
 }
 ?>

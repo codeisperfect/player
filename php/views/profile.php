@@ -81,7 +81,7 @@ load_view("template/header.php");
                   Languages
                  </label>
                  <div class="col-md-10">
-                  <input type="text" name="lang" id="user_languages" class="form-control" value="" />
+                  <input type="text" name="lang" id="user_languages" class="form-control" value="<?php echo $uinfo["smily_lang"]; ?>" />
                  </div>
                 </div>
                 <div class="form-group">
@@ -89,7 +89,7 @@ load_view("template/header.php");
                   Newsletter
                  </label>
                  <div class="col-md-10">
-                  <input type="checkbox" class="bs_switch" data-on-color="success" data-on-text="Yes" data-off-text="No" name="news" value="" />
+                  <input type="checkbox" class="bs_switch" data-on-color="success" data-on-text="Yes" data-off-text="No" name="news" <?php echo $uinfo["news"]=='t'?"checked":"" ?> />
                  </div>
                 </div>
                 <?php
@@ -113,7 +113,7 @@ load_view("template/header.php");
                   load_view("template/input1.php",array('label'=>"Country","name"=>"country"));
                   load_view("template/input1.php",array('label'=>"Street","name"=>"street"));
                 }
-                 load_view("template/input1.php",array('label'=>"Full Address","name"=>"address"));
+                 load_view("template/input1.php",array('label'=>"Full Address","name"=>"address",'inpattr'=>array("value"=>$uinfo["smily_address"])));
                 ?>
                 <div class="form-group">
                  <div class="col-md-12">
@@ -123,8 +123,8 @@ load_view("template/header.php");
                  </div>
                 </div>
                 <?php
-                  load_view("template/input1.php",array('label'=>"Facebook ID","name"=>"fb","dc"=>"idel"));
-                  load_view("template/input1.php",array('label'=>"Skype ID","name"=>"skype","dc"=>"idel"));
+                  load_view("template/input1.php",array('label'=>"Facebook ID","name"=>"fbid","dc"=>"idel",'inpattr'=>array("value"=>$uinfo["smily_fbid"])));
+                  load_view("template/input1.php",array('label'=>"Skype ID","name"=>"skypeid","dc"=>"idel",'inpattr'=>array('value'=>$uinfo["smily_skypeid"])));
                   load_view("profile_save_button");
                 ?>
               </form>

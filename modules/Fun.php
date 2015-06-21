@@ -123,8 +123,31 @@ abstract class Fun{
 		else
 			return self::timetostr(time()-$s);
 	}
+
+	public static function timepassed_t2($s){
+		if($s<5)
+			return "Just now";
+		else if($s<60)
+			return $s."s Ago";
+		else if($s<60*45)
+			return floor($s/60)."m Ago";
+		else if($s<60*60*24)
+			return floor($s/3600)."h Ago";
+		else if($s<60*60*24*5)
+			return floor($s/(60*60*24))."d";
+		else
+			return self::timetostr(time()-$s);
+	}
+
 	public static function maxspace($inp,$len){
 		$inp=self::displayMsgBody($inp);
+		if(strlen($inp)>$len)
+			return substr($inp,0,$len-3).".. ";
+		else
+			return $inp;
+	}
+	public static function maxspace_v2($inp,$len){
+		$inp=self::smilymsg($inp);
 		if(strlen($inp)>$len)
 			return substr($inp,0,$len-3).".. ";
 		else

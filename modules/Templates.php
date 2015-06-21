@@ -26,5 +26,20 @@ class Templates{
               </div>
 <?php
 	}
+  function headerdd($inp){
+    foreach($inp as $key=>$val)
+      $$key=$val;
+    foreach($links as $link=>$text){
+    ?>
+       <li>
+        <a href="<?php echo $link; ?>">
+         <?php echo $text; ?>
+        </a>
+       </li>
+    <?php
+    }
+?>
+<?php
+  }
 }
 ?>

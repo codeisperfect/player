@@ -40,7 +40,7 @@
 		$_SESSION[$key]=$val;
 	}
 	function gets($key){
-		return $_SESSION[$key];
+		return getval($key,$_SESSION);
 	}
 
 
@@ -148,6 +148,32 @@
 		}
 		return $outp;
 	}
+	function handle_disp($post_data,$actionarg=null){
+		global $_ginfo;
+		if($actionarg!=null)
+			$post_data["action"]=$actionarg;
+		$a=new Actiondisp();
+		$outp=array("ec"=>-7);
+		if(isset($post_data["action"])  ){
+			$isvalid=isvalid_action($post_data);
+			if(!($isvalid>0))
+				$outp["ec"]=$isvalid;
+			else{
+				$func=$post_data["action"];
+				if( method_exists($a,$post_data["action"])){
+					$a->$func($post_data,$actionarg==null);
+					return;
+				}
+				else if(islset($_ginfo,array("autoscroll",$post_data["action"]))) {
+					$action_spec=$_ginfo["autoscroll"][$post_data["action"]];
+//					$action_spec=Fun::mergeifunset($action_spec,array("fixed"=>array(),"add"=>array()));
+					$outp["ec"]=1;
+				}
+			}
+		}
+		if($actionarg==null)
+			echo json_encode($outp)."\n";
+	}
 
 	function setifunset(&$data,$key,$val){
 		if(!isset($data[$key]))
@@ -199,7 +225,7 @@
 				$image = imagecreatefromgif($filename); 
 				$transparent = imagecolorallocatealpha($image_p, 0, 0, 0, 127);
 				imagefill($image_p, 0, 0, $transparent);
-				imagealphablending($image_p, true); 				
+				imagealphablending($image_p, true);         
 				break;
 			case "2": $image = imagecreatefromjpeg($filename);break;
 			case "3": 
@@ -288,5 +314,6 @@
 		}
 		return $row;
 	}
+
 
 ?>

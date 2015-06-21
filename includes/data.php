@@ -76,7 +76,14 @@ $view_default=array(
 		'stylebody'=>'',
 		'stylemain'=>'min-width:200px;',
 		'defaultfooter'=>true
+		),
+	"template/headerdd.php"=>array(
+		"links"=>array()
+		),
+	"template/msg.php"=>array(
+		"align"=>"left"
 		)
+
 	);
 
 
@@ -88,7 +95,7 @@ $_ginfo["action_constrain"]=array(
 	"signup"=>array("need"=>array("name","email","password","phone")),
 	"login"=>array("need"=>array("email","password")),
 	"logout"=>array("need"=>array()),
-	"sendmsg"=>array("need"=>array("msg","rid","type","formid"),"users"=>array("a","u"),"isfilter"=>"sisi"),
+	"sendmsg"=>array("need"=>array("msg","rid"),"users"=>array("a","u"),"isfilter"=>"sisi"),
 	"loadmsg"=>array("need"=>array("uid","num_msg","minid","maxid","is_load_newer"),"users"=>array("a", "u") ,"isfilter"=>""),
 	"addcontent"=>array("need"=>array("title","data","catg"),"isfilter"=>"ssi"),
 	"addform"=>array("need"=>array("formjson","title","catg"),"isfilter"=>"ssi"),
@@ -137,6 +144,37 @@ $_ginfo["error"]=array(
 $_ginfo['lang']=array("Hindi","English","Hinglish");
 
 $_ginfo["logouturl"]=HOST."login.php?logout";
+
+$_ginfo["headerddlist"]=array(
+	'a'=>array(
+		"profile.php"=>"Profile",
+		"chat.php"=>"My Messages",
+		"cal.php"=>"Center Calender",
+		"req.php"=>"User requests",
+		'?logout'=>"Logout"
+		),
+	'u'=>array(
+		"profile.php"=>"Profile",
+		"chat.php"=>"My Messages",
+		"cal.php"=>"My Calender",
+		'?logout'=>"Logout",
+		),
+	'f'=>array(
+		"profile.php"=>"Profile",
+		"chat.php"=>"My Messages",
+		"cal.php"=>"My Calender",
+		'?logout'=>"Logout",
+		),
+	);
+
+
+$_ginfo["autoscroll"]=array(
+	"personmsg"=>array(
+		"query"=>"",
+		"sort"=>"order by id asc"
+		)
+
+	);
 
 
 ?>

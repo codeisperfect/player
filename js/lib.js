@@ -35,6 +35,9 @@ var checkValidInput={
 	checkcheckbox:function(obj){
 		return obj.checked;
 	},
+	msg:function(obj){
+		return hasgoodchar(obj.value);
+	},
 	'isChecked':function (obj){
 		return (obj.getAttribute('data-condition')==null || this[ obj.getAttribute('data-condition') ](obj)) ;
 	}

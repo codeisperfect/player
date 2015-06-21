@@ -5,6 +5,7 @@ $( document ).ready(function(){
 	$('.dropdown-menu').click(function(e) {
 		e.stopPropagation();
 	});
+	mylib();
 	if(typeof(runonload)!='undefined')
 		runonload();
 });
@@ -157,3 +158,54 @@ function animreplce(e,showid,allids,call_back){
 			call_back(showid);
 	}, 700);
 }
+
+
+
+var funcs={
+	f1:function(obj){
+		$("#msgcontent").val('');
+	},
+	sendmsg:function(obj,e){
+		if(e.keyCode==13 && !e.shiftKey){
+			$("#sendmsgform").submit();
+		}
+	},
+	sendtoval:function(){
+		if($("#sendto").val()==null)
+			return "";
+		else
+			return $("#sendto").val().join("-");
+	}
+};
+
+var search={
+	grouplist:function(key){
+		var allg = $("#msggrouplist").children();
+		var numshown=0;
+		for(var i=0;i<allg.length;i++){
+			var ismatch=($(allg[i]).attr("data-name").indexOf(key)!=-1);
+			numshown+=ismatch;
+			var delay=100;//ms
+			if(ismatch)
+				$(allg[i]).fadeIn(delay);
+			else
+				$(allg[i]).fadeOut(delay);
+		}
+		$("#msggrouplist").parent().prev()[0].style.display=(numshown==0)?"":"none";
+	}
+};
+
+
+
+function runonload(){
+	if($("#sendto").length>0){
+		$("#sendto").select2().on('change',function(){});
+		$("#sendto").val([]);
+	}
+	$(".searchgroup").on('keyup keydown',function(){
+		search.grouplist($(this).val());
+	});
+}
+
+
+

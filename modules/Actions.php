@@ -48,17 +48,20 @@ class Actions{
 		return $outp;
 	}
 	function sendmsg($data){
+		$outp=array("ec"=>1,"data"=>0);
 		$recvlist=Fun::intexplode("-",$data["rid"]);
-		$msgdata=Fun::getflds(array("formid","type","msg"),$data);
-		$msgdata["time"]=time();
-		$msgid=Sqle::insertVal("msgdata",$msgdata);
-		$msg_table_arr=array();
-		foreach($recvlist as $i=>$rid){
-			$msg_table_arr[]=array(User::loginId(),$rid,User::loginId(),$msgid,'u');//u for unseen
-			$msg_table_arr[]=array(User::loginId(),$rid,$rid,$msgid,'u');
+		$msgdata=Fun::getflds(array("msg"),$data);
+		if($data["msg"]!=""){
+			$msgdata["time"]=time();
+			$msgid=Sqle::insertVal("msgdata",$msgdata);
+			$msg_table_arr=array();
+			foreach($recvlist as $i=>$rid){
+				$msg_table_arr[]=array(User::loginId(),$rid,User::loginId(),$msgid,'u');//u for unseen
+				$msg_table_arr[]=array(User::loginId(),$rid,$rid,$msgid,'u');
+			}
+			$outp["data"]=Sql::query("insert into msg (sid,rid,aid,msgid,isseen) ".Fun::makeDummyTableColumns($msg_table_arr,array("sid","rid","aid","msgid","isseen"),'iiiis'));
 		}
-		$outp=Sql::query("insert into msg (sid,rid,aid,msgid,isseen) ".Fun::makeDummyTableColumns($msg_table_arr,array("sid","rid","aid","msgid","isseen"),''));
-		return array("ec"=>1,"outp"=>$outp);
+		return $outp;
 	}
 	function loadmsg($data){
 		$loginid=User::loginId();
@@ -76,8 +79,8 @@ class Actions{
 		if(User::loginType()=='a' || User::loginId()==$data["uid"]){
 			$canneed=array("name", "sign", "lang", "news", "address", "fbid", "skypeid", "email");
 			$toupdate=Fun::getflds($canneed, $data);
-			$myf=User::userProfile(null, array("email"=>$toupdate["email"]));
-			if(!( $myf==null || $myf["id"]==$data["uid"] )){
+			$myf=User::userProfile(null, array("email"=>getval("email",$toupdate,'')));
+			if(isset($toupdate["email"]) && !( $myf==null || $myf["id"]==$data["uid"] )){
 				$outp["ec"] = -16;
 			} else{
 				$outp["data"] = Sqle::updateVal("users",$toupdate,array("id"=>$data["uid"]));

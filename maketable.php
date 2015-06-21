@@ -9,7 +9,8 @@ function dt($tn){
 
 
 function drop_tables(){
-	$tl=array("users","msg","forms","msgdata","formsoln","content","catg");
+//	$tl=array("users","msg","forms","msgdata","formsoln","content","catg");
+	$tl=array("msg", "msgdata");
 	foreach($tl as $i=>$val){
 		dt($val);
 	}
@@ -33,8 +34,17 @@ function make_table(){
 	echo Sql::query("ALTER TABLE users add skypeid varchar(100) NULL ");
 
 	echo Sql::query("CREATE TABLE msg (id int NOT NULL AUTO_INCREMENT, sid int, rid int, aid int, msgid int, isseen varchar(1), PRIMARY KEY ( id) ) ");
-	echo Sql::query("CREATE TABLE msgdata (id int NOT NULL AUTO_INCREMENT, msg varchar(1000), type varchar(1), formid int, time int, PRIMARY KEY ( id) ) ");
-	//type : 'f'=>'Form','a'=>"Answer", 'm'=>"Message", 
+	/*
+		sid: sender Id,
+		rid: Recever ID,
+		aid: Account Id, ( in account of whom, message is stored )
+		msgid : Id of message ( foreign key with msgdata.id)
+		isseen : 't' if seen, 'u'/Null if unseen
+	*/
+	echo Sql::query("CREATE TABLE msgdata (id int NOT NULL AUTO_INCREMENT, msg varchar(1000), time int, PRIMARY KEY ( id) ) ");
+	/*
+		msg:content of message
+	*/
 
 	echo Sql::query("CREATE TABLE forms (id int NOT NULL AUTO_INCREMENT, formjson varchar(1000),title varchar(100), catg int, time int, PRIMARY KEY ( id) ) ");
 
@@ -58,7 +68,7 @@ function make_table(){
 
 
 
-//drop_tables();
+drop_tables();
 make_table();
 
 closedb();

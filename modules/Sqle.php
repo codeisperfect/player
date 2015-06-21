@@ -103,5 +103,28 @@ class Sqle extends Sql{
 		}
 		return array("qoutp"=>$qoutp,"min"=>$min,"max"=>$max);
 	}
+	public static function convQuery($query,$param_array=array()){
+		preg_match_all("|{[^}]+}|U",$query,$matches);
+		$matches=$matches[0];
+		$params="";
+		$parama=array();
+		for($i=0;$i<count($matches);$i++){
+			$key=substr($matches[$i],1,strlen($matches[$i])-2);
+			if(isset($param_array[$key])){
+				$params.=(gettype($param_array[$key])=='string'?'s':'i');
+				$parama[]=$param_array[$key];
+				$query=str_replace($matches[$i], '?' , $query );
+			}
+		}
+		return array($query,$params,$parama);
+	}
+	public static function getA($query,$param_array=array()){
+		$conq=Sqle::convQuery($query,$param_array);
+		return Sql::getArray($conq[0],$conq[1],getrefarr($conq[2]));
+	}
+	public static function q($query,$param_array=array()){
+		$conq=Sqle::convQuery($query,$param_array);
+		return Sql::query($conq[0],$conq[1],getrefarr($conq[2]));
+	}
 }
 ?>

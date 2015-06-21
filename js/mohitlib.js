@@ -173,6 +173,20 @@ var button={
 			}
 		}});
 	},
+	sendreq_v2_t4:function(obj,call_back_data,call_back_html,adata){
+		var allattrs=this.attrs(obj);
+		if(!button.hasattr(allattrs,"data-params"))
+			var params=this.tosendattrs(obj,allattrs);
+		else{
+			eval("var params="+allattrs["data-params"]);
+		}
+		if(button.hasattr(allattrs,"data-eparams")){
+			eval("var eparams="+allattrs["data-eparams"]);
+			params=others.mergeifunset(params,eparams);
+		}
+		params['action']=allattrs["data-action"];
+		button.sendreq_v2_t3(params,call_back_data,call_back_html);
+	},
 	sendreq1:function (params,call_back,adata){
 		$.post("actionv2.php",params,function(d,s){if(s=='success'){
 			var respo=button.parse(d);
@@ -310,6 +324,14 @@ var form={
 			}
 			return !(errors.length>0);
 		}
+	}
+};
+
+var div={
+	reload:function(obj,call_back_data,adata){
+		button.sendreq_v2_t4(obj,call_back_data,function(d){
+			$(obj).html(d);
+		},adata);
 	}
 };
 
@@ -580,3 +602,26 @@ var success={
 	}
 };
 
+
+function mylib(){
+	function textareainc(obj){
+		var allattrs=button.attrs(obj);
+		mergeifunset(allattrs,{'data-maxrows':5});
+		if($(obj).outerHeight() < obj.scrollHeight + parseFloat($(obj).css("borderTopWidth")) + parseFloat($(obj).css("borderBottomWidth"))) {
+			if($(obj).attr("rows")<allattrs["data-maxrows"])
+				$(obj).attr("rows",1+parseInt($(obj).attr("rows")));
+		};
+	}
+	$("textarea.autoinc").on("keyup keydown",function(){
+		textareainc(this);
+	});
+}
+
+function hasgoodchar(inp){
+	var uselesschar=" \t\n";
+	for(var i=0;i<inp.length;i++){
+		if(uselesschar.indexOf(inp[i])==-1)
+			return true;
+	}
+	return false;
+}
