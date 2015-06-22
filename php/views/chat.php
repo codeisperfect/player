@@ -57,8 +57,10 @@ load_view("template/header.php");
 									<?php disp_olist($cansendlist); ?>
 								</select>
 							</div>
-							<div id="mohit" ></div>
-							<div class="chat_messages">
+							<div id="loadchat" class="chat_messages" data-min="-1" data-max="0" data-minl="10" data-maxl="-1" data-action="personmsg" data-pid="4" >
+
+
+
 							</div>
 						 </div>
 

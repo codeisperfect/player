@@ -148,6 +148,22 @@
 		}
 		return $outp;
 	}
+	function autoscroll($post_data){
+		global $_ginfo;
+		$action_spec=$_ginfo["autoscroll"][$post_data["action"]];
+		mergeifunset($action_spec, array('sort'=>'', 'maxl'=>null, 'minl'=>null, "filterfunc"=>null, "load_view"=>"template/".$post_data["action"].".php" ));
+		$fixed=array("uid"=>User::loginId(), "time"=>time());
+		$post_data=Fun::mergeforce($post_data, $fixed);
+		$qoutput=Sqle::autoscroll($action_spec["query"], $post_data, $action_spec["key"], $action_spec["sort"], $post_data["isloadold"], $action_spec["minl"], $action_spec["maxl"]);
+		if($action_spec["filterfunc"]!=null){
+			$autos=new Autoscoll();
+			$funcname=$action_spec["filterfunc"];
+			if(method_exists($autos, $funcname))
+				$qoutput=$autos->$funcname($qoutput);
+		}
+		$qoutput["load_view"]=$action_spec["load_view"];
+		return $qoutput;
+	}
 	function handle_disp($post_data,$actionarg=null){
 		global $_ginfo;
 		if($actionarg!=null)
@@ -165,9 +181,13 @@
 					return;
 				}
 				else if(islset($_ginfo,array("autoscroll",$post_data["action"]))) {
-					$action_spec=$_ginfo["autoscroll"][$post_data["action"]];
-//					$action_spec=Fun::mergeifunset($action_spec,array("fixed"=>array(),"add"=>array()));
+					$as_handle = autoscroll($post_data);
+					$outp["data"]=Fun::getflds(array("min", "max", "minl", "maxl"), $as_handle);
 					$outp["ec"]=1;
+					if($actionarg==null)
+						echo json_encode($outp)."\n";
+					load_view($as_handle["load_view"], array("qresult"=>$as_handle["qresult"]));
+					return;
 				}
 			}
 		}
@@ -313,6 +333,15 @@
 			$row[$add.$val] = ($tosmily ? Fun::smilymsg($row[$val]) : htmlspecialchars($row[$val]));
 		}
 		return $row;
+	}
+	function setift(&$var, $val, $istrue=true){
+		if($istrue){
+			$var = $val;
+		}
+	}
+
+	function setifnn(&$var, $val) {
+		setift($var, $val, $var==null);
 	}
 
 

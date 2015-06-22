@@ -107,7 +107,8 @@ $_ginfo["action_constrain"]=array(
 	"get_allpastgoals"=>array(),
 	"addexercise"=>array("need"=>array("title","content")),
 	"changepassword"=>array("need"=>array("opassword","npassword"),"users"=>"all"),
-	"saveuserdetails"=>array("need"=>array("uid"),"users"=>"all")
+	"saveuserdetails"=>array("need"=>array("uid"),"users"=>"all"),
+	"autoscroll"=>array("need"=>array("min", "max", "minl", "maxl", "isloadold"))
 );
 
 
@@ -170,10 +171,12 @@ $_ginfo["headerddlist"]=array(
 
 $_ginfo["autoscroll"]=array(
 	"personmsg"=>array(
-		"query"=>"",
-		"sort"=>"order by id asc"
+		"query"=>"mymsgperson",
+		"sort"=>"order by id asc",
+		"minl"=>5,
+		"key"=>"id",
+		"load_view"=>"template/dispmsg.php"
 		)
-
 	);
 
 

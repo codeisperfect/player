@@ -10,6 +10,7 @@ $uinfo = User::userProfile($pageinfo["uid"]);
 if($uinfo != null){
   $pageinfo['cansendlist'] = Fun::dbarrtooption(Funs::cansend(),"id","name");
   $pageinfo["msggroup"]=Funs::mygrouplist();
+  
   load_view("chat.php", $pageinfo);
 }
 

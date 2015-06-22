@@ -126,5 +126,30 @@ class Sqle extends Sql{
 		$conq=Sqle::convQuery($query,$param_array);
 		return Sql::query($conq[0],$conq[1],getrefarr($conq[2]));
 	}
+
+	public static function autoscroll($query, $param, $key, $sort='', $isloadold=true ,$minl=null, $maxl=null){
+		setifnn($minl, $param["minl"]);
+		setifnn($maxl, $param["maxl"]);
+		if($isloadold)
+			$querylimit="select * from (".gtable($query).") outpquery where ($key<{min} OR {min}=-1) ".($param["minl"]==-1?'':"limit {minl} ");
+		else
+			$querylimit="select * from (".gtable($query).") outpquery where $key>{max} ".($param["maxl"]==-1?'':"limit {maxl} ");
+		$querysort="select * from (".$querylimit.") sortquery ".$sort;
+		$qresult=Sqle::getA($querysort,$param);
+		$outp["qresult"]=$qresult;
+		$outp["maxl"]=$maxl;
+		$outp["minl"]=$minl;
+		if(count($qresult)==0){
+			$outp["min"] = $param["min"];
+			$outp["max"] = $param["max"];
+		}
+		else{
+			$e1=$qresult[0][$key];
+			$e2=$qresult[count($qresult)-1][$key];
+			$outp["min"] = min($e1, $e2);
+			$outp["max"] = max($e1, $e2);
+		}
+		return $outp;
+	}
 }
 ?>
