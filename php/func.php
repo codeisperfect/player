@@ -156,7 +156,7 @@
 		$post_data=Fun::mergeforce($post_data, $fixed);
 		$qoutput=Sqle::autoscroll($action_spec["query"], $post_data, $action_spec["key"], $action_spec["sort"], $post_data["isloadold"], $action_spec["minl"], $action_spec["maxl"]);
 		if($action_spec["filterfunc"]!=null){
-			$autos=new Autoscoll();
+			$autos=new Autoscroll();
 			$funcname=$action_spec["filterfunc"];
 			if(method_exists($autos, $funcname))
 				$qoutput=$autos->$funcname($qoutput);
@@ -186,7 +186,7 @@
 					$outp["ec"]=1;
 					if($actionarg==null)
 						echo json_encode($outp)."\n";
-					load_view($as_handle["load_view"], array("qresult"=>$as_handle["qresult"]));
+					load_view($as_handle["load_view"], $as_handle);
 					return;
 				}
 			}

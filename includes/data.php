@@ -173,9 +173,10 @@ $_ginfo["autoscroll"]=array(
 	"personmsg"=>array(
 		"query"=>"mymsgperson",
 		"sort"=>"order by id asc",
-		"minl"=>5,
+		"minl"=>2,
 		"key"=>"id",
-		"load_view"=>"template/dispmsg.php"
+		"load_view"=>"template/dispmsg.php",
+		"filterfunc"=>"loadchat"
 		)
 	);
 

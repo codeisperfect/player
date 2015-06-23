@@ -175,7 +175,27 @@ var funcs={
 			return "";
 		else
 			return $("#sendto").val().join("-");
+	},
+	//For chatting.
+	openchat:function(pid){
+		var chatdiv=$("#loadchat");
+		chatdiv.scroll(function(){});
+		if(chatdiv.length>0){
+			div.reload_autoscroll(chatdiv[0], {"data-min":-1, "data-max":0, "data-minl":3, "data-maxl":-1, "data-pid":pid}, null, function(d){
+				chatdiv.prop("scrollTop", chatdiv.prop("scrollHeight"));
+			});
+		}
+	},
+	loadprv:function(obj, i){
+		var chatdiv=$(obj);
+		if(chatdiv.prop("scrollTop")==0){
+			div.load(chatdiv[0], 1, null, null, function(d){
+				funcs.loadprv(obj,1);
+			});
+		}
 	}
+
+	//#End : For chatting..
 };
 
 var search={

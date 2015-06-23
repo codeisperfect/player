@@ -328,25 +328,51 @@ var form={
 };
 
 var div={
+	setblock:function(obj){
+		$(obj).attr("data-blocked","true");
+	},
+	isblock:function(obj){
+		return ($(obj).attr("data-blocked")=="true");
+	},
+	setunblock:function(obj){
+		$(obj).attr("data-blocked","false");
+	},
 	reload:function(obj,call_back_data,adata){
 		button.sendreq_v2_t4(obj,call_back_data,function(d){
 			$(obj).html(d);
 		},adata);
 	},
-	load:function(obj,isloadold){
+	load:function(obj, isloadold, isappendold, call_back_data, call_back_html) {
+		if(div.isblock(obj))
+			return false;
+		div.setblock(obj);
+		if(isappendold==null)
+			isappendold=isloadold;
 		$(obj).attr("data-isloadold",isloadold);
 		button.sendreq_v2_t4(obj,function(d){
 			var replacearr=["min", "max", "minl", "maxl"];
 			for(var i=0; i<replacearr.length; i++){
 				$(obj).attr("data-"+replacearr[i], d[replacearr[i]]);
 			}
+			if(call_back_data!=null)
+				call_back_data(d);
 		},function(d){
-			if(isloadold==1)
+			if(isappendold==1)
 				$(obj).prepend(d);
-			else
+			else if(isappendold==0)
 				$(obj).append(d);
+			else if(isappendold==-1)
+				$(obj).html(d);
+			div.setunblock(obj);
+			if(call_back_html!=null){
+				call_back_html(d);
+			}
 		});
 	},
+	reload_autoscroll:function(obj, min_maxa, call_back_data, call_back_html){
+		$(obj).attr(min_maxa);
+		div.load(obj, 1, -1, call_back_data, call_back_html);
+	}
 };
 
 

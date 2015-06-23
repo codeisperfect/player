@@ -383,4 +383,13 @@
 	function dit($cond=false){
 		echo ((!$cond)?"display:none;":"");
 	}
+
+
+	function pit($toprint, $cond=true, $toprint_false=''){
+		if($cond)
+			echo $toprint;
+		else
+			echo $toprint_false;
+	}
+
 ?>

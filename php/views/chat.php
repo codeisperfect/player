@@ -57,10 +57,10 @@ load_view("template/header.php");
 									<?php disp_olist($cansendlist); ?>
 								</select>
 							</div>
-							<div id="loadchat" class="chat_messages" data-min="-1" data-max="0" data-minl="10" data-maxl="-1" data-action="personmsg" data-pid="4" >
-
-
-
+<!-- 
+							<button type='button' onclick='div.load($("#loadchat")[0],1);' >Load older</button>
+ -->
+							<div onscroll='funcs.loadprv(this, 2)' id="loadchat" class="chat_messages" data-min="-1" data-max="0" data-minl="3" data-maxl="-1" data-action="personmsg" data-pid="4" >
 							</div>
 						 </div>
 
@@ -289,13 +289,14 @@ load_view("template/header.php");
 	</script>
 	<script src="assets/js/tisa_common.js">
 	</script>
-<script type="text/javascript">
-	$(document).ready(function(){
-
-	});
-
-</script>
 
 <?php
-load_view("template/bottomnew.php");
+load_view("template/bottomnew.php",array("closebody"=>false));
 ?>
+<script type="text/javascript">
+	$(document).ready(function(){
+		funcs.openchat(4);
+	});
+</script>
+</body>
+</html>

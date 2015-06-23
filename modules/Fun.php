@@ -256,9 +256,9 @@ abstract class Fun{
 	}
 	public static function mycurl($url,$post_params=''){
 		$lc="curl -s -k --no-progress-bar -d '$post_params' '$url'";
- 		$lc="wget -O- --post-data='$post_params' '$url' -o  /tmp/null";
+		$lc="wget -O- --post-data='$post_params' '$url' -o  /tmp/null";
 		return shell_exec($lc);
-//		return shell_exec("python check_plogin.py '".$url."'");
+//    return shell_exec("python check_plogin.py '".$url."'");
 	}
 	public static function get_key_values($arr){
 		$outp=array();
@@ -443,6 +443,41 @@ abstract class Fun{
 	}
 	public static function getloadviewname($inp){
 		return firstelm(explode(".php",lastelm(explode("/",$inp))));
+	}
+}
+
+class Special{
+	function lt($a, $b){
+		return ($b==-1 || $a<$b);
+	}
+	function gt($a, $b){
+		return ($a==-1 || $a>$b);
+	}
+	function max2($a, $b){
+		return ($this->gt($a, $b) ? $a:$b);
+	}
+	function min2($a, $b){
+		return ($this->lt($a, $b) ? $a:$b);
+	}
+	function max(){
+		$inp=func_get_args();
+		if(count($inp)==0)
+			return null;
+		$maxtillnow=$inp[0];
+		for($i=1; $i<count($inp); $i++){
+			$maxtillnow=$this->max2($maxtillnow, $inp[$i]);
+		}
+		return $maxtillnow;
+	}
+	function min(){
+		$inp=func_get_args();
+		if(count($inp)==0)
+			return null;
+		$mintillnow=$inp[0];
+		for($i=1; $i<count($inp); $i++){
+			$mintillnow=$this->min2($mintillnow, $inp[$i]);
+		}
+		return $mintillnow;
 	}
 }
 

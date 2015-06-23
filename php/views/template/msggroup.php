@@ -1,7 +1,7 @@
 						 	<?php
 						 	foreach($msggroup as $i=>$row){
 						 	?>
-							<tr style="<?php if(!$row["selfseen"]) echo "background-color:#D1D1D1;"; ?>cursor:pointer;" data-name="<?php echo htmlspecialchars($row["name"]); ?>" >
+							<tr style="width:100%;<?php if(!$row["selfseen"]) echo "background-color:#D1D1D1;"; ?>cursor:pointer;" data-name="<?php echo htmlspecialchars($row["name"]); ?>" onclick='funcs.openchat(<?php echo $row["personid"]; ?>);' >
 							 <th>
 								<img class="img-circle" src="<?php echo $row["profilepic"]; ?>" alt="<?php echo $row["name"]; ?>" width="60" />
 							 </th>
@@ -10,7 +10,7 @@
 								 <?php echo htmlspecialchars($row["name"]); ?>
 								</strong>
 								<br />
-								<?php echo Fun::maxspace_v2($row["content"],1000); ?>
+								<?php echo Fun::maxspace_v2($row["content"],50); ?>
 							 </td>
 							 <td>
 								<?php echo Fun::timepassed_t2(time()-$row["time"]);
