@@ -177,24 +177,43 @@ var funcs={
 			return $("#sendto").val().join("-");
 	},
 	//For chatting.
+	scrollbottom:function(obj){
+		$(obj).prop("scrollTop", $(obj).prop("scrollHeight"));
+	},
 	openchat:function(pid){
 		var chatdiv=$("#loadchat");
 		chatdiv.scroll(function(){});
 		if(chatdiv.length>0){
 			div.reload_autoscroll(chatdiv[0], {"data-min":-1, "data-max":0, "data-minl":3, "data-maxl":-1, "data-pid":pid}, null, function(d){
-				chatdiv.prop("scrollTop", chatdiv.prop("scrollHeight"));
+				var pdiv=chatdiv.parent();
+				funcs.scrollbottom(pdiv[0]);
+//				pdiv.prop("scrollTop", pdiv.prop("scrollHeight"));
 			});
 		}
 	},
 	loadprv:function(obj, i){
-		var chatdiv=$(obj);
-		if(chatdiv.prop("scrollTop")==0){
-			div.load(chatdiv[0], 1, null, null, function(d){
+		var chatdiv=$("#loadchat");
+		if($(obj).prop("scrollTop")==0){
+			var height_prv=$(obj).prop("scrollHeight");
+			div.load(chatdiv[0], 1, null, function(d){
+				if(d.qresultlen==0){
+					chatdiv.attr("data-minl",0);
+				}
+				console.log(d.qresultlen);
+			}, function(d){
+				var height_now=$(obj).prop("scrollHeight");
+				console.log(height_now-height_prv);
+				$(obj).prop("scrollTop", height_now-height_prv );
 				funcs.loadprv(obj,1);
 			});
 		}
+	},
+	loadnew:function(){
+		var chatdiv=$("#loadchat");
+		div.load(chatdiv[0], 0, null, null, function(){
+			funcs.scrollbottom( chatdiv.parent()[0]  );
+		});
 	}
-
 	//#End : For chatting..
 };
 

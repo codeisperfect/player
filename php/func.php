@@ -182,7 +182,7 @@
 				}
 				else if(islset($_ginfo,array("autoscroll",$post_data["action"]))) {
 					$as_handle = autoscroll($post_data);
-					$outp["data"]=Fun::getflds(array("min", "max", "minl", "maxl"), $as_handle);
+					$outp["data"]=Fun::getflds(array("min", "max", "minl", "maxl", "qresultlen"), $as_handle);
 					$outp["ec"]=1;
 					if($actionarg==null)
 						echo json_encode($outp)."\n";

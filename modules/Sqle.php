@@ -146,6 +146,7 @@ class Sqle extends Sql{
 		$outp["qresult"]=$qresult;
 		$outp["maxl"]=$maxl;
 		$outp["minl"]=$minl;
+		$outp["qresultlen"]=count($qresult);
 		if($key==null){
 			$outp["max"]=$param["max"]+$param["maxl"];
 		} else{

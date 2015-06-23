@@ -344,7 +344,9 @@ var div={
 	},
 	load:function(obj, isloadold, isappendold, call_back_data, call_back_html) {
 		if(div.isblock(obj))
-			return false;
+			return -1;
+		if( (isloadold==1 && $(obj).attr("data-minl")==0) || (isloadold==0 && $(obj).attr("data-maxl")==0) )
+			return -2;
 		div.setblock(obj);
 		if(isappendold==null)
 			isappendold=isloadold;
