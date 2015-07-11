@@ -35,19 +35,20 @@ function login_redirect_url(){
 		return profile_page_url;
 }
 
-function uploadfile(name,disptagJ,formtagJ,disptag_max_length){
-	if(!(formtagJ.find("input[name="+name+"]").length>0)){
+function uploadfile(obj,name){
+	var formjobj=$(obj).parent();
+	if(!(formjobj.find("input[name="+name+"]").length>0)){
 		var elm=document.createElement("input");
 		elm.setAttribute("type","file");
 		elm.setAttribute("name",name);
 		elm.setAttribute("style","display:none;");
 		elm.onchange=function (){
-			disptagJ.html(elm.value.bound(disptag_max_length));
+			formjobj.submit();
 		}
-		formtagJ[0].appendChild(elm);
+		formjobj[0].appendChild(elm);
 	}
 	else{
-		var elm=formtagJ.find("input[name="+name+"]")[0];
+		var elm=formjobj.find("input[name="+name+"]")[0];
 	}
 	elm.click();
 }

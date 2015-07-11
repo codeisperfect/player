@@ -6,10 +6,12 @@ load_view("template/navbarnew.php");
 <div class="parallax-container">
   <div class="row">
     <div class="col s12"><br><br><br><br><br>
-      <h3 class="center white-text raleway-font" style="text-shadow:none;">LOOK FOR Expert Advisers</h3>
+
+<!--       <h3 class="center white-text raleway-font" style="text-shadow:none;">LOOK FOR Expert Advisers</h3>
+ -->
     </div>
   </div>
-  <div class="parallax"><img src="images/teaching2.jpg"></div>
+  <div class="parallax"><img src="images/aboutus.png"></div>
 </div>
 
 <div class="white">

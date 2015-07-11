@@ -25,7 +25,7 @@
 
 	if(!isset($config))
 		$config=array();
-	$config=Fun::mergeifunset($config,array("session_start"=>true,"set_session_id"=>0 ));
+	$config=Fun::mergeifunset($config,array("session_start"=>true,"set_session_id"=>0 , "needprofile" => false));
 
 	if($config["session_start"])
 		@session_start();

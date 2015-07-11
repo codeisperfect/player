@@ -25,7 +25,7 @@ $defopen="signupwindow";
                   <div class="col s12">
                     <ul>
                       <li><i class="material-icons tiny left">chevron_right</i>
-                        This form is meant only for students.
+                        This form is meant only for users.
                       </li>
                       <li><i class="material-icons tiny left">chevron_right</i>
                         All fields are mandatory.
@@ -80,7 +80,7 @@ $defopen="signupwindow";
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="otp" name="otp" type="text" data-condition="simple" class="validate" >
+                      <input id="otp" name="otp" type="text" class="validate" >
                       <label for="otp">One Time Password</label>
                     </div>
                   </div>

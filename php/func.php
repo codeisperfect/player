@@ -1,19 +1,9 @@
 <?php
 	function div($a, $b) {
-	/*
-	Divides $a by $b and returns the quotient
-	Arguments: $a,$b integer 
-
-	*/
 		return ($a-($a%$b))/$b;
 	}
 
 	function jshref($url="") {
-	/*
-	Used to redirect using javascript
-	Arguments: $url: path to redirect
-
-	*/    
 		return "window.location.href = '$url'";
 	}
 
@@ -293,9 +283,13 @@
 		setift($var, $val, $var==null);
 	}
 
+	function setifunset(&$data,$key,$val){
+		if(!isset($data[$key]))
+			$data[$key]=$val;
+		return $data;
+	}
+
 	function mergeifunset(&$a, $b) {
-	/*If the required key values are not set in $a,then it set the corresponding key values from $b
-	*/
 		$keys = array_keys($b);
 		for($i = 0;$i<count($keys);$i++){
 			if(!isset($a[$keys[$i]]))
@@ -687,6 +681,21 @@
 
 	function a() {
 		return func_get_args();
+	}
+
+	function fixedlen($inp, $len=20) {
+		return Fun::limitlen($len, Fun::inclen($len, $inp));
+	}
+
+	function mystr_repeat($str, $len) {
+		if($len>0)
+			return str_repeat($str, $len);
+		else
+			return "";
+	}
+
+	function lid() {
+		return (0+User::loginId());
 	}
 
 ?>

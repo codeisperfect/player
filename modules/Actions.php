@@ -14,7 +14,7 @@ class Actions{
 		}
 		return array('ec'=>$ec,'data'=>$odata);
 	}
-	function signup($data){
+	function signup($data) {
 		global $_ginfo;
 		$outp=array("ec"=>1,"data"=>0);
 		$temp=User::signUp(Fun::getflds($_ginfo["action_constrain"]["signup"]["need"],$data));

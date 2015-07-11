@@ -100,13 +100,15 @@ abstract class Fun{
 			self::redirect(HOST);
 		}
 	}
-	public static function redirect($url){
-		closedb();
-		header("Location: ".$url);
-		exit(0);
+	public static function redirect($url, $cnd=true){
+		if($cnd){
+			closedb();
+			header("Location: ".$url);
+			exit(0);
+		}
 	}
-	public static function redirectinv(){
-		Fun::redirect(HOST."invalid.php");
+	public static function redirectinv($cnd=true){
+		Fun::redirect(HOST."invalid.php", $cnd);
 	}
 	public static function getcururl($protocol='http://'){
 		return $protocol. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -204,11 +206,7 @@ abstract class Fun{
 			return self::timetostr(time()-$s);
 	}
 	public static function maxspace($inp,$len){
-		$inp=self::displayMsgBody($inp);
-		if(strlen($inp)>$len)
-			return substr($inp,0,$len-3).".. ";
-		else
-			return $inp;
+		return Fun::limitlen($len, self::displayMsgBody($inp));
 	}
 	public static function displayMsgBody($inp){
 		$inp=htmlspecialchars($inp);
@@ -633,10 +631,34 @@ abstract class Fun{
 	public static function runmain($filename, $args) {
 		$mainclass = new Main();
 		if(method_exists($mainclass, $filename)) {
+			s("curpage", $filename);
 			call_user_func_array(array($mainclass, $filename), $args);
 		} else {
 			echo "404 Error";
 		}
+	}
+
+	public static function profileid($inp) {
+		$inp = 0+$inp;
+		setift($inp, User::loginId(), $inp == 0);
+		$inp = 0+$inp;
+		return $inp;
+	}
+
+	public static function inclen($len, $name="", $repeat=' ') {
+		if(strlen($name) >= $len) {
+			return $name;
+		} else {
+			$inc = ( $len - strlen($name) );
+			return (mystr_repeat($repeat, div($inc ,2))).$name.(mystr_repeat($repeat, $inc-div($inc, 2)));
+		}
+	}
+
+	public static function limitlen($len, $inp) {
+		if(strlen($inp)>$len)
+			return substr($inp,0,$len-4)." ...";
+		else
+			return $inp;
 	}
 }
 

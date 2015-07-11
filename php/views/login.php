@@ -48,7 +48,7 @@ load_view("template/navbarnew.php");
                   </div>
                   <div class="row">
                     <div class="input-field col s12 l10">
-                      <button class="btn waves-effect waves-light" type="submit">Login
+                      <button class="btn waves-effect waves-light" type="submit" name="login" >Login
                         <i class="material-icons right">send</i>
                       </button>
                     </div>

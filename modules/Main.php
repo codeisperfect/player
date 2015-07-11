@@ -10,6 +10,10 @@ class Main{
 	}
 
 	function index(){
+		if(isget("logout")) {
+			User::logout();
+			Fun::redirect(HOST);
+		}
 		load_view("index.php");
 	}
 
@@ -29,12 +33,44 @@ class Main{
 
 	function login(){
 		$pageinfo = emptyarr(a("loginmsg"));
+		if(ispost("login")) {
+			$ho = handle_request($_POST, "login");
+			$pageinfo["loginmsg"] = errormsg($ho["ec"]);
+			Fun::redirect(BASE."profile", $ho["ec"] > 0);
+		}
 		load_view("login.php", $pageinfo);
 	}
 
 	function signup() {
 		$pageinfo = emptyarr(a("signupmsg"));
+		if(ispost("signup")) {
+			$ho = handle_request($_POST, "signup");
+			$pageinfo["signupmsg"] = errormsg($ho["ec"]);
+			Fun::redirect(BASE."profile", $ho["ec"] > 0);
+		}
 		load_view("signup.php", $pageinfo);
+	}
+
+	function profile($uid = 0 ) {
+		$uid = Fun::profileid($uid);
+		Fun::redirect(HOST, $uid == 0);
+		if(isset($_FILES["profilepic"])){
+			Fun::uploadpic($_FILES["profilepic"], "profilepic", "profilepicbig", 300);
+		}
+
+
+		$uinfo = User::userProfile($uid);
+		$pageinfo = $uinfo;
+		$pageinfo["isme"] = (lid() == $uid);
+		$pageinfo["isadmin"] = (User::loginType() == "a");
+		$pageinfo["ismea"] = ($pageinfo["isadmin"] || $pageinfo["isme"]);
+
+		if( $uinfo["type"] == "f" ) {
+		} else if( $uinfo["type"] == "u") {
+		} else if( $uinfo["type"] == "a") {
+		}
+
+		load_view("profile.php", $pageinfo);
 	}
 }
 ?>

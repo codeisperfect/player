@@ -3,6 +3,7 @@
 $_ginfo["default_user_type"]='f';
 
 $_ginfo["myname"] = "Players";
+$_ginfo["mysite"] = "www.players.com";
 
 $view_default=array(
 	'template/top.php'=>array(

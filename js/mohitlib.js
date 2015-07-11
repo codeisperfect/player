@@ -340,9 +340,10 @@ var form={
 			return !(errors.length>0);
 		},
 		action1:function(obj){
-			form.valid.action(obj,1);
-			return false;
-//			return form.valid.action(obj,1);
+			return form.valid.action(obj,1);
+		},
+		action2:function(obj){
+			return form.valid.action(obj);
 		}
 	}
 };

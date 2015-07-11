@@ -7,5 +7,9 @@ $_ginfo["query"]["mymsggroupdisp"]="select users.name, users.profilepic, sum(1-m
 $_ginfo["query"]["mymsggroupdispordered"]="select * from (".gtable("mymsggroupdisp").") mymsggroupdisp order by time desc";
 $_ginfo["query"]["mymsgperson"]="select users.name, users.profilepic, mymsg.* from (".gtable("mymsg")." ) mymsg left join users on users.id=mymsg.sid where personid={pid} order by id desc";
 
+if(isset($config["needprofile"])) {
+	$myf = User::myprofile();
+}
+
 
 ?>
