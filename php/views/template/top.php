@@ -13,8 +13,9 @@
 
 <!-- 	<link href="assets/icons/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
  -->
- 	<link rel="stylesheet" href="assets/lib/select2/select2.css">
 
+<!--  	<link rel="stylesheet" href="assets/lib/select2/select2.css">
+ -->
 	<script type="text/javascript">
 		var HOST="<?php echo HOST; ?>";
 	</script>

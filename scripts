@@ -1,5 +1,0 @@
-#to save all css files
-for i in $(cat chat.php | grep -oh 'href="[^#][^\"]*.css' | sed s/'href="'/''/ )  ; do curl "http://www.aadi.me/mbi/"$i --create-dirs -o $i ; done
-
-#to download scripts
-for i in $(cat chat.php | grep -oh 'src="[^\"]*' | sed s/'src="'/''/ )  ; do curl "http://www.aadi.me/mbi/"$i --create-dirs -o $i ; done

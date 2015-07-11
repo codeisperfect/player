@@ -1,6 +1,6 @@
 <?php
-load_view("Template/top.php",$inp);
-load_view("Template/navbarnew.php",$inp);
+load_view("template/top.php");
+load_view("template/navbarnew.php");
 
 $defopen="otpwindow";
 $defopen="signupwindow";
@@ -13,7 +13,7 @@ $defopen="signupwindow";
         <div class="col s12 l10 offset-l1">
           <div class="card-panel">
             <?php
-              load_view('Template/form_errors.php',array("msg"=>$signupmsg));
+              load_view('template/form_errors.php',array("msg"=>$signupmsg));
             ?>
 
             <div class="row">
@@ -37,7 +37,7 @@ $defopen="signupwindow";
             </div>
 
             <div class="row center">
-              <form class="col s12 l10 offset-l1" method="post" onsubmit='return ms.signupform(this,<?php echo tf($_ginfo["needsignupotp"]); ?>);' <?php if($_ginfo["needsignupotp"]) { ?>  data-action='signupotp' data-param='{"phone":$("#signupwindow").find("input[name=phone]").val(), type: "s"}' data-res='hideshowdown("signupwindow","otpwindow");'  <?php }else{ ?>  <?php } ?>  autocomplete="off" >
+              <form class="col s12 l10 offset-l1" method="post" onsubmit='return form.valid.action1(this);' autocomplete="off" >
                 <div id="signupwindow" style='<?php dit($defopen=="signupwindow"); ?>' >
                   <div class="row">
                     <div class="input-field col s12 l6">
@@ -45,7 +45,7 @@ $defopen="signupwindow";
                       <label for="fullname">Full Name</label>
                     </div>
                     <div class="input-field col s12 l6">
-                      <input id="email" name="email" type="text"  data-condition='email' >
+                      <input id="email" name="email" type="text" data-condition='email' >
                       <label for="email">Email</label>
                     </div>
                   </div>
@@ -102,12 +102,6 @@ $defopen="signupwindow";
   </main>
 
 <?php
-load_view("Template/footer.php",$inp);
-load_view("Template/bottom.php",Fun::mergeifunset($inp,array("needbody"=>false)));
+load_view("template/footer.php",$inp);
+load_view("template/bottom.php");
 ?>
-
-<!-- 
-  <script src="js/signup.js"></script>
--->
-</body>
-</html>

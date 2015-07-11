@@ -1,6 +1,6 @@
 <?php
-load_view("Template/top.php");
-load_view("Template/navbarnew.php");
+load_view("template/top.php");
+load_view("template/navbarnew.php");
 ?>
 
 <main>
@@ -18,21 +18,21 @@ load_view("Template/navbarnew.php");
             <div class="col s6">
               <h6 class="teal-text text-darken-1">Address <i class="material-icons tiny">navigation</i></h6>
               <div class="grey-text">
-                B-178<br>
-                Shivalik<br>
-                Malviya Nagar<br>
-                New Delhi - 110017<br>
+                C-15<br>
+                Aravali hostel<br>
+                IIT Delhi<br>
+                New Delhi - 110016<br>
                 India
               </div>
             </div>
             <div class="col s6">
               <h6 class="teal-text text-darken-1">Mail <i class="material-icons tiny">mail</i></h6>
               <div class="grey-text">
-                info@getiitians.com
+                mohitsaini1196@gmail.com
               </div><br>
               <h6 class="teal-text text-darken-1">Call <i class="material-icons tiny">call</i></h6>
               <div class="grey-text">
-                +91 931 339 4403
+                +91 750 375 9053
               </div>
             </div>
           </div>
@@ -78,11 +78,11 @@ load_view("Template/navbarnew.php");
 	    		  	  	<label for="phone_number">Phone Number</label>
 	    		  	  </div>
 	    		  	  <div class="input-field col s12">
-	    		  	  	<textarea id="message" name="msg" class="materialize-textarea" required></textarea>
+	    		  	  	<textarea id="message" name="content" class="materialize-textarea" required></textarea>
           				<label for="message">Your Message</label>
 	    		  	  </div>
 	    		  	  <div class="col s12">
-	    		  	  	<button type="submit" class="btn waves-light waves-effect">Send
+	    		  	  	<button type="submit" class="btn waves-light waves-effect" name="contactus" >Send
 	    		  	  	  <i class="material-icons right">send</i>
 	    		  	  	</button>
 	    		  	  </div>
@@ -99,10 +99,6 @@ load_view("Template/navbarnew.php");
 </main>
 
 <?php
-load_view("Template/footer.php");
-load_view("Template/bottom.php",Fun::mergeifunset($inp,array("needbody"=>false)));
+load_view("template/footer.php");
+load_view("template/bottom.php", Fun::mergeifunset($inp,array("js" => array("https://maps.googleapis.com/maps/api/js"), "curpage" => "contactus" )));
 ?>
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
-  <script src="js/contactus.js"></script>
-</body>
-</html>

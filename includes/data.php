@@ -7,5 +7,13 @@ $_ginfo["attributes"]=array("name","value","style","class","id","type","ph","onc
 $_ginfo["attrs_shortcut"]=array("ph"=>"placeholder","dc"=>"data-condition");
 $_ginfo["shoudnotnull"]=array("id","name","value","style","class","type");
 
+$_ginfo["adminmail"] = "mohitsaini1196@gmail.com";
+
+$_ginfo["isrealmail"] = false;
+$_ginfo["isrealmsg"] = false;
+
+$_ginfo["mailfile"] = "php/mails/";
+$_ginfo["loadviewfile"] = "php/views/";
+
 
 ?>

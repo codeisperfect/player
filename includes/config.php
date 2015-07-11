@@ -16,7 +16,9 @@ $view_default=array(
 		),
 	'template/bottom.php'=>array(
 		"needpopup"=>true,
-		"needbody" => true
+		"needbody" => true,
+		"js" => array(),
+		"curpage" => ""
 		),
 	'template/bottomnew.php'=>array(
 		"addjs"=>array(),
@@ -65,7 +67,7 @@ $view_default=array(
 	"login.php"=>array(
 		"defopen"=>"login"
 		),
-	"template/popup.php"=>array(
+	"popup.php"=>array(
 		"title"=>"this popup is made in India",
 		"body"=>"",
 		"bodyinfo"=>array(),
@@ -174,4 +176,10 @@ $_ginfo["autoscroll"]=array(
 		"filterfunc"=>"loadchat"
 	)
 );
+
+
+//$_ginfo["adminmail"] = "vaibhav@admin.com";
+
+$_ginfo["isrealmail"] = false;
+
 ?>

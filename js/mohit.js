@@ -89,7 +89,11 @@ var mohit={
 			});
 		});
 	},
-	alert:function(msg){
+	alert:function(msg, timeout){
+		// if(timeout == null)
+		// 	timeout = 4000;
+		// Materialize.toast(msg, timeout);
+
 		mohit.popup("alert",{"title":"Alert","body":msg});
 	},
 	closeme:function(obj){

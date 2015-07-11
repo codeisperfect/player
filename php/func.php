@@ -109,7 +109,7 @@
 			return true;
 		}
 		else{
-			$view="php/views/".$view;
+			$view = gi("loadviewfile").$view;
 			if(file_exists($view)){
 				foreach($inp as $key=>$val){
 					$$key=$val;
@@ -211,7 +211,7 @@
 		return $_ginfo["action_constrain"][$fname]["need"];
 	}
 
-	function handle_request($post_data) {
+	function handle_request($post_data, $action=null) {
 		global $_ginfo;
 		$b=new Actions();
 		if(User::isloginas('s'))
@@ -223,6 +223,9 @@
 		else
 			$a=$b;
 		$outp=array("ec"=>-7);
+		if($action != null) {
+			$post_data["action"] = $action;
+		}
 		if(isset($post_data["action"])  ){
 			$isvalid=isvalid_action($post_data);
 			if(!($isvalid>0))
@@ -667,6 +670,23 @@
 			return $foutput;
 		};
 		return $af;
+	}
+
+	function ao() {
+		return array("ec" => 1, "data" => 0);
+	}
+
+	function msmail($file, $data = array(), $to=null) {
+		setifnn($to, gi("adminmail"));
+		Fun::mailfromfile($to, gi("mailfile").$file, $data);
+	}
+
+	function emptyarr($inp) {
+		return map($inp, f('""'), array("isindexed" => true));
+	}
+
+	function a() {
+		return func_get_args();
 	}
 
 ?>

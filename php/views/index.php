@@ -188,7 +188,7 @@ load_view("template/navbarnew.php",$inp);
     </h3>
   </div>
 </div>
-<div class="container">
+<div class="container" style='display:none;' >
   <div class="row border-bottom border-top" style="margin:0; padding:0;">
     <div class="col s12 m6 border-right">
       <h2 class="header center">

@@ -6,7 +6,7 @@
   </ul>
 
   <!-- NavBar -->
-  <div class="navbar-fixed">
+  <div class="navbar-fixed" >
     <nav class="teal darken-3" role="navigation">
       <div class="nav-wrapper">
         <a href="" class="brand-logo">getIITians</a>
