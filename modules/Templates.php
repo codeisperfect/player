@@ -1,14 +1,21 @@
 <?php
 class Templates{
-	function profile_save_button(){
+  function input($inp){
+    foreach($inp as $key=>$val)
+      $$key=$val;
+    if($id==null)
+      $id=$name;
+    $inpattr=Fun::mergeifunset($inpattr,array("name"=>$name,"type"=>$type,"class"=>"validate","dc"=>$dc,"onkeyup"=>"checkValid(this,event);","id"=>$id));
+    mergeifunset($divattr,array("class"=>"row"));
 ?>
-              <hr/>
-              <div class="text-center">
-               <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>Save profile</button>
-               <button type="reset" class="btn btn-default"><i class="fa fa-trash-o fa-lg"></i>Cancel</button>
+            <div <?php echo param2str($divattr); ?>  >
+              <div class="input-field col s12 m12">
+                <input <?php echo param2str($inpattr); ?> >
+                <label for='<?php echo $id; ?>' ><?php echo $label; ?></label>
               </div>
+            </div>
 <?php
-	}
+  }
 
 	function input1($inp){
 		foreach($inp as $key=>$val)
@@ -26,20 +33,16 @@ class Templates{
               </div>
 <?php
 	}
-  function headerdd($inp){
+  function check1($inp){
     foreach($inp as $key=>$val)
       $$key=$val;
-    foreach($links as $link=>$text){
-    ?>
-       <li>
-        <a href="<?php echo $link; ?>">
-         <?php echo $text; ?>
-        </a>
-       </li>
-    <?php
-    }
+    mergeifunset($inpattr,array("class"=>$class.'filled-in',"id"=>$id==''?'':"check_".$id,"onchange"=>$onchange,"type"=>"checkbox", "value"=>$value, 'checked'=>'',"name"=>$name ));
 ?>
-<?php
+             <input <?php echo param2str($inpattr); ?>  />
+             <label for="<?php echo $inpattr["id"]; ?>" >
+              <?php echo $label; ?>
+             </label><br>
+<?php    
   }
 }
 ?>

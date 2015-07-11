@@ -43,6 +43,9 @@ class Sqle extends Sql{
 			$str.=(gettype($data[$keys[$i]])=='string'?'s':'i');
 		}
 		$query="insert into $table (".join(",",$keys).") VALUES  (".join(",",$vars).")";
+		// print_r($query);
+		// print_r($str);
+		// print_r($params);
 		return self::query($query,$str,$params);
 	}
 	public static function updateVal($table,$sets,$cnds,$limit=-1){
@@ -75,14 +78,55 @@ class Sqle extends Sql{
 		$query="update $table set ".join(',',$setstr).( $conds ===""? " ":" WHERE ").$conds." ".($limit!=-1 ? " LIMIT $limit ":" ");
 		return self::query($query,$str,$params);
 	}
-
-	public static function getRow($query,$param_string="",$param_array=array()){
+	public static function deleteVal($table,$cnds,$limit=-1){
+		$selects=array();
+		$params=array();
+		$str="";
+		$keys=array_keys($cnds);
+		for($i=0;$i<count($keys);$i++){
+			if(gettype($cnds[$keys[$i]])!='array'){
+				$params[]=&$cnds[$keys[$i]];
+				$val=$cnds[$keys[$i]];
+				$sign='=';
+			}
+			else{
+				$val=$cnds[$keys[$i]][0];
+				$params[]=&$cnds[$keys[$i]][0];
+				$sign=(count($cnds[$keys[$i]])>1 ? $cnds[$keys[$i]][1]:"=" );
+			}
+			$selects[]=$keys[$i].$sign." ? ";
+			$str.=gettype($val)=='integer'?'i':'s';
+		}
+		$conds=join(" AND ",$selects);
+		$query="delete from $table ".( $conds ===""? " ":" WHERE ").$conds." ".($limit!=-1 ? " LIMIT $limit ":" ");
+		return self::query($query,$str,$params);
+	}
+	public static function fetchColumnNamesFromTable($table,$excludeColumns=array()){		//Function returns a array of column names of table defined by $table. And Excludes columns which are present in array $excludeColumns
+		$columns = array();
+		$query = "SHOW COLUMNS FROM $table";
+		$columnInfoArray = self::getArray($query);
+		foreach ($columnInfoArray as $columnInfoRow) {
+			if(!array_search($columnInfoRow['Field'], $excludeColumns))
+				$columns[] = $columnInfoRow['Field'];
+		}
+		return $columns;
+	}
+	public static function getRow($query,$param_string="",$param_array=array(), $getkey=null){
 		$qoutp=Sql::getArray($query,$param_string,$param_array);
 		if(count($qoutp)>0)
-			return $qoutp[0];
+			return ($getkey == null ? $qoutp[0]:getval($getkey, $qoutp[0]) );
 		else
 			return null;
 	}
+
+	public static function getR($query, $param = array(), $getkey=null) {
+		$qoutp=Sqle::getA($query, $param);
+		if(count($qoutp) > 0)
+			return ($getkey == null ? $qoutp[0]:getval($getkey, $qoutp[0]) );
+		else
+			return null;
+	}
+
 	public static function loadtables($query,$key,$limit=-1,$min=0,$max=0,$isnewer=true,$sorttext=''){
 		$min=0+$min;
 		$max=0+$max;
@@ -118,23 +162,60 @@ class Sqle extends Sql{
 		}
 		return array($query,$params,$parama);
 	}
+
 	public static function getA($query,$param_array=array()){
 		$conq=Sqle::convQuery($query,$param_array);
 		return Sql::getArray($conq[0],$conq[1],getrefarr($conq[2]));
 	}
+
 	public static function q($query,$param_array=array()){
 		$conq=Sqle::convQuery($query,$param_array);
 		return Sql::query($conq[0],$conq[1],getrefarr($conq[2]));
 	}
+
+	// public static function autoscroll($query, $param, $key, $sort='', $isloadold=true ,$minl=null, $maxl=null){
+	// 	setifnn($minl, $param["minl"]);
+	// 	setifnn($maxl, $param["maxl"]);
+	// 	if($key!=null){
+	// 		if($isloadold)
+	// 			$querylimit = "select * from (".gtable($query).") outpquery where ($key<{min} OR {min}=-1) ".($param["minl"]==-1?'':"limit {minl} ");
+	// 		else
+	// 			$querylimit = "select * from (".gtable($query).") outpquery where $key>{max} ".($param["maxl"]==-1?'':"limit {maxl} ");
+	// 	} else{//max,maxl must be +ve int
+	// 		$querylimit="select * from (".$query.") outpquery limit {maxl} offset {max} ";
+	// 	}
+	// 	if($key!=null)
+	// 		$querysort="select * from (".$querylimit.") sortquery ".$sort;
+	// 	else
+	// 		$querysort=$querylimit;
+	// 	$qresult=Sqle::getA($querysort,$param);
+	// 	$outp["qresult"]=$qresult;
+	// 	$outp["maxl"]=$maxl;
+	// 	$outp["minl"]=$minl;
+	// 	if($key==null){
+	// 		$outp["max"]=$param["max"]+$param["maxl"];
+	// 	} else{
+	// 		if(count($qresult)==0){
+	// 			$outp["min"] = $param["min"];
+	// 			$outp["max"] = $param["max"];
+	// 		} else{
+	// 			$e1=$qresult[0][$key];
+	// 			$e2=$qresult[count($qresult)-1][$key];
+	// 			$outp["min"] = min($e1, $e2);
+	// 			$outp["max"] = max($e1, $e2);
+	// 		}
+	// 	}
+	// 	return $outp;
+	// }
 
 	public static function autoscroll($query, $param, $key, $sort='', $isloadold=true ,$minl=null, $maxl=null){
 		setifnn($minl, $param["minl"]);
 		setifnn($maxl, $param["maxl"]);
 		if($key!=null){
 			if($isloadold)
-				$querylimit = "select * from (".gtable($query).") outpquery where ($key<{min} OR {min}=-1) ".($param["minl"]==-1?'':"limit {minl} ");
+				$querylimit = "select * from (".gtable($query, false).") outpquery where ($key<{min} OR {min}=-1) ".($param["minl"]==-1?'':"limit {minl} ");
 			else
-				$querylimit = "select * from (".gtable($query).") outpquery where $key>{max} ".($param["maxl"]==-1?'':"limit {maxl} ");
+				$querylimit = "select * from (".gtable($query, false).") outpquery where $key>{max} ".($param["maxl"]==-1?'':"limit {maxl} ");
 		} else{//max,maxl must be +ve int
 			$querylimit="select * from (".$query.") outpquery limit {maxl} offset {max} ";
 		}
@@ -163,5 +244,9 @@ class Sqle extends Sql{
 		}
 		return $outp;
 	}
+
+
+
+
 }
 ?>

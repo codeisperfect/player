@@ -1,6 +1,7 @@
 <?php
 	include_once( 'includes/setting.php' ) ;
 	include_once( 'includes/data.php' ) ;
+	include_once( 'includes/config.php' ) ;
 	include_once( 'includes/password.php' ) ;
 
 	ini_set('display_errors', 'on');
@@ -16,24 +17,25 @@
 	}
 	spl_autoload_register('loadModule');
 	include "php/func.php";
+	include "php/funcs.php";
+
+	include("pankaj/phpmailer/class.phpmailer.php");
+	include("pankaj/phpmailer/class.smtp.php");
+
 
 	if(!isset($config))
 		$config=array();
-
-	$config=Fun::mergeifunset($config,array("session_start"=>true,"set_session_id"=>0,"addccode"=>true));
+	$config=Fun::mergeifunset($config,array("session_start"=>true,"set_session_id"=>0 ));
 
 	if($config["session_start"])
 		@session_start();
-	else if($config["session_start"]!=0)
+	else if($config["set_session_id"]!=0)
 		session_id($config["set_session_id"]);
 
-	include_once( 'includes/data_loadonce.php' );
-	include_once('includes/initdb.php');
+
+	$DB = null;
 	include "php/display.php";
-	include "php/specf_display.php";
-	if($config["addccode"]){
-		include "includes/ccode.php";
-	}
-
-
+	include "php/displays.php";
+	include_once( 'includes/dataload.php' ) ;
+	include_once( 'includes/dataloads.php' ) ;
 ?>

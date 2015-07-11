@@ -1,132 +1,128 @@
 <?php
-load_view("template/topnew.php",array("addcss"=>array("assets/css/login.css"),"title"=>"Login"));
+load_view("Template/top.php",$inp);
+load_view("Template/navbarnew.php",$inp);
 ?>
- <body>
-  <div class="login_container">
-   <form id="login_form"  method="post" onsubmit='return form.valid.action(this);' action="" style='<?php dit($defopen=="login"); ?>' >
-    <h1 class="login_heading">
-     Login
-     <span>
-      /
-      <a href="#" class="open_register_form">
-       register
-      </a>
-     </span>
-    </h1>
-    <div style="margin-top:-10px;margin-bottom:10px;color:red;" ><?php echo $loginmsg; ?></div>
-    <?php
-    load_view("template/input.php",array("name"=>"email","label"=>"Username","dc"=>"email",'inpattr'=>array("autofocus"=>"")));
-    load_view("template/input.php",array("name"=>"password","label"=>"Password","type"=>"password","closediv"=>false));
-    ?>
-     <span class="help-block" >
-      <a href="#" class="open_forget_form" >
-       Forgot password?
-      </a>
-     </span>
-    </div>
 
-     <div class="submit_section">
-     <button class="btn btn-lg btn-success btn-block" name="login" >
-      Continue
-     </button>
-    </div>
-   </form>
-   <form id="forget_form" method="post" style="<?php dit($defopen=="forget"); ?>" onsubmit='submitForm(this);return false;'  >
-    <h1 class="login_heading" style='margin-bottom:10px;' >
-     Forget password ?
-    </h1>
-    <span>Don't worry! we knew you will do so. that's why we made this option.</span>
-    <br><br>
-    <?php
-    load_view("template/input.php",array("name"=>"fpemail","label"=>"Email Id","inpattr"=>array("dc"=>"email")));
-    ?>
-    <div class="form-group">
-     <span class="help-block">
-      <a href="#" class="open_login_form" >
-       Oh, you remembered password ?
-      </a>
-     </span>
-    </div>
-    <div class="submit_section">
-     <button class="btn btn-lg btn-success btn-block">
-      Reset
-     </button>
-    </div>
-   </form>
-   <form id="register_form" style="<?php dit($defopen=="signup"); ?>" action="" onsubmit="return form.valid.action(this);" method="post" >
-    <h1 class="login_heading">
-     Register
-     <span>
-      /
-      <a href="#" class="open_login_form">
-       login
-      </a>
-     </span>
-    </h1>
-    <div style="margin-top:-10px;margin-bottom:10px;color:red;" ><?php echo $signupmsg; ?></div>
-    <?php
-      load_view("template/input.php",array("label"=>"Full Name","name"=>"name"));
-      load_view("template/input.php",array("label"=>"Email ID","name"=>"email","dc"=>"email"));
-      load_view("template/input.php",array("label"=>"Password","name"=>"password","type"=>"password"));
-      load_view("template/input.php",array("label"=>"Phone","name"=>"phone","dc"=>"phone"));
-    ?>
-    <div class="form-group">
-     <label class="checkbox-inline">
-      <input type="checkbox" name="tnc" id="register_terms" data-condition='checkcheckbox' data-unfilled='Terms & Conditions' checked />
-      Agree to
-      <a href="javascript:void(0)" data-toggle="modal" data-target="#terms_modal">
-       terms&conitions;
-      </a>
-     </label>
-    </div>
-    <div class="submit_section">
-     <button type="submit" class="btn btn-lg btn-success btn-block" name="signup" >
-      Continue
-     </button>
-    </div>
-   </form>
-  </div>
-  <div class="modal fade" id="terms_modal">
-   <div class="modal-dialog">
-    <div class="modal-content">
-     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">
-       &times;
-      </button>
-      <h4 class="modal-title">
-       Terms & Conditions
-      </h4>
-     </div>
-     <div class="modal-body">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus eaque tempora! Porro cumque labore voluptate dolore alias libero commodi deserunt unde aspernatur dignissimos quaerat similique maiores quasi eos optio quidem.
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus eaque tempora! Porro cumque labore voluptate dolore alias libero commodi deserunt unde aspernatur dignissimos quaerat similique maiores quasi eos optio quidem.
-     </div>
-    </div>
-   </div>
-  </div>
-  <script src="assets/js/jquery.min.js">
-  </script>
-  <script src="assets/bootstrap/js/bootstrap.min.js">
-  </script>
+  <main>
+    <div class="container">
+    <br>
+      <div class="row">
+        <div class="col s12 l6">
+          <div class="card-panel">
+            <?php
+              load_view('Template/form_errors.php',array("msg"=>$loginmsg));
+            ?>
 
+            <div class="row">
+              <div class="col s12 l4 offset-l1">
+                <h3 class="teal-text text-darken-1">Login</h3>
+              </div>
+              <div class="col s12 l7">
+                <div class="row grey-text">
+                  <div class="col s12">
+                    <ul>
+                      <li>Login for Students and Tutors.</li>
+                      <li>Don't have an account?</li>
+                      <li><i class="material-icons left tiny">chevron_right</i>
+                        Student: Sign Up <a href="<?php echo BASE."signup"; ?>">here</a>.
+                      </li>
+                      <li><i class="material-icons left tiny">chevron_right</i>
+                        Tutor: Join Us <a href="<?php echo BASE."joinus"; ?>">here</a>.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div id="login_section">
+              <div class="row">
+                <form class="col s12 offset-l1" method="post">
+                  <div class="row">
+                    <div class="input-field col s12 l10">
+                      <input id="email" name="email" type="email" class="validate" required>
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12 l10">
+                      <input id="password" name="password" type="password" class="validate" required>
+                      <label for="password">Password</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12 l10">
+                      <button class="btn waves-effect waves-light" type="submit">Login
+                        <i class="material-icons right">send</i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col s12 l10 offset-l1" style='' >
+                <h6>
+                  <a onclick="forgotPass();" style="cursor:pointer;">
+                    <span id="forgot_prefix_arrow"><i class="material-icons tiny">keyboard_arrow_up</i></span>&nbsp;Forgot Password
+                  </a>
+                </h6>
+              </div>
+              <form class="col s12 l10 offset-l1" id="forgot_pass_section" onsubmit='form.req(this);return false;' data-action="forgotpass" data-res='success.push("Password reseting link is sent. check your mail.");' >
+                <div class="row">
+                  <div class="col s12">
+                    <p class="grey-text">Enter your email to send verification link.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="email_forgot_pass" name="email" type="email" class="validate" required>
+                    <label for="email_forgot_pass">Email</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit"  >Send</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 l6" style='' >
+          <div class="card-panel">
+          <br>
+            <div class="row">
+              <div class="col s12 l10 offset-l1">
+                <h5 class="teal-text">Sign up with other platforms</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 l10 offset-l1">
+                <h6 class="grey-text"><i class="material-icons tiny left">chevron_right</i>Only Students can sign up from this section.</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 l10 offset-l1">
+                <a href="<?php echo HOST."fb2.php"; ?>" class="btn-large waves-effect waves-light blue darken-3" style="width:100%;">Sign Up with facebook</a>
+              </div>
+            </div>
+            <div class="row" style='' >
+              <div class="col s12 l10 offset-l1">
+                <a href="<?php echo HOST."gplus.php"; ?>" class="btn-large waves-effect waves-light red darken-1" style="width:100%;">Sign Up with google+</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 <?php
-load_view("template/bottomnew.php",array("closebody"=>false));
+load_view("Template/footer.php",$inp);
+load_view("Template/bottom.php",Fun::mergeifunset($inp,array("needbody"=>false)));
 ?>
-  <script>
-   $(function(){
-      var allids=["login_form","forget_form","register_form"];
-
-      doforall(allids,function(elm){
-        $('.open_'+elm).click(function(e){
-          animreplce(e,elm,allids,function(d){
-            var inputs=$('#'+elm).find("input");
-            if(inputs.length>0){
-              $(inputs[0]).focus();
-            }
-          });
-        });
-      });
-		})
-  </script>
- </body>
+  <script src="js/login.js"></script>
+</body>
 </html>

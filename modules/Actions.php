@@ -1,72 +1,121 @@
 <?php
 class Actions{
-	function sendchatmsg($data){
-		$need=array( 'msg');
+
+//For Not login people
+
+	function fillotp($data){
+		$need=array('otp');
 		$ec=1;
 		$odata=0;
 		if(!Fun::isAllSet($need,$data))
 			$ec=-9;
-		else if($data["msg"]!=""){
-			if(!($_SESSION["chatthid"]>0)){
-				$_SESSION["chatthid"]=Sqle::insertVal("chattingthread",array("ip"=>$_SERVER['REMOTE_ADDR'],"time"=>time(),"uid"=>User::loginId(),"isclosed"=>"f"));
+		else{
+			if(isset($_SESSION["signupdata"]) && $_SESSION["signupdata"]["otp"]==$data["otp"]){
+				$info=$_SESSION["signupdata"];
+				$temp=User::signUp(array('type'=>'t','email'=>$info['email'],'password'=>$info['password'],'name'=>$info["name"],"phone"=>$info["phone"] ));
+				if($temp>0){
+					$datatoinsert=Fun::getflds(array('experience','addinfo','iit','iitentryyear','degree'),$info);
+					$datatoinsert["tid"]=$temp['id'];
+					$datatoinsert["isselected"]=($info["sec"]=="1"?'t':'f');
+					$odata=Sqle::insertVal("teachers",$datatoinsert);
+					$_SESSION['login']=$temp;
+				}
+				else
+					$ec=-18;
 			}
-			$odata=array("msgid"=>Help::sendchatmsg($data["msg"],$_SESSION["chatthid"]) );
+			else
+				$ec=-17;
 		}
 		return array('ec'=>$ec,'data'=>$odata);
+	}
+
+	function teacherreg($data){
+		$need=array('name','email','phone','password','experience','addinfo','iit','iitentryyear','degree',"sec");
+		$ec=1;
+		$odata=0;
+		if(!Fun::isAllSet($need,$data))
+			$ec=-9;
+		else{
+			$data['type']='t';
+			if(!User::isValidSignUp($data))
+				$ec=-3;
+			else if(User::isUserExist($data['email']))
+				$ec=-16;
+			else{
+				$data['otp']=rand(1000000,9999999);
+				$_SESSION["signupdata"]=$data;
+				Fun::mailfromfile($data["email"],"php/mail/m1.txt",array("name"=>$data["name"],"otp"=>$data["otp"]));
+				$ec=1;
+			}
+		}
+		return array('ec'=>$ec,'data'=>$odata);
+	}
+	function teacherregcreatea($data){
+		$need=array('name','email','phone','password','experience','addinfo','iit','iitentryyear','degree');
+		$ec=1;
+		$odata=0;
+		if(!Fun::isAllSet($need,$data))
+			$ec=-9;
+		else{
+			$temp=User::signUp(array('type'=>'t','email'=>$data['email'],'password'=>$data['password'],"phone"=>$data["phone"],"address"=>$data["address"]));
+			if($temp>0){
+				$datatoinsert=Fun::getflds(array('experience','addinfo','iit','iitentryyear','degree'),$data);
+				$datatoinsert["tid"]=$temp['id'];
+				$odata=Sqle::insertVal("teachers",$datatoinsert);
+			}
+			else
+				$ec=$temp;
+		}
+		return array('ec'=>$ec,'data'=>$odata);
+	}
+	function sendotp($data){//this function is not used.
+		$need=array("phone");
+		$ec=1;
+		$odata=0;
+		if(!Fun::isAllSet($need,$data))
+			$ec=-9;
+		else{
+			$otp=rand(100000,999999);
+			sets("phone",$otp);
+			Fun::mailfromfile($data["phone"],"php/mail/otp.txt",array("otp"=>$otp));
+			Fun::msgfromfile($data["phone"],"php/mail/otp.txt",array("otp"=>$otp));
+		}
+		return array('ec'=>$ec,'data'=>$odata);
+	}
+
+	function signupotp($data){
+		$outp=array("ec"=>1,"data"=>0);
+		$outp["ec"]=Funs::otpstore($data["phone"], ($data["type"]=='s' ? "Student" : "Teacher") );
+		return $outp;
+	}
+
+	function confirmotp($data){//this function is not used.
+		$outp=array("ec"=>1,"data"=>0);
+		if(gets("phone")!=$data["otp"])
+			$outp["ec"]=-17;
+		return $outp;
+	}
+	function mohit($data){
+		$outp=array("ec"=>1,"data"=>0);
+		$outp["data"]=array(11,33,$data["month"]);
+		return $outp;
 	}
 	function signup($data){
 		global $_ginfo;
 		$outp=array("ec"=>1,"data"=>0);
-		$temp=User::signUp(Fun::getflds($_ginfo["action_constrain"]["signup"]["need"],$data));
-		if($temp>0)
-			$outp["data"]=$temp;
-		else
-			$outp["ec"]=$temp;
-		return $outp;
-	}
-	function login($data){
-		global $_ginfo;
-		$outp=array("ec"=>1,"data"=>0);
-		$temp=User::signIn($data["email"],$data["password"]);
-		if($temp>0)
-			$outp["data"]=$temp;
-		else
-			$outp["ec"]=$temp;
-		return $outp;
-	}
-	function logout($data){
-		User::logout();
-		return array("ec"=>1,"data"=>1);
-	}
-	function getlogin($data){
-		$outp=array("ec"=>1,"data"=>0);
-		if(User::islogin()){
-			$outp["data"]=gets("login");
-		}
-		else
-			$outp["ec"]=-22;
-		return $outp;
-	}
-	function sendmsg($data){
-		$outp=array("ec"=>1,"data"=>0);
-		$recvlist=Fun::intexplode("-",$data["rid"]);
-		$msgdata=Fun::getflds(array("msg"),$data);
-		if($data["msg"]!=""){
-			$msgdata["time"]=time();
-			$msgid=Sqle::insertVal("msgdata",$msgdata);
-			$msg_table_arr=array();
-			foreach($recvlist as $i=>$rid){
-				$msg_table_arr[]=array(User::loginId(),$rid,User::loginId(),$msgid,'u');//u for unseen
-				$msg_table_arr[]=array(User::loginId(),$rid,$rid,$msgid,'u');
+		if(gets("phone")!=$data["otp"] && $_ginfo["needsignupotp"] ){
+			$outp["ec"]=-17;
+		} else{
+			$signup_data=Fun::getflds(array("phone","name","email","password"),$data);
+			$signup_data["type"]="s";
+			$temp=User::signUp($signup_data);
+			if(!($temp>0)){
+				$outp["ec"]=$temp;
+			} else {
+				Fun::mailfromfile( $signup_data["email"], "php/mail/signupmail.txt", $signup_data );
 			}
-			$outp["data"]=Sql::query("insert into msg (sid,rid,aid,msgid,isseen) ".Fun::makeDummyTableColumns($msg_table_arr,array("sid","rid","aid","msgid","isseen"),'iiiis'));
 		}
 		return $outp;
-	}
-	function loadmsg($data){
-		$loginid=User::loginId();
-		$query=array("select users.name,users.profilepic, msgdata.msg, msgdata.type, msgdata.formid, msgdata.time, msg.* from msg left join msgdata on msg.msgid=msgdata.id left join users on users.id=(case when msg.aid=msg.sid then msg.rid else msg.sid end) where aid=? AND rid=? order by msg.id desc",'ii',array(&$loginid,&$data["uid"]));
-		return array("ec"=>1,"data"=>Sqle::loadtables($query,'id'));
 	}
 	function changepassword($data){
 		$outp=array("ec"=>1,"data"=>0);
@@ -76,17 +125,28 @@ class Actions{
 	}
 	function saveuserdetails($data){
 		$outp=array("ec"=>1,"data"=>0);
-		if(User::loginType()=='a' || User::loginId()==$data["uid"]){
-			$canneed=array("name", "sign", "lang", "news", "address", "fbid", "skypeid", "email");
-			$toupdate=Fun::getflds($canneed, $data);
-			$myf=User::userProfile(null, array("email"=>getval("email",$toupdate,'')));
-			if(isset($toupdate["email"]) && !( $myf==null || $myf["id"]==$data["uid"] )){
-				$outp["ec"] = -16;
-			} else{
-				$outp["data"] = Sqle::updateVal("users",$toupdate,array("id"=>$data["uid"]));
-			}
-		} else
-			$outp["ec"]=-2;
+		$canneed=array("name", "email", "phone", "gender", "dob");
+		$toupdate=Fun::getflds($canneed, $data);
+		$myf=User::userProfile(null, array("email"=>getval("email",$toupdate,'')));
+		if(isset($toupdate["email"]) && !( $myf==null || $myf["id"]==$data["uid"] )){
+			$outp["ec"] = -16;
+		} else{
+			$outp["data"] = Sqle::updateVal("users",$toupdate,array("id"=>User::loginId()));
+		}
+		return $outp;
+	}
+
+	function forgotpass($data) {
+		$outp = array("ec"=>1,"data"=>0);
+		if(!(User::passreset($data["email"]))) {
+			$outp["ec"] = -6;
+		}
+		return $outp;
+	}
+
+	function resetpass($data) {
+		$outp = array("ec"=>1, "data"=>0);
+		$outp["data"] = User::changePassword( null,  $data["password"] );
 		return $outp;
 	}
 }

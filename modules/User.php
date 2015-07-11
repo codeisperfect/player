@@ -1,23 +1,20 @@
 <?php
 class User extends Sql{
 	public static function accountTypes(){
-		return array_keys(self::atypes());
+		return array('a', 't','s');
+		//a:Admin
+		//u:user
 	}
 	public static function accountNames($t){
-		$dataANames=self::atypes();
-		return get($t,$dataANames);
-	}
-	public static function atypes(){
-		return array('a'=>'Admin','u'=>'User','f'=>"Free user");
+		$dataANames=array('a'=>'Admin','s'=>'Student','t'=>'Teacher');
+		return $dataANames[$t];
 	}
 	public static function isValidType($t){
 		return in_array($t, self::accountTypes()  );
 	}
 	public static function islogin(){
-		if ( isset($_SESSION['login']) && isset($_SESSION['login']["id"])  && isset($_SESSION['login']["type"]) &&  (0+$_SESSION['login']["id"]) > 0   && 	self::isValidType($_SESSION["login"]["type"])){
-			$_SESSION["login"]["id"]=0+$_SESSION["login"]["id"];
+		if ( isset($_SESSION['login']) && isset($_SESSION['login']["id"])  && isset($_SESSION['login']["type"]) &&  $_SESSION['login']["id"] > 0   && 	self::isValidType($_SESSION["login"]["type"]))
 			return $_SESSION['login'];
-		}
 		else
 			return false;
 	}
@@ -29,11 +26,26 @@ class User extends Sql{
 		$temp=self::islogin() ;
 		return ($temp ? $temp['id']:$temp);
 	}
+
 	public static function logout(){
 		$_SESSION['login']=null;
 	}
+
+	public static function login($id, $type){
+		$temp = array("id" => $id, "type" => $type);
+		sets("login", $temp);
+		return $temp;
+	}
+
 	public static function isloginas($t){
 		return (self::islogin() && self::loginType()==$t);
+	}
+	public static function isloginin($t){
+		for($i=0;$i<strlen($t);$i++){
+			if(User::isloginas($t[$i]))
+				return true;
+		}
+		return false;
 	}
 	public static function isUserExist($email){
 		$temp=Sqle::selectVal( "users","email,password",array('email'=>$email),1);
@@ -51,8 +63,6 @@ class User extends Sql{
 			return 1;//yes, This is valid SignUpable data.
 	}
 	public static function signUp($data){//email,password,type keys are compulsary !!
-		global $_ginfo;
-		$data=Fun::setifunset($data,"type",$_ginfo["default_user_type"]);
 		$data['create_time']=$data['update_time']=time();
 		if(!self::isValidSignUp($data))
 			return -3;//not valid input
@@ -68,6 +78,7 @@ class User extends Sql{
 			return $temp;
 		}
 	}
+
 	public static function signIn($email,$password){
 		$temp=Sqle::selectVal("users",'id,type,password,conf',array('email'=>$email),1);
 		if($temp==null)
@@ -82,16 +93,21 @@ class User extends Sql{
 			return $temp;
 		}
 	}
-	public static function changePassword($oldp,$newp){
-		if(self::islogin())
-			return Sqle::updateVal('users',array('password'=>$newp,"update_time"=>time()),array('id'=>self::loginId(),'password'=>$oldp),1);
+
+	public static function changePassword($oldp=null, $newp){
+		if(self::islogin()){
+			$match = array('id'=>self::loginId());
+			if($oldp != null) {
+				$match['password'] = $oldp;
+			}
+			return Sqle::updateVal('users',array('password'=>$newp), $match, 1);
+		}
 		else
 			return false;
 	}
-	public static function userProfile($uid, $selector=array()){
-		if($uid!=null)
-			setifunset($selector, "id", $uid);
-		return Sqle::selectVal("users", "*", $selector ,1);
+	public static function userProfile($uid){
+		$uid=0+$uid;
+		return $uid>0?(Sqle::selectVal("users","*",array('id'=>$uid ),1)):null;
 	}
 	public static function myprofile(){
 		if(User::islogin())
@@ -103,5 +119,41 @@ class User extends Sql{
 		$timenow=time();
 		Sqle::updateVal("users",array('last_login'=>$timenow),array('id'=>User::loginId()));
 	}
+	public static function name($uid){
+		$temp=Sqle::selectVal("users","name",array("id"=>$uid),1);
+		if($temp!=null)
+			return $temp["name"];
+		else
+			return $temp;
+	}
+
+	public static function passreset($email) {
+		$uinfo = Sqle::getR("select * from users where email={email} limit 1", array("email" => $email));
+		if($uinfo!=null) {
+			$uinfo["password"] = Fun::encode2($uinfo["password"]);
+			$reseturl = BASE."forgotPassword?".http_build_query( Fun::getflds(array("id", "password"), $uinfo) );
+			$uinfo["link"] = $reseturl;
+			Fun::mailfromfile($email, "php/mail/passwordreset.txt", $uinfo);
+			return true;
+		}
+		return null;
+	}
+
+	public static function fglogin($data){//must have key, { type, data[type], email} Additional : { name, phone, email}
+		if( in_array($data["type"], array("fblogin", "gpluslogin")) ){
+			$ins_data=Fun::getflds(array("name", "phone", "email"), $data);
+			$trylogin = Sqle::selectVal("users", "*", array( $data["type"] => $data[$data["type"]] ),1);
+			if(!$trylogin) {
+				$ins_data["password"] = rand(100000, 999999);
+				$ins_data["type"] = "s";
+				$ins_data[$data["type"]] = $data[$data["type"]];
+				return User::signUp($ins_data);
+			} else {
+				return User::login($trylogin["id"], $trylogin["type"]);
+			}
+		}
+	}
+
+
 }
 ?>

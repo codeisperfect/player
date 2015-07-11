@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+		<meta charset="UTF-8">
+		<title>Training History</title>
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		
+		<link rel="shortcut icon" href="favicon.ico" />
+		
+		<!-- bootstrap framework -->
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		
+		<!-- custom icons -->
+			<!-- font awesome icons -->
+			<link href="assets/icons/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+			<!-- ionicons -->	
+			<link href="assets/icons/ionicons/css/ionicons.min.css" rel="stylesheet" media="screen">
+			<!-- flags -->
+			<link rel="stylesheet" href="assets/icons/flags/flags.css">
+				<link rel="stylesheet" href="assets/lib/DataTables/extensions/Scroller/css/dataTables.scroller.min.css">
+		
+		<!-- main stylesheet -->
+		<link href="assets/css/style.css" rel="stylesheet" media="screen">
+		
+		<!-- google webfonts -->
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400&amp;subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+		
+		<!-- moment.js (date library) -->
+		<script src="assets/lib/moment-js/moment.min.js"></script>
+        
+        
+        <style>
+					.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius:0px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "In-Progress";
+    padding-left:2px;
+    background-color: #34A7C1; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "Achieved";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width:15px; height:15px; margin:10px; margin-right:3px;
+    background: #FFFFFF;
+    border: 1px solid #999999; border-radius:20px;
+    position: absolute; top: 0; bottom: 0; right: 68px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+		</style>
+		
+    </head>
+    <body>
+		<!-- top bar -->
+			<header class="navbar navbar-fixed-top" role="banner">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a href="#" class="navbar-brand"><img src="assets/img/blank.gif" alt="Logo"></a>
+				</div>
+				<ul class="top_links">
+				<li>
+						<a href="#"><span>3</span>Notification</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					
+					<li class="user_menu">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="navbar_el_icon ion-person"></span> <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="user_profile.html">Profile</a></li>
+							<li><a href="#">My messages</a></li>
+							<li><a href="#">My tasks</a></li>
+							<li class="divider"></li>
+							<li><a href="login_page.html">Log Out</a></li>
+						</ul>
+					</li>
+					
+				</ul>
+			</div>
+		</header>
+		
+		
+		
+        <!-- main content -->
+		<div id="main_wrapper" style=" margin-top:-20px;">
+			<div class="page_content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<h2>Training History </h2>              
+							</div>
+						</div>
+					</div>
+				</div>		
+			</div>
+            
+            
+                <div class="row">
+						<div class="col-sm-12">
+							<div class="panel panel-default">
+								
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-4" style="height:380px; width:100%; overflow: scroll;">
+										
+											<table cellpadding="5" cellspacing="5" border="1" id="dt_scroll_x" class="table table-striped" style="width:100%; border-color:#CCC;">
+                                            		<tr style="color:#787878;">
+                                                    	<td width="15%"><strong>Date</strong></td>
+                                                        <td width="25%"><strong>Nature of session</strong></td>
+                                                        <td width="50%"><strong>Brief Description</strong></td>
+                                                        <td width="10%"><strong>&nbsp;</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                    	<td>25 May 2015 </td>
+                                                        <td>In-person (Office)</td>
+                                                        <td>Discussion about mental focus.....</td>
+                                                        <td align="center">
+                                                                <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h2>Date: 25 May 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br></p>
+<P align="justify">
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br><br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as Date: 25 May 2015<br>
+Nature of Session – In-person<br>
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br>
+<br>
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' <br>
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as this is the stage where I can improve on my technique and also can keep things in my control. Most of the training and even matches will be done in Stage I focus.
+Another task was to implement 'self talk' as a part of my preparation time – for pre-shot, pre-series and pre-match preparation.
+I also need to realize the clear difference between 'natural thoughts' and 'purposely done self-talk'. Almost all the thoughts that we experience are generally 'natural thoughts'. We need to change this for our training and have a control over our thoughts through 'self talk' 
+Self-talk need not include any motivational statements. It can be as basic as reminding yourself of what you are doing right now, or where are you right now like just saying to yourself 'water' while you're having water.<br><br>
+Another important realization: I need to be aware that when I'm distracted and not in focus while shooting, what are the technical mistakes I tend to repeat in such cases. These errors simply tell me that those technical points have yet not reached perfection and thus do not happen automatically. These mistakes shows that what are the technical points we need to work more on. Through technical improvements, I have to reach a stage where, even if distracted,  I will be able to shoot technically correct without any errors.
+At the end, I need to realize that even the best shooters in the world make around 15-20 mistakes in a match. So its ok to make mistakes during my match. I need to accept my errors first in order to minimize them. So I cannot let these mistakes to hold me back and remain stuck on those bad shots. I should move on, immediately.<br>
+Similarly, the good shots are not supposed to give me more shivers. I need to realize that these good shots are what I am training for and if I train hard then they are bound to happen. So do not let them effect me.<br>
+Also, we discussed that now on I am supposed to give ratings to training, like on a scale of 1-10 based on the 2 tasks given to me – self talk and eye control.<br><br>
+Another point discussed was regarding the self-talk I did during my recent matches. What I did was to get rid of the fear I had been experiencing during the match, I left everything completely on destiny and God. I told myself that if something bad has to happen and if its written it will happen anyways, so no point that I keep worrying about it. As if I keep worrying, it will definitely mess up. So lets just leave it on God and I should just focus on my technique. My last series was 50. But the point is, that I cannot get excused off my actions so easily> I need to take responsibility of my actions and its results. If the series was bad it was bad because I did not focus on my technique and if it was good, then it was good because I shot it well and focused on the technique.<br>
+Another task – No face expressions. I have to make sure that it should not be possible for anyone to tell whether I shot a good shot or a bad one, through my expressions or behavior. I should keep myself neutral at all times, irrespective of my scores. 
+
+
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    	<td>19 May 2015</td>
+                                                        <td>Telephonic</td>
+                                                        <td>Self-Talk....</td>
+                                                        <td align="center">
+                                                             <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large2">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large2">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h2>Date: 19 May 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br>
+
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as 
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    	<td>14 April 2015</td>
+                                                        <td>In-person (Range)</td>
+                                                        <td>Review of live shooting .....</td>
+                                                        <td align="center">
+                                                                 <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large3">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large3">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h2>Date: 14 April 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br>
+
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as 
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                     <tr>
+                                                    	<td>1 Feb 2015</td>
+                                                        <td>In-person (Office)</td>
+                                                        <td>Discussion about match routines....</td>
+                                                        <td align="center">
+                                                                 <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large4">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large4">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h2>Date: 1 Feb 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br>
+
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as 
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                     <tr>
+                                                    	<td>1 Feb 2015</td>
+                                                        <td>In-person (Office)</td>
+                                                        <td>Discussion about match routines....</td>
+                                                        <td align="center">
+                                                                 <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large4">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large4">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h2>Date: 1 Feb 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br>
+
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as 
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                     <tr>
+                                                    	<td>1 Feb 2015</td>
+                                                        <td>In-person (Office)</td>
+                                                        <td>Discussion about match routines....</td>
+                                                        <td align="center">
+                                                                 <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large4">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large4">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h2>Date: 1 Feb 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br>
+
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as 
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                     <tr>
+                                                    	<td>1 Feb 2015</td>
+                                                        <td>In-person (Office)</td>
+                                                        <td>Discussion about match routines....</td>
+                                                        <td align="center">
+                                                                 <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large4">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large4">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h2>Date: 1 Feb 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br>
+
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as 
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                     <tr>
+                                                    	<td>1 Feb 2015</td>
+                                                        <td>In-person (Office)</td>
+                                                        <td>Discussion about match routines....</td>
+                                                        <td align="center">
+                                                                 <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large4">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large4">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h2>Date: 1 Feb 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br>
+
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as 
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                     <tr>
+                                                    	<td>1 Feb 2015</td>
+                                                        <td>In-person (Office)</td>
+                                                        <td>Discussion about match routines....</td>
+                                                        <td align="center">
+                                                                 <div class="col-sm-4">
+											<button class="btn btn-default" style="background-color:#2986b9; color:#FFF;" data-toggle="modal" data-target="#bs_modal_large4">View</button>
+										</div>
+                                        <div class="modal fade" id="bs_modal_large4">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-body">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h2>Date: 1 Feb 2015</h2>
+							<p align="left">Nature of Session – In-person<br><br>
+
+
+Place  - Vasant Kunj Office <br>
+Brief Description – Discussion about mental focus<br><br>
+
+We had a discussion about what basically focus is? What all does 'focus' involves. So we took the example of 'focusing on the cup while looking somewhere else' or without looking at the cup at all. This example explained that to focus on something, a person needs to atleast 'look' at that thing, along with thinking or feeling it. <br>
+This gave us one important task to do – 'Eye control' 
+Before we can control our minds from wandering, it is important to have a control over our eyes. And I should watch neutral things and may be just no where like somewhere long distance but not watching anything specific. Don't have to meet anybody's eyes during training and matches. I need to have a complete control over my eyes.<br>
+Another important thing discussed was to be aware that even 'concentration' requires a lot of effort. We cannot assume that it will come naturally or without effort. The fact is, I will have to make an extra effort to focus on what I want to focus on.
+Then we discussed about the 3 types of focus i experience during my training:<br>
+Type I – where I am completely distracted and lose control on my technique. This is the 'no focus' or 'zero focus' stage. 
+Stage I focus – Where I am not distracted and I consciously make effort to focus on my technique. I keep a check on all technical steps required during a shot or a series. Here I do reasonably good. This is the stage where I can work consciously on my technique and also improve on the technique.<br>
+Stage II focus – In this kind of focus, I am not distracted and I don't even make any extra efforts to focus consciously on my technique. Everything just happens on its own and I am just wanting to feel the way I love to shoot. I feel empty minded here and I am just able to do the things right automatically. Here I am not working to improve on my technique, like in Stage I focus – but I am just re-doing what I've learnt so far, with 'feeling' being the main element here. Almost at all times, I shoot really good during this kind of focus. Whenever I am able to achieve it.<br>
+But as discussed, our purpose for now will be to maintain 'stage I focus' at majority of the times, as 
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                            </table>
+										
+										
+									</div>
+                                   
+									
+								</div>
+                                
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+        
+            
+        </div>
+
+
+	<!-- side navigation -->
+		<nav id="side_nav">
+			<ul>
+            	<li>
+					<a href="user_profile.html"><span class="ion-search"></span> <span class="nav_title">Explore</span></a>
+				</li>
+				<li>
+					<a href="user_profile.html"><span class="ion-android-social-user"></span> <span class="nav_title">Profile</span></a>
+				</li>
+                <li>
+					<a href="calendar.html"><span class="ion-calendar"></span> <span class="nav_title">Calendar</span></a>
+				</li>
+				<li>
+					<a href="#">
+						
+						<span class="ion-clipboard"></span>
+						<span class="nav_title">Track</span>
+					</a>
+					<div class="sub_panel">
+						<div class="side_inner">
+							<h4 class="panel_heading panel_heading_first">Logs</h4>
+							<ul>
+								<li><a href="daily-log.html">Daily Log</a></li>
+								<li><a href="weekly-review-from.html"> Weekly Review</a></li>
+								<li><a href="misc-form.html">Misc. Forms</a></li>
+                                <li><a href="graph.html">Graphs</a></li>
+                                
+							</ul>
+							<h4 class="panel_heading">Reference</h4>
+							<ul>
+								<li class="add_label">
+									<a href="goal.html">Goals</a>
+									
+								</li>
+								<li class="add_label">
+									<a href="exercise.html">Exercises</a>
+									
+								</li>
+								<li class="add_label">
+									<a href="routines.html">Routines</a>
+									
+								</li>
+								<li class="add_label">
+									<a href="training-history.html">History</a>
+									
+								</li>
+							</ul>
+							
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ion-game-controller-a"></span>
+						<span class="nav_title">Train</span>
+					</a>
+					<div class="sub_panel">
+						<div class="side_inner">
+							<h4 class="panel_heading">Pages</h4>
+							<ul>
+								<li><a href="#">N Bach</a></li>
+								<li><a href="#">Intractive Metro</a></li>
+								<li><a href="#">Breathing Practice</a></li>
+                                <li><a href="#">Meditation</a></li>
+                                <li><a href="#">Sound Track</a></li>
+							</ul>
+							
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ion-android-friends"></span>
+						<span class="nav_title">Consult</span>
+					</a>
+					<div class="sub_panel">
+						<div class="side_inner">
+							<h4 class="panel_heading">Pages</h4>
+							<ul>
+								<li><a href="chat.html">Instant Massenger</a></li>
+								<li><a href="post.html">Post A Question</a></li>
+								<li><a href="challenges.html">Thinking Review Forms</a></li>
+							</ul>
+						
+						</div>
+					</div>
+				</li>
+					<li>
+					<a href="chat.html"><span class="ion-chatbubble"></span> <span class="nav_title">Chat</span></a>
+				</li>
+				
+				
+			</ul>
+		</nav>
+
+
+		<!-- right slidebar -->
+		
+		<!-- jQuery -->
+		<script src="assets/js/jquery.min.js"></script>
+		<!-- easing -->
+		<script src="assets/js/jquery.easing.1.3.min.js"></script>
+		<!-- bootstrap js plugins -->
+		<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+		<!-- top dropdown navigation -->
+		<script src="assets/js/tinynav.js"></script>
+		<!-- perfect scrollbar -->
+		<script src="assets/lib/perfect-scrollbar/min/perfect-scrollbar-0.4.8.with-mousewheel.min.js"></script>
+		
+		<!-- common functions -->
+		<script src="assets/js/tisa_common.js"></script>
+		<script src="assets/lib/DataTables/extensions/Scroller/js/dataTables.scroller.min.js"></script>
+		<!-- style switcher -->
+		
+		
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-49181536-1']);
+		_gaq.push(['_trackPageview']);
+	  
+		(function() {
+		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+    </body>
+
+</html>
