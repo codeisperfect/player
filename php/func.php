@@ -220,10 +220,12 @@
 		}
 		return $temp;
 	}
+
 	function daystarttime($ts=null){
 		setifnn($ts,time());
 		return strtotime(Fun::timetodate($ts));
 	}
+
 	function resizeimg($filename,$tosave, $max_width, $max_height){
 		$imginfo=getimagesize($filename);
 		list($orig_width, $orig_height) = $imginfo;
@@ -268,6 +270,7 @@
 		}
 		chmod($tosave,0777);
 	}
+
 	function getrefarr(&$inp){
 		$outp=array();
 		foreach($inp as $i=>$val){
