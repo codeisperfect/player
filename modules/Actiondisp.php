@@ -34,7 +34,8 @@ class Actiondisp{
 		$odata=0;
 		if($printjson)
 			echo json_encode(array('ec'=>$ec,'data'=>$odata))."\n";
-		load_view("template/msggroup.php",array("msggroup"=>Funs::mygrouplist()));
+		$mymsggroup = Sqle::getA(gtable("mymsggroupdispordered", false), array("uid"=>User::loginId()));
+		load_view("template/msggroup.php",array("msggroup"=> $mymsggroup ));
 	}
 
 	function profile_aboutdisp($data, $printjson = true) {

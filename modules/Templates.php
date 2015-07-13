@@ -44,5 +44,18 @@ class Templates{
              </label><br>
 <?php    
   }
+
+  function input3($inp) {
+    foreach($inp as $key=>$val)
+      $$key=$val;
+    mergeifunset($inpattr,array("name"=>$name,"type"=>$type, "dc"=>$dc, "id" =>rit("input3_".$id, $id!='') ));
+    mergeifunset($divattr,array("class"=>$divclass));
+?>
+  <div <?php echo param2str($divattr); ?> >
+    <input <?php echo param2str($inpattr); ?> >
+    <label for="<?php echo $inpattr["id"]; ?>" ><?php echo $label; ?></label>
+  </div>
+<?php
+  }
 }
 ?>

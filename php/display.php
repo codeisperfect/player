@@ -1,4 +1,5 @@
 <?php
+
 	function param2str($data){
 		global $_ginfo;
 		$params="";
@@ -7,11 +8,14 @@
 		$keys=array_keys($data);
 		for($i=0;$i<count($keys);$i++){
 			if( in_array($keys[$i],$temp) || substr($keys[$i],0,5)=="data-" || substr($keys[$i],0,2)=="on" ){
-				$params.=(" ".(isset($keymap[$keys[$i]])?$keymap[$keys[$i]]:$keys[$i])."='".$data[$keys[$i]]."' ");
+				if(!($data[$keys[$i]]==="" && in_array($keys[$i],$_ginfo["shoudnotnull"])  )){
+					$params.=(" ".(isset($keymap[$keys[$i]])?$keymap[$keys[$i]]:$keys[$i])."='".$data[$keys[$i]]."' ");
+				}
 			}
 		}
 		return $params;
 	}
+
 
 	function getparams($data=null){//Dict Array of parameters , return parameters string
 		if($data==null)

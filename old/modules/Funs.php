@@ -34,7 +34,7 @@ abstract class Funs{
 		return Sqle::getArray($query1);
 	}
 	public static function mygrouplist(){
-		return Sqle::getA(gtable("mymsggroupdispordered"), array("uid"=>User::loginId()));
+		return 
 	}
 }
 ?>

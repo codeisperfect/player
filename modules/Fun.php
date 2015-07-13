@@ -195,6 +195,24 @@ abstract class Fun{
 		else
 			return self::timetostr(time()-$s);
 	}
+
+	public static function timepassed_t3($s){
+		if($s<5)
+			return "few sec. ago";
+		else if($s<60)
+			return $s." sec. ago";
+		else if($s<60*45)
+			return floor($s/60)." min. ago";
+		else if($s<60*(60+45))
+			return "about 1 hour ago";
+		else if($s<60*60*24)
+			return floor($s/3600)." hours ago";
+		else if($s<60*60*24*5)
+			return floor($s/(60*60*24))." days ago";
+		else
+			return self::timetostr(time()-$s);
+	}
+
 	public static function timepassed_t2($s){
 		if($s<5)
 			return "Just";

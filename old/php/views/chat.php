@@ -61,7 +61,7 @@ load_view("template/header.php");
 							<button type='button' onclick='div.load($("#loadchat")[0],1);' >Load older</button>
  -->
  							<div class="chat_messages" onscroll='funcs.loadprv(this, 2)' >
-								<div  id="loadchat"  data-min="-1" data-max="0" data-minl="3" data-maxl="-1" data-action="personmsg" data-pid="4" >
+								<div id="loadchat"  data-min="-1" data-max="0" data-minl="3" data-maxl="-1" data-action="personmsg" data-pid="4" >
 								</div>
 							</div>
 						 </div>

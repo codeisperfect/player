@@ -363,12 +363,13 @@ var div={
 			$(obj).html(d);
 		},adata);
 	},
-	load:function(obj, isloadold, isappendold, call_back_data, call_back_html) {
+	load:function(obj, isloadold, isappendold, call_back_data, call_back_html, loadingselector) {
 		if(div.isblock(obj))
 			return -1;
 		if( (isloadold==1 && $(obj).attr("data-minl")==0) || (isloadold==0 && $(obj).attr("data-maxl")==0) )
 			return -2;
 		div.setblock(obj);
+		loading.showimg(loadingselector);
 		if(isappendold==null)
 			isappendold=isloadold;
 		$(obj).attr("data-isloadold",isloadold);
@@ -379,6 +380,7 @@ var div={
 			}
 			if(call_back_data!=null)
 				call_back_data(d);
+			loading.hideimg(loadingselector);
 		},function(d){
 			if(isappendold==1)
 				$(obj).prepend(d);
@@ -392,10 +394,15 @@ var div={
 			}
 		});
 	},
-	reload_autoscroll:function(obj, min_maxa, call_back_data, call_back_html){
-		$(obj).attr(min_maxa);
-		div.load(obj, 1, -1, call_back_data, call_back_html);
-	}
+	reload_autoscroll: function(obj, data_maxl, call_back_data, call_back_html, selector) {
+		if(data_maxl==null)
+			data_maxl=$(obj).attr("data-ignoreloadonce");
+		if(typeof(data_maxl) == "number" )
+			$(obj).attr({"data-max":0, "data-maxl":data_maxl});
+		else
+			$(obj).attr(data_maxl);
+		div.load(obj, 1, -1, call_back_data, call_back_html, selector);
+	},
 };
 
 
@@ -735,6 +742,16 @@ var ms = {
 	changescreen: function(obj, id1, id2) {
 		hs_toggle([id1, id2], 700);
 		ms.changesym(obj);
+	}
+};
+
+
+var loading = {
+	showimg: function(selector) {
+		$(selector).css("visibility", "visible");
+	},
+	hideimg: function(selector) {
+		$(selector).css("visibility", "hidden");
 	}
 };
 

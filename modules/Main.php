@@ -71,6 +71,9 @@ class Main{
 
 	function chat() {
 		Fun::redirect(HOST, lid()==0);
+		$pageinfo = array();
+		$pageinfo['cansendlist'] = Fun::dbarrtooption(Funs::cansend(),"id","name");
+
 		load_view("chat.php", $pageinfo);
 	}
 }

@@ -98,3 +98,10 @@
 .edit:hover {
   text-decoration: underline;
 }
+
+
+
+.msggroup:hover{
+  cursor: pointer;
+  background-color: #eeeeee;
+}

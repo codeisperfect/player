@@ -225,6 +225,15 @@ var funcs={
 
 	f3:function(obj) {
 		ms.changescreen(obj, 'disp_profile_info', 'edit_profile_info');
+	},
+	loadolder: function(obj) {
+		var sdiv = $("#loadchat");
+		var maxl = parseInt(sdiv.attr("data-maxl"));
+		div.load(sdiv[0], 0, 0, function(d){
+			if(d.qresultlen < maxl){
+				$(obj).fadeOut();
+			}
+		}, null, "#loadmoreloadingimg");
 	}
 };
 
@@ -284,6 +293,10 @@ var page = {
 		// 	dateFormat:"dd-mm-yy"
 		// });
 
+	},
+	chat:function() {
+		$(".select2").select2();
+		funcs.openchat(4);
 	}
 };
 

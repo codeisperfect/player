@@ -49,8 +49,9 @@ class Actions{
 	}
 	function sendmsg($data){
 		$outp=array("ec"=>1,"data"=>0);
-		$recvlist=Fun::intexplode("-",$data["rid"]);
+		$recvlist=intexplode("-",$data["rid"]);
 		$msgdata=Fun::getflds(array("msg"),$data);
+		$msgdata["msg"] = trim($msgdata["msg"]);
 		if($data["msg"]!=""){
 			$msgdata["time"]=time();
 			$msgid=Sqle::insertVal("msgdata",$msgdata);

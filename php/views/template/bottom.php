@@ -13,9 +13,9 @@ if($needpopup){
 	<script src="js/jquery.raty.js"></script>
 
 
-<!--
+
 	<script src="assets/lib/select2/select2.min.js"></script>
- -->
+ 
 
 <?php
 	addall_js($js);

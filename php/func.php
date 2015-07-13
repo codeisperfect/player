@@ -384,7 +384,7 @@
 		$post_data=Fun::mergeforce($post_data, $fixed);
 		$qoutput=Sqle::autoscroll($action_spec["query"], $post_data, $action_spec["key"], $action_spec["sort"], $post_data["isloadold"], $action_spec["minl"], $action_spec["maxl"]);
 		if($action_spec["filterfunc"]!=null){
-			$autos=new Autoscoll();
+			$autos=new Autoscroll();
 			$funcname=$action_spec["filterfunc"];
 			if(method_exists($autos, $funcname))
 				$qoutput=$autos->$funcname($qoutput);

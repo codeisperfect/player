@@ -83,8 +83,17 @@ $view_default=array(
 		),
 	"template/msg.php"=>array(
 		"align"=>"left"
+		),
+	"input3" => array(
+		"divclass" => "input-field col s12 l6",
+		"name" => null,
+		"type" => "text",
+		"dc" => "simple",
+		"inpattr" => array(),
+		"divattr" => array(),
+		"id" => "",
+		"label" => "Enter"
 		)
-
 	);
 
 
@@ -169,7 +178,7 @@ $_ginfo["headerddlist"]=array(
 $_ginfo["autoscroll"]=array(
 	"personmsg"=>array(
 		"query"=>"mymsgperson",
-		"sort"=>"order by id asc",
+		"sort"=>"order by id desc",
 		"minl"=>2,
 		"key"=>"id",
 		"load_view"=>"template/dispmsg.php",
