@@ -14,7 +14,7 @@ class Actions{
 		}
 		return array('ec'=>$ec,'data'=>$odata);
 	}
-	function signup($data){
+	function signup($data) {
 		global $_ginfo;
 		$outp=array("ec"=>1,"data"=>0);
 		$temp=User::signUp(Fun::getflds($_ginfo["action_constrain"]["signup"]["need"],$data));
@@ -74,10 +74,10 @@ class Actions{
 			$outp["ec"]=-26;
 		return $outp;
 	}
-	function saveuserdetails($data){
+	function saveuserdetails($data) {
 		$outp=array("ec"=>1,"data"=>0);
 		if(User::loginType()=='a' || User::loginId()==$data["uid"]){
-			$canneed=array("name", "sign", "lang", "news", "address", "fbid", "skypeid", "email");
+			$canneed=array("name", "sign", "lang", "news", "address", "fbid", "skypeid", "email", "phone");
 			$toupdate=Fun::getflds($canneed, $data);
 			$myf=User::userProfile(null, array("email"=>getval("email",$toupdate,'')));
 			if(isset($toupdate["email"]) && !( $myf==null || $myf["id"]==$data["uid"] )){
@@ -89,5 +89,21 @@ class Actions{
 			$outp["ec"]=-2;
 		return $outp;
 	}
+
+	function contactus($data) {
+		$outp = ao();
+		$outp["data"] = msmail("contactus.txt", $data);
+		return $outp;
+	}
+
+	function forgotpass($data) {
+		$outp = array("ec"=>1,"data"=>0);
+		if(!(User::passreset($data["email"]))) {
+			$outp["ec"] = -6;
+		}
+		return $outp;
+	}
+
+
 }
 ?>

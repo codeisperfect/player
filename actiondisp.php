@@ -6,23 +6,17 @@ if(server!='server'){
 	sleep(1);
 }
 
+$a=new Actiondisp();
 
-if(false){
-	$a=new Actiondisp();
-	if(isset($_POST["action"])  ){
-		$func=$_POST["action"];
-		if( method_exists($a,$_POST["action"]))
-			$a->$func($_POST);
-		else
-			echo json_encode(array('ec'=>'-11'));
-	}
+if(isset($_POST["action"])  ){
+	$func=$_POST["action"];
+	if( method_exists($a,$_POST["action"]))
+		$a->$func($_POST);
 	else
 		echo json_encode(array('ec'=>'-11'));
 }
-
-handle_disp($_POST);
-
-
+else
+	echo json_encode(array('ec'=>'-11'));
 
 closedb();
 ?>

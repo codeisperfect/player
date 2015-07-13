@@ -9,8 +9,8 @@ function dt($tn){
 
 
 function drop_tables(){
-//	$tl=array("users","msg","forms","msgdata","formsoln","content","catg");
-	$tl=array("msg", "msgdata");
+	$tl=array("users","msg","forms","msgdata","formsoln","content","catg");
+//	$tl=array("msg", "msgdata");
 	foreach($tl as $i=>$val){
 		dt($val);
 	}
@@ -32,6 +32,7 @@ function make_table(){
 	echo Sql::query("ALTER TABLE users add news varchar(1) NULL ");
 	echo Sql::query("ALTER TABLE users add fbid varchar(100) NULL ");
 	echo Sql::query("ALTER TABLE users add skypeid varchar(100) NULL ");
+	echo Sql::query("ALTER TABLE users add profilepicbig varchar(100) NULL ");
 
 	echo Sql::query("CREATE TABLE msg (id int NOT NULL AUTO_INCREMENT, sid int, rid int, aid int, msgid int, isseen varchar(1), PRIMARY KEY ( id) ) ");
 	/*

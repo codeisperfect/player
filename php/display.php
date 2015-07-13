@@ -7,9 +7,7 @@
 		$keys=array_keys($data);
 		for($i=0;$i<count($keys);$i++){
 			if( in_array($keys[$i],$temp) || substr($keys[$i],0,5)=="data-" || substr($keys[$i],0,2)=="on" ){
-				if(!($data[$keys[$i]]=="" && in_array($keys[$i],$_ginfo["shoudnotnull"])  )){
-					$params.=(" ".(isset($keymap[$keys[$i]])?$keymap[$keys[$i]]:$keys[$i])."='".$data[$keys[$i]]."' ");
-				}
+				$params.=(" ".(isset($keymap[$keys[$i]])?$keymap[$keys[$i]]:$keys[$i])."='".$data[$keys[$i]]."' ");
 			}
 		}
 		return $params;
@@ -21,16 +19,6 @@
 		if(!isset($data["class"]))
 			$data["class"]="form-control";
 		return param2str($data);
-		// $params="";
-		// $temp=array("name","value","style","class","id","type","ph","onclick","dc",'rows',"disabled");
-		// $keymap=array("ph"=>"placeholder","dc"=>"data-condition");
-		// $keys=array_keys($data);
-		// for($i=0;$i<count($keys);$i++){
-		// 	if( in_array($keys[$i],$temp) || substr($keys[$i],0,5)=="data-" || substr($keys[$i],0,2)=="on" ){
-		// 		$params.=(" ".(isset($keymap[$keys[$i]])?$keymap[$keys[$i]]:$keys[$i])."='".$data[$keys[$i]]."' ");
-		// 	}
-		// }
-		// return $params;
 	}
 	function dict_to_dataparams($inp){
 		$outp=array();
@@ -240,7 +228,7 @@
 			<?php
 				for($i=0;$i<count($ttitle);$i++){
 			?>
-				<td style='padding:10px;' ><?php echo htmlspecialchars($ttitle[$i]); ?></td>
+				<td style='padding:10px;' ><?php echo $ttitle[$i]; ?></td>
 			<?php
 				}
 			?>
@@ -274,7 +262,7 @@
 	function hinp($name,$val){
 		return "<input type=hidden name='$name' value='$val' />";
 	}
-	function hidinp($name,$val,$params=array()){
+	function hidinp($name, $val='', $params=array()){
 		$params=Fun::mergeifunset($params,array("type"=>"hidden","name"=>$name,"value"=>$val));
 		opent("input",$params);
 	}
@@ -313,11 +301,9 @@
 	}
 	function addcss($href){
 		opent("link",array("type"=>"text/css","rel"=>"stylesheet","href"=>$href));
-		echo "\n";
 	}
 	function addjs($src){
 		ocloset("script",'',array("type"=>"text/javascript","src"=>$src));
-		echo "\n";
 	}
 	function addall_js($arr){
 		foreach($arr as $i=>$src)
@@ -328,7 +314,10 @@
 			addcss($src);
 	}
 	function disp_olist($inp,$option=array()){
-		$option=Fun::mergeifunset($option,array('selected'=>''));
+		$option=Fun::mergeifunset($option,array('selected'=>'','selectalltext'=>''));
+		if($option['selectalltext']!=''){
+			array_unshift($inp,array('val'=>'','disptext'=>$option['selectalltext']));
+		}
 		$olist=$inp;
 		foreach($olist as $key=>$val){
 			$param=array("value"=>$val["val"]);
@@ -338,11 +327,9 @@
 		}
 	}
 	function addmycss(){
-		addcss("css/lib.css");
-		addcss("css/main.css");
+		addall_css(array("css/lib.css", "css/main.css" ));
 	}
 	function addmyjs(){
-		//Assuming Bootstrap & Jquery are already added
 		global $_ginfo;//Assuming Bootstrap & Jquery are already added
 		opent("script");
 	?>
@@ -376,20 +363,23 @@
 		hidinp($name,$n);
 		closet("div");
 	}
-	function resimg($img,$params=array()){
-		$params=Fun::mergeifunset($params,array("src"=>$img,"class"=>"img-responsive"));
-		opent("img",$params);
+	function dummyheight($inp,$params=array()){
+		$inp=0+$inp;
+		mergeifunset($params,array("style"=>"height:".$inp."px",'innerHTML'=>''));
+		ocloset("div",$params['innerHTML'],$params);
 	}
 	function dit($cond=false){
 		echo ((!$cond)?"display:none;":"");
 	}
-
-
+	function disperror($error,$params=array()){
+		mergeifunset($params,array("style"=>"color:red;"));
+		ocloset("div",$error,$params);
+	}
 	function pit($toprint, $cond=true, $toprint_false=''){
-		if($cond)
-			echo $toprint;
-		else
-			echo $toprint_false;
+		echo rit($toprint, $cond, $toprint_false);
 	}
 
+	function msprint($inp) {
+		echo msvalprint($inp);
+	}
 ?>

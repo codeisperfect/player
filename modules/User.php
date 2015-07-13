@@ -103,5 +103,17 @@ class User extends Sql{
 		$timenow=time();
 		Sqle::updateVal("users",array('last_login'=>$timenow),array('id'=>User::loginId()));
 	}
+
+	public static function passreset($email) {
+		$uinfo = Sqle::getR("select * from users where email={email} limit 1", array("email" => $email));
+		if($uinfo!=null) {
+			$uinfo["password"] = Fun::encode2($uinfo["password"]);
+			$reseturl = BASE."resetpassword?".http_build_query( Fun::getflds(array("id", "password"), $uinfo) );
+			$uinfo["link"] = $reseturl;
+			msmail("passwordreset.txt", $uinfo, $email);
+			return true;
+		}
+		return null;
+	}
 }
 ?>

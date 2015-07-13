@@ -1,28 +1,24 @@
 <?php
 class Userc {
-	function addgoal($data){
-		$ins_data=Fun::getflds(getmyneed("addgoal"),$data);
-		$ins_data["expiredate"]=strtotime($ins_data["expiredate"]);
-		$ins_data["time"]=time();
-		$ins_data["uid"]=User::loginId();
-		return array("data"=>Sqle::insertVal("goals",$ins_data),"ec"=>1);
-	}
-	function set_goalstatus($data){
-		return array("data"=>Sqle::updateVal("goals",array("status"=>$data["status"]),array("id"=>$data["gid"],"uid"=>User::loginId())),"ec"=>1);
-	}
-	function get_goals($data){
-		$uid=User::loginId();
-		$timenow=time();
-		return array("data"=>Sql::getArray("select * from goals where uid=? AND type=? AND expiredate>? order by time desc ",'isi',array(&$uid,&$data["type"],&$timenow)),"ec"=>1);
-	}
-	function get_allpastgoals($data){
-		$uid=User::loginId();
-		$timenow=time();
-		return array("data"=>Sql::getArray("select * from goals where uid=? AND expiredate<=? order by time desc ",'isi',array(&$uid,&$timenow)),"ec"=>1);
-	}
-	function get_allexercise($data){
-		$uid=User::loginId();
-		return array("data"=>Sql::getArray("select * from exercise where uid=? ",'i',array(&$uid)),"ec"=>1);
+	function applyforpos($data){
+		$need=array('pos','comment');
+		$ec=1;
+		$odata=0;
+		if(!Fun::isAllSet($need,$data))
+			$ec=-9;
+		else if(!Valid::apply_position($data['pos']))
+			$ec=-12;
+		else{
+			$timenow=time();
+			$uinfo=User::myprofile();
+			$name=$uinfo==null?"":$uinfo["name"];
+			$notfm=$name.' Applied for '.Help::appliedfor($data["pos"]);//."\n".Fun::maxspace($data["comment"],0);
+			$url=HOST."app.php?pos=".$data['pos']."&uid=".(User::loginId());
+//			$url.="&host=".rawurlencode($url);
+			Sqle::insertVal("notf",array("uid"=>1,'text'=>$notfm,'time'=>$timenow,'isr'=>'0','url'=>$url ));
+			$odata=Sqle::insertVal("apply",array('uid'=>User::loginId(),'pos'=>$data["pos"],'time'=>$timenow,'comment'=>$data["comment"]));
+		}
+		return array('ec'=>$ec,'data'=>$odata);
 	}
 }
 ?>

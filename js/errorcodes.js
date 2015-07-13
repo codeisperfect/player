@@ -27,11 +27,8 @@ var ecn={
 		"-19":"You cannot choose slot of past.",
 
 		"-20":"You Cannot generate link",
-		"-21":"Your account deactivated",
+
 		
-		"-22":"Nobody is login",
-
-
 		"1":"Positive"
 		
 	};

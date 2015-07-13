@@ -290,9 +290,14 @@ var form={
 			
 		}});
 	},
+	req:function(obj){
+		form.sendreq1(obj, $(obj).find("button[type=submit]")[0]);
+		return false;
+	},
 	valid:{
 		is:function (obj){
 			var errorlist=[];
+			var objlist=[];
 			var inputs=['INPUT','TEXTAREA','SELECT'];
 			var problem=false;
 			for(i=0;i<inputs.length;i++){
@@ -303,7 +308,8 @@ var form={
 					}
 					else{
 						$(ilist[j]).parent().addClass("has-error");
-						var errormsg=$(ilist[j]).attr("data-unfilled") || $(ilist[j]).attr("name") || null;
+						var errormsg=$(ilist[j]).attr("data-unfilled") || "Please fill it" ||$(ilist[j]).attr("name") ;
+						objlist.push(ilist[j]);
 						errorlist.push(errormsg);
 						if(!problem)
 							$(ilist[j]).focus();
@@ -311,18 +317,33 @@ var form={
 					}
 				}
 			}
-			return errorlist;
+			return [errorlist,objlist];
 		},
-		action:function(obj){
-			var errors=form.valid.is(obj);
+		action:function(obj, type){
+			var temp=form.valid.is(obj);
+			var errors=temp[0];
+			var objlist=temp[1];
 			if(errors.length>0){
-				for(var i=0;i<errors.length;i++){
-					errors[i]=(i+1)+". "+errors[i];
+				if(type==1){
+					for(var i=0; i<errors.length; i++){
+						objlist[i].setCustomValidity(errors[i]);
+					}
 				}
-				var dispmsg="You have to fill:<br>"+errors.join("<br>");
-				success.push(dispmsg,true);
+				else{
+					for(var i=0;i<errors.length;i++){
+						errors[i]=(i+1)+". "+errors[i];
+					}
+					var dispmsg="You have to fill:<br>"+errors.join("<br>");
+					success.push(dispmsg,true);
+				}
 			}
 			return !(errors.length>0);
+		},
+		action1:function(obj){
+			return form.valid.action(obj,1);
+		},
+		action2:function(obj){
+			return form.valid.action(obj);
 		}
 	}
 };
@@ -657,7 +678,35 @@ function mylib(){
 	$("textarea.autoinc").on("keyup keydown",function(){
 		textareainc(this);
 	});
+	var valid={
+		resetinp:function (){
+			$("input").on("kepup keydown ", function(e){
+				if(e.keyCode!=9 && e.keyCode!=13 ){
+					this.setCustomValidity("");
+				}
+			});
+		}
+	};
+	var hovercss = {
+		onmousein: function(obj, selector, cssprop) {
+			selector.css(cssprop);
+		},
+		onmousein: function(obj, selector, cssprop) {
+			selector.css(cssprop);
+		},
+		hovercss: function (obj, cssv, selector) {
+			if(selector == null) {
+				selector = $(obj).find(".edit");
+			}
+		}
+	};
+	var editform = {
+
+	}
+	valid.resetinp();
 }
+
+
 
 function hasgoodchar(inp){
 	var uselesschar=" \t\n";
@@ -666,4 +715,9 @@ function hasgoodchar(inp){
 			return true;
 	}
 	return false;
+}
+
+
+function haskey(arr, key){
+	return (typeof(arr[key])!='undefined');
 }

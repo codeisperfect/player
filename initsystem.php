@@ -23,7 +23,7 @@ function makesomeaccounts(){
 
 
 
-//echo add_catg();
+echo add_catg();
 echo makesomeaccounts();
 
 

@@ -1,6 +1,6 @@
 <?php
 $sec=array();
-$sec['encode1']='mymansi143';
+$sec['encode1']='Bkvas1';
 $passkey=array();
 $passkey["key1"]="MSV";
 ?>

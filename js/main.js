@@ -22,6 +22,12 @@ function hideshowdown(h,s){
 	$("#"+s).slideDown();
 }
 
+function hs_toggle(ids, timetaken) {
+	doforall(ids, function(e){
+		$("#"+e).slideToggle(timetaken);
+	});
+}
+
 function login_redirect_url(){
 	if(redurl!="")
 		return redurl;
@@ -29,19 +35,20 @@ function login_redirect_url(){
 		return profile_page_url;
 }
 
-function uploadfile(name,disptagJ,formtagJ,disptag_max_length){
-	if(!(formtagJ.find("input[name="+name+"]").length>0)){
+function uploadfile(obj,name){
+	var formjobj=$(obj).parent();
+	if(!(formjobj.find("input[name="+name+"]").length>0)){
 		var elm=document.createElement("input");
 		elm.setAttribute("type","file");
 		elm.setAttribute("name",name);
 		elm.setAttribute("style","display:none;");
 		elm.onchange=function (){
-			disptagJ.html(elm.value.bound(disptag_max_length));
+			formjobj.submit();
 		}
-		formtagJ[0].appendChild(elm);
+		formjobj[0].appendChild(elm);
 	}
 	else{
-		var elm=formtagJ.find("input[name="+name+"]")[0];
+		var elm=formjobj.find("input[name="+name+"]")[0];
 	}
 	elm.click();
 }
@@ -246,5 +253,50 @@ function runonload(){
 	});
 }
 
+var page = {
+	contactus:function() {
+		var myCenter = new google.maps.LatLng( 28.5453552,77.1923144 );
+		function initialize() {
+		  var mapCanvas = document.getElementById('map-canvas');
+		  var mapOptions = {
+		    center:myCenter,
+		    zoom: 17,
+		    mapTypeId: google.maps.MapTypeId.ROADMAP
+		  }
+		  var map = new google.maps.Map(mapCanvas, mapOptions);
+		  var marker=new google.maps.Marker({
+		    position:myCenter,
+		  });
+		  marker.setMap(map);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	}
+};
+
+function runmypagecode(inp) {
+	if(haskey(page, inp)) {
+		page[inp]();
+	}
+}
 
 
+var mt = {
+	icon: function(inp, size){
+		if(size==null)
+			size='tiny';
+		return '<i class="material-icons '+size+'">'+inp+'</i>';
+	}
+};
+
+
+var ms = {
+	changesym: function(obj, slist) {
+		if(slist == null)
+			slist = ["keyboard_arrow_down", "keyboard_arrow_up"];
+		var elm = $(obj).children();
+		var curicon = slist.indexOf(elm.children().html());
+		var newicon = ((curicon+1)%slist.length);
+		elm.html(mt.icon(slist[newicon]));
+	}
+
+};
