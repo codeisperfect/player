@@ -721,3 +721,20 @@ function hasgoodchar(inp){
 function haskey(arr, key){
 	return (typeof(arr[key])!='undefined');
 }
+
+
+var ms = {
+	changesym: function(obj, slist) {
+		if(slist == null)
+			slist = ["keyboard_arrow_down", "keyboard_arrow_up"];
+		var elm = $(obj).children();
+		var curicon = slist.indexOf(elm.children().html());
+		var newicon = ((curicon+1)%slist.length);
+		elm.html(mt.icon(slist[newicon]));
+	},
+	changescreen: function(obj, id1, id2) {
+		hs_toggle([id1, id2], 700);
+		ms.changesym(obj);
+	}
+};
+

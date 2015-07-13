@@ -220,8 +220,12 @@ var funcs={
 		div.load(chatdiv[0], 0, null, null, function(){
 			funcs.scrollbottom( chatdiv.parent()[0]  );
 		});
-	}
+	},
 	//#End : For chatting..
+
+	f3:function(obj) {
+		ms.changescreen(obj, 'disp_profile_info', 'edit_profile_info');
+	}
 };
 
 var search={
@@ -270,6 +274,16 @@ var page = {
 		  marker.setMap(map);
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
+	},
+	profile:function() {
+		// $('#dob').pickadate({
+		// 	selectMonths: true,
+		// 	selectYears: 65,
+		// 	min: [1950,01,01],
+		// 	max: true,
+		// 	dateFormat:"dd-mm-yy"
+		// });
+
 	}
 };
 
@@ -289,14 +303,3 @@ var mt = {
 };
 
 
-var ms = {
-	changesym: function(obj, slist) {
-		if(slist == null)
-			slist = ["keyboard_arrow_down", "keyboard_arrow_up"];
-		var elm = $(obj).children();
-		var curicon = slist.indexOf(elm.children().html());
-		var newicon = ((curicon+1)%slist.length);
-		elm.html(mt.icon(slist[newicon]));
-	}
-
-};

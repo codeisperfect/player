@@ -54,17 +54,12 @@ class Main{
 	function profile($uid = 0 ) {
 		$uid = Fun::profileid($uid);
 		Fun::redirect(HOST, $uid == 0);
-		if(isset($_FILES["profilepic"])){
+		if(isset($_FILES["profilepic"]) && User::islogin() ) {
 			Fun::uploadpic($_FILES["profilepic"], "profilepic", "profilepicbig", 300);
 		}
 
-
-		$uinfo = User::userProfile($uid);
+		$uinfo = Funs::getprofile_about($uid);
 		$pageinfo = $uinfo;
-		$pageinfo["isme"] = (lid() == $uid);
-		$pageinfo["isadmin"] = (User::loginType() == "a");
-		$pageinfo["ismea"] = ($pageinfo["isadmin"] || $pageinfo["isme"]);
-		$pageinfo["dispbioform"] = ($pageinfo["isme"] && $uinfo["sign"] == "");
 
 		if( $uinfo["type"] == "f" ) {
 		} else if( $uinfo["type"] == "u") {
@@ -72,6 +67,11 @@ class Main{
 		}
 
 		load_view("profile.php", $pageinfo);
+	}
+
+	function chat() {
+		Fun::redirect(HOST, lid()==0);
+		load_view("chat.php", $pageinfo);
 	}
 }
 ?>

@@ -596,4 +596,21 @@
 		return (0+User::loginId());
 	}
 
+	function applyconv($inp, $isdbtodisp = true, $onlythese = null, $conva = null) {
+		setifnn($conva, g("formconv"));
+		setifnn($onlythese, array_keys($conva));
+		foreach($onlythese as $i => $key) {
+			$conv = $conva[$key][(1-$isdbtodisp)];
+			$inp = $conv($inp);
+		}
+		return $inp;
+	}
+
+	function isallset($alist, $data){
+		for($i=0;$i<count($alist);$i++)
+			if( ! isset($data[ $alist[$i] ]) )
+				return false;
+		return true;
+	}
+
 ?>

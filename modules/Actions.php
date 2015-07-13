@@ -77,7 +77,8 @@ class Actions{
 	function saveuserdetails($data) {
 		$outp=array("ec"=>1,"data"=>0);
 		if(User::loginType()=='a' || User::loginId()==$data["uid"]){
-			$canneed=array("name", "sign", "lang", "news", "address", "fbid", "skypeid", "email", "phone");
+			$data = applyconv($data, false);
+			$canneed=array("name", "sign", "lang", "news", "address", "fbid", "skypeid", "email", "phone", "dob");
 			$toupdate=Fun::getflds($canneed, $data);
 			$myf=User::userProfile(null, array("email"=>getval("email",$toupdate,'')));
 			if(isset($toupdate["email"]) && !( $myf==null || $myf["id"]==$data["uid"] )){

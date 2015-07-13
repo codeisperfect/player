@@ -23,7 +23,7 @@ if($needpopup){
 	addmyjs();
 ?>
 	<script>
-		runmypagecode("<?php echo $curpage; ?>");
+		runmypagecode("<?php echo g("curpage"); ?>");
 	</script>
 
 <?php

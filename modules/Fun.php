@@ -149,13 +149,17 @@ abstract class Fun{
 	public static function timetodate_v2($time){
 		return date("d-m-Y",$time);
 	}
-	public static function timetostr_t3($time){
+	public static function timetostr_t3($time, $format = null){
+		if($time == 0)
+			return '';
+		setifnn($format, gi("dateformat"));
 		return date('d F, Y',$time);
 	}
-	public static function strtotime_t3($date){
+	public static function strtotime_t3($date, $format = null){
 		if($date=='')
 			return 0;
-		$temp=DateTime::createFromFormat('d F, Y',$date);
+		setifnn($format, gi("dateformat"));
+		$temp=DateTime::createFromFormat($format,$date);
 		return strtotime($temp->format("M d Y h:i a"));
 	}
 

@@ -19,7 +19,6 @@ $view_default=array(
 		"needpopup"=>true,
 		"needbody" => true,
 		"js" => array(),
-		"curpage" => ""
 		),
 	'template/bottomnew.php'=>array(
 		"addjs"=>array(),

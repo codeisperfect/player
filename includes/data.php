@@ -17,5 +17,8 @@ $_ginfo["isrealmsg"] = false;
 $_ginfo["mailfile"] = "php/mails/";
 $_ginfo["loadviewfile"] = "php/views/";
 
+$_ginfo["dateformat"] = 'd F, Y';
+$_ginfo["timeformat"] = 'h:i a';
+
 
 ?>
