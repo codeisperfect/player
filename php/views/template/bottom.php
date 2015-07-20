@@ -13,7 +13,8 @@ if($needpopup){
 	<script src="js/jquery.raty.js"></script>
 
 
-
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 	<script src="assets/lib/select2/select2.min.js"></script>
  
 

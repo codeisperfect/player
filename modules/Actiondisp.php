@@ -42,7 +42,7 @@ class Actiondisp{
 		$outp = ao();
 		if($printjson)
 			echo json_encode($outp)."\n";
-		load_view("template/profile_aboutdisp.php", Funs::getprofile_about($data["uid"]));
+		load_view("template/profile_aboutdisp.php", f_profile_info($data["uid"]));
 	}
 }
 ?>

@@ -93,8 +93,16 @@ $view_default=array(
 		"divattr" => array(),
 		"id" => "",
 		"label" => "Enter"
-		)
+		),
+	"template/table.php"=>array(
+		"sqlo"=>"true",
+		"func" => null,
+		"rows" => array(),
+		"tabattr" => array(),
+		"class" => "responsive-table"
+		),
 	);
+
 
 
 $_ginfo["action_constrain"]=array(

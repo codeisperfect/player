@@ -58,7 +58,7 @@ class Main{
 			Fun::uploadpic($_FILES["profilepic"], "profilepic", "profilepicbig", 300);
 		}
 
-		$uinfo = Funs::getprofile_about($uid);
+		$uinfo = f_profile_info($uid);
 		$pageinfo = $uinfo;
 
 		if( $uinfo["type"] == "f" ) {
@@ -72,7 +72,7 @@ class Main{
 	function chat() {
 		Fun::redirect(HOST, lid()==0);
 		$pageinfo = array();
-		$pageinfo['cansendlist'] = Fun::dbarrtooption(Funs::cansend(),"id","name");
+		$pageinfo['cansendlist'] = Fun::dbarrtooption(f_cansend(),"id","name");
 
 		load_view("chat.php", $pageinfo);
 	}

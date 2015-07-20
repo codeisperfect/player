@@ -22,7 +22,7 @@
 
 		<div class="row center">
 			<form class="col s12 l10" method="post" onsubmit='form.req(this); return false;' autocomplete="off" data-action="saveuserdetails" data-res='div.reload($("#disp_profile_info")[0]);funcs.f3(this);' >
-				<?php hidinp("uid", $id); ?>
+				<?php hinp("uid", $id); ?>
 				<div  style='' >
 					<?php
 						$formneeds = array("name" => "Name", "phone" => "Mobile", "fbid" => "Facebook Id", "skypeid" => "SkypeId");
@@ -55,7 +55,7 @@
  					</div>
 
 					<div class="row">
-						<textarea placeholder="Your Address" class="materialize-textarea" name="address" ><?php echo convchars("address"); ?></textarea>
+						<textarea placeholder="Your Address" class="materialize-textarea" name="address" ><?php echo convchars($inp["address"]); ?></textarea>
 					</div>
 					<div class="row">
 					<div class="input-field col s12">

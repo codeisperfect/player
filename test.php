@@ -1,12 +1,13 @@
 <?php
 include "includes/app.php";
 
-$config = array("needprofile" => true );
- 
-//$a = fixedlen("My", 50);
+$a = da("mohit", 11, "saini", 22);
 
 
-echo "-".Fun::inclen(10, "mohit")."-";
+load_view("template/top.php");
+disp_table(getA(table("users")));
+load_view("template/bottom.php");
+
 
 
 closedb();

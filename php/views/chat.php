@@ -4,7 +4,7 @@ load_view("template/navbarnew.php");
 $tabid=1;
 ?>
 	<main class='' >
-		<div class="container" style='width:100%' >
+		<div class="container-fluid" style='width:100%' >
 			<div class="card-panel" style='margin-top:0px;' >
 				<div class="row">
 					<div class="col s12">
@@ -20,7 +20,7 @@ $tabid=1;
 					</div>
 					<div id="tab_topics" class="col s12">
 					<?php
-						load_view("chat_cal.php", $inp);
+//						load_view("chat_cal.php", $inp);
 					?>
 					</div>
 				</div>

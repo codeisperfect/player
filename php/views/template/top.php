@@ -14,6 +14,7 @@
 	<link href="assets/icons/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
 
 
+	  <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
  	<link rel="stylesheet" href="assets/lib/select2/select2.css">
 
 

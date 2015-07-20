@@ -25,7 +25,7 @@ if(1){
 				<div>
 					<a><?php echo $table_name; ?></a><br>
 			<?php
-			Disp::disp_table( Sqle::selectVal( $table_name , "*" , array() , 300) );
+			disp_table( Sqle::selectVal( $table_name , "*" , array() , 300) );
 			echo "<br><br>";
 			?>
 				</div>

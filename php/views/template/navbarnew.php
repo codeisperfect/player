@@ -2,7 +2,7 @@
 	<!-- Dropdown for Create Account -->
 	<ul id="dropdownaccount" class="dropdown-content">
 		<li class="<?php pit('active', g("curpage")==='profile');?>"><a href="<?php echo BASE."profile" ;?>" >Profile&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:13px;" class="grey-text">for myinfo</span></a></li>
-		<li class="<?php pit('active', g("curpage")==='account');?>"><a href="<?php echo BASE."account" ;?>" >Account&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:13px;" class="grey-text">for setting</span></a></li>
+		<li class="<?php pit('active', g("curpage")==='chat');?>"><a href="<?php echo BASE."chat" ;?>" >Messages&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:13px;" class="grey-text">for setting</span></a></li>
 		<li class=""><a href="<?php echo HOST."?logout"; ?>" >Logout&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:13px;" class="grey-text">for exit</span></a></li>
 	</ul>
 

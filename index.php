@@ -1,3 +1,3 @@
 <?php
-include "includes/mslib.php";
+include "includes/disppage.php";
 ?>

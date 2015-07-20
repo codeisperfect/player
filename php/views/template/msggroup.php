@@ -1,8 +1,8 @@
 <?php
 foreach($msggroup as $i => $row) {
 ?>
-<div>
-	<div style='padding:5px;padding-right:0px;' class='msggroup' >
+<div data-name="<?php echo htmlspecialchars($row["name"]); ?>" >
+	<div style='padding:5px;padding-right:0px;' class='msggroup' onclick="funcs.openchat(<?php echo $row["personid"]; ?>);$('#sendto').val(<?php echo $row["personid"]; ?>);$('#sendto').select2();" >
 		<div class='row' style='margin-bottom:0px;' >
 			<div class='col s3 m3 l3' >
 				<img src='photo/mohitsmall.jpg' class='circle img-responsive' />
