@@ -308,7 +308,7 @@ var form={
 					}
 					else{
 						$(ilist[j]).parent().addClass("has-error");
-						var errormsg=$(ilist[j]).attr("data-unfilled") || "Please fill it" ||$(ilist[j]).attr("name") ;
+						var errormsg=$(ilist[j]).attr("data-unfilled") || $(ilist[j]).attr("name") ;
 						objlist.push(ilist[j]);
 						errorlist.push(errormsg);
 						if(!problem)

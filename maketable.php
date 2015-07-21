@@ -64,12 +64,15 @@ function make_table(){
 
 	echo Sql::query("CREATE TABLE goals (id int NOT NULL AUTO_INCREMENT, title varchar(100), expiredate int, status varchar(1), uid int, type varchar(1), PRIMARY KEY ( id) )");
 	echo Sql::query("ALTER TABLE goals add time int NULL ");
+
+	echo Sql::query("CREATE TABLE sechedule (id int NOT NULL AUTO_INCREMENT, msg varchar(1000), time int, stime int, uid int, sid int, PRIMARY KEY ( id) )");
+
 }
 
 
 
 
-drop_tables();
+//drop_tables();
 make_table();
 
 closedb();

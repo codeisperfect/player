@@ -33,5 +33,6 @@ $tabid=1;
 <?php
 load_view("template/footer.php");
 //load_view("popup.php",array("name"=>"timeslot", "title" => "Please select your free slots"));
+load_view("popup.php",array("name"=>"sechedule", "title" => "Sechedule this message.", "body" => "template/chat_sechedule_popup.php"));
 load_view("template/bottom.php" );
 ?>

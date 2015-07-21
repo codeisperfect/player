@@ -31,7 +31,7 @@
 							</div>
 							<div class='s12 l3 col' >
 								<button class="btn waves-effect waves-light" type="submit" >Send <i class="material-icons right"  >send</i>&nbsp;&nbsp;&nbsp;</button><br><br>
-								<button class="btn waves-effect waves-light" >Send Later</button>
+								<button class="btn waves-effect waves-light" onclick="mohit.popup('sechedule');" type="button" >Send Later</button>
 							</div>
 						</div>
 					</div>
