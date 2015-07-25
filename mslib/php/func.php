@@ -119,18 +119,6 @@
 		return $cfname;
 	}
 
-	function isvalid_action($post_data) {
-		global $_ginfo;
-		if(isset($_ginfo["action_constrain"][$post_data["action"]])){
-			$sarr=$_ginfo["action_constrain"][$post_data["action"]];
-			$sarr=Fun::mergeifunset($sarr,array("users"=>"","need"=>array()));
-			if(!(($sarr["users"]==="all" && User::islogin()) || $sarr["users"]==="" || ($sarr["users"] !== "all" && in_array(User::loginType(), $sarr["users"])) ))
-				return -2;
-			if(!Fun::isAllSet($sarr["need"], $post_data))
-				return -9;
-		}
-		return true;
-	}
 
 	function islset($data, $arr) {
 		for($i = 0;$i<count($arr);$i++){
@@ -147,35 +135,29 @@
 	}
 
 	function handle_request($post_data, $action=null) {
-		global $_ginfo;
-		$b=new Actions();
-		$a=$b;
+		$a=new Actions();
 		$outp=array("ec"=>-7);
-		if($action !== null) {
-			$post_data["action"] = $action;
-		}
-		if(isset($post_data["action"])  ){
-			$isvalid=isvalid_action($post_data);
-			if(!($isvalid>0))
-				$outp["ec"]=$isvalid;
-			else{
-				$func=$post_data["action"];
-				if( method_exists($a,$post_data["action"]))
-					$outp=$a->$func($post_data);
-				else if( method_exists($b,$post_data["action"]))
-					$outp=$b->$func($post_data);
-				else if(islset($_ginfo,array("autoinsert",$post_data["action"]))) {
-					$action_spec=$_ginfo["autoinsert"][$post_data["action"]];
-					$action_spec=Fun::mergeifunset($action_spec,array("fixed"=>array(),"add"=>array()));
-					$ins_data=Fun::getflds(getmyneed($post_data["action"]) , $post_data );
-					$ins_data=Fun::mergeifunset($ins_data,$action_spec["add"]);
-					$fixvalues=array("time"=>time(),"uid"=>User::loginId());
-					foreach($action_spec["fixed"] as $i=>$val){
-						$ins_data[$val]=$fixvalues[$val];
-					}
-					$outp["data"]=Sqle::insertVal($action_spec["table"],$ins_data);
-					$outp["ec"]=1;
+		setift($post_data["action"], $action, $action!==null);
+		if(isset($post_data["action"]) ){
+			$func=$post_data["action"];
+			if( getval($post_data["action"], gi("action_constrain") ) !== null ) {
+				$spec = mius( getval($post_data["action"], gi("action_constrain")) , f_action_constrain_default() );
+				setift($spec["users"], gi("users"), $spec["users"] === "all");
+				$spec["action"] = $post_data["action"];
+				$post_data = f_deletekeys($post_data, array("action"));
+				$isvalid = f_isvalid_action($post_data, $spec);
+				if(!($isvalid>0))
+					$outp["ec"]=$isvalid;
+				else{
+					$req = f_setinput($post_data, $spec);
+					$outp["data"] = f_handle_db_request($req);
+					$outp["ec"] = 1;
+					if( method_exists($a, $func) )
+						$outp = $a->$func($req["data"]);
 				}
+			} else {
+				if(method_exists($a, $func))
+					$outp = $a->$func($post_data);
 			}
 		}
 		return $outp;
@@ -258,7 +240,7 @@
 		return $temp;
 	}
 
-	function intexplode_t2($inp, $limit=-1, $ex='-'){
+	function intexplode_t2($inp, $limit=-1, $ex='-'){//-1 is infinite
 		$temp=myexplode($ex,$inp);
 		$outp=array();
 		foreach($temp as $i=>$val){
@@ -391,6 +373,22 @@
 		}
 		$qoutput["load_view"]=$action_spec["load_view"];
 		return $qoutput;
+	}
+
+	function isvalid_action($post_data) {//to be deleted
+	/*Checks whether all the fields in post data are set or not according to g_info["action_constraint"] requirements
+	 Arguments: $post_data: Input data array
+	*/
+		global $_ginfo;
+		if(isset($_ginfo["action_constrain"][$post_data["action"]])){
+			$sarr=$_ginfo["action_constrain"][$post_data["action"]];
+			$sarr=Fun::mergeifunset($sarr,array("users"=>"","need"=>array()));
+			if(!(($sarr["users"]=="all" && User::islogin()) || $sarr["users"]=="" || ($sarr["users"] != "all" && in_array(User::loginType(), $sarr["users"])) ))
+				return -2;
+			if(!Fun::isAllSet($sarr["need"], $post_data))
+				return -9;
+		}
+		return true;
 	}
 
 	function handle_disp($post_data,$actionarg=null){
@@ -534,6 +532,12 @@
 		}
 	}
 
+	function rem($a, $b) {
+		if(gettype($a) === 'array' && gettype($b) === 'array') {
+			return f_array_a_minus_b($a, $b);
+		}
+	}
+
 	function msvalprint($inp) {//recursive function.
 		if(gettype($inp) === "array") {
 			$isnindex = (array_keys($inp) === Fun::oneToN(count($inp)-1, 0));//is natural indexed
@@ -543,6 +547,8 @@
 			return "array(".implode(", ", $otext).")";
 		} else if(gettype($inp) === 'integer') {
 			return $inp;
+		} else if(gettype($inp) === 'boolean') {
+			return tf($inp);
 		} else {
 			$inp = str_replace("'", "\\'", "".$inp);
 			return "'".$inp."'";
@@ -555,7 +561,7 @@
 
 	function f($content) {
 		global $msvar;
-		$af = function($inp, $ind) use ($content, $msvar) {
+		$af = function($inp, $ind=0) use ($content, $msvar) {
 			$content = '$foutput  = '.$content.';';
 			eval($content);
 			return $foutput;
@@ -641,5 +647,10 @@
 		} else {
 			return Sqle::q($query, $param);
 		}
+	}
+
+	function t($tablename) {
+		$tf = gi("table_prifix");
+		return $tf.rit("_", $tf!==null).$tablename;
 	}
 ?>
