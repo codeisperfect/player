@@ -1,4 +1,4 @@
-includes/setting.php
+includes/password.php
 backup/
 data/files/*
 data/mailf
