@@ -1,16 +1,14 @@
 <?php
 include "includes/app.php";
 
-
-
 function dt($tn){
 	echo Sql::query("drop table ".$tn);
 }
 
 
 function drop_tables(){
-	$tl=array("users","msg","forms","msgdata","formsoln","content","catg");
-//	$tl=array("msg", "msgdata");
+//	$tl=array("users","msg","forms","msgdata","formsoln","content","catg");
+	$tl=array("users", "content", "catg");
 	foreach($tl as $i=>$val){
 		dt($val);
 	}
@@ -72,7 +70,7 @@ function make_table(){
 
 
 
-//drop_tables();
+drop_tables();
 make_table();
 
 closedb();

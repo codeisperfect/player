@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Admin</title>
+
+<title>Admin</title>
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<link href="assets/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="css/responsive.css" rel="stylesheet" type="text/css" />
+<link href="css/plugin.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+    
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+<![endif]-->
+    
+</head>
+
+<body>
+
+<header>
+    <div class="header clearfix">
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png"></a>
+        </div>
+        
+        <ul class="top_links">
+            <li><a href="welcome-back.html"><span>3</span>Notification</a></li>
+            <li><a href="admin.html"><span class="fa fa-briefcase"></span>Dashboard</a></li>
+        </ul>
+        
+        <div class="profile-rt">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><span class="fa fa-user"></span>
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li><a href="user_profile.html">Profile</a></li>
+                    <li><a href="#">My messages</a></li>
+                    <li><a href="#">My tasks</a></li>
+                    <li><a href="login_page.html">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+    
+<div class="left-menu">
+    <nav class="side_nav">
+        <ul>
+            <li><a href="explore.html"><span class="fa fa-search"></span><br> Explore</a></li>
+            <li><a href="user_profile.html"><span class="fa fa-user"></span> <br>Profile</a></li>
+            <li><a href="calendar.html"><span class="fa fa-calendar-o"></span> <br>Calendar</a></li>
+            <li><a href="#"><span class="fa fa-road"></span><br>Track</a>
+                <div class="sub_panel">
+                    <div class="side_inner">
+                        <h4 class="panel_heading panel_heading_first">Logs</h4>
+                            <ul>
+                                <li><a href="daily-log.html">Daily Logs</a></li>
+                                <li><a href="weekly-review-from.html"> Weekly Review</a></li>
+                                <li><a href="misc-form.html">Misc. Forms</a></li>
+                                <li><a href="graph.html">Graphs</a></li>
+                            </ul>
+
+                        <h4 class="panel_heading">Reference</h4>
+                        <ul>
+                            <li class="add_label"><a href="goal.html">Goals</a></li>
+                            <li class="add_label"><a href="exercise.html">Exercises</a></li>
+                            <li class="add_label"><a href="routines.html">Routines</a></li>
+                            <li class="add_label"><a href="training-history.html">History</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#"><span class="fa fa-gamepad"></span><span class="nav_title">Train</span></a>
+                <div class="sub_panel">
+                    <div class="side_inner">
+                        <h4 class="panel_heading">Pages</h4>
+                        <ul>
+                            <li><a href="#">N Bach</a></li>
+                            <li><a href="#">Intractive Metro</a></li>
+                            <li><a href="#">Breathing Practice</a></li>
+                            <li><a href="#">Meditation</a></li>
+                            <li><a href="#">Sound Track</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#"><span class="fa fa-users"></span><span class="nav_title">Consult</span></a>
+                <div class="sub_panel">
+                    <div class="side_inner">
+                        <h4 class="panel_heading">Pages</h4>
+                        <ul>
+                            <li><a href="chat.html">Instant Messenger</a></li>
+                            <li><a href="post.html">Post A Question</a></li>
+                            <li><a href="challenges.html">Thinking Review Forms</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+    
+    
+<div class="container">
+    <div class="main-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+            	<h4 class="title-dt">Master Calender</h4>
+                <div id="calendar"></div>
+            </div>
+            
+        </div>
+                
+        <div class="row mt50">
+            <div class="col-xs-12 col-lg-6">
+            	<h4 class="title-dt">Events This Week</h4>
+                <div class="table-responsive admin-table">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Week Day</th>
+                                <th>Player Name</th>
+                                <th>Event</th>
+                                <th align="center">Send Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monday</td>
+                                <td>Doe</td>
+                                <td>john@example.com</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check1" class="css-checkbox">
+                                        <label class="css-label" for="check1"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tuesday</td>
+                                <td>Moe</td>
+                                <td>mary@example.com</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check2" class="css-checkbox">
+                                        <label class="css-label" for="check2"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Wednesday</td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check3" class="css-checkbox">
+                                        <label class="css-label" for="check3"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thursday</td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check4" class="css-checkbox">
+                                        <label class="css-label" for="check4"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Friday</td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check5" class="css-checkbox">
+                                        <label class="css-label" for="check5"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Saturday</td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check6" class="css-checkbox">
+                                        <label class="css-label" for="check6"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sunday</td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check7" class="css-checkbox">
+                                        <label class="css-label" for="check7"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="col-xs-12 col-lg-6">
+            	<h4 class="title-dt">Message Master Table</h4>
+                <div class="table-responsive admin-table">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="dropdown">
+                                      <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Player Name
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                          <li><a href="#">Rahul</a></li>
+                                        <li><a href="#">Sushil</a></li>
+                                        <li><a href="#">Aadi</a></li>
+                                      </ul>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="dropdown">
+                                      <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Player
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                        <li><a href="#">Rahul</a></li>
+                                        <li><a href="#">Sushil</a></li>
+                                        <li><a href="#">Aadi</a></li>
+                                      </ul>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="dropdown">
+                                      <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Sports
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                        <li><a href="#">Football</a></li>
+                                        <li><a href="#">Hockey</a></li>
+                                        <li><a href="#">Shooting</a></li>
+                                      </ul>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="dropdown">
+                                      <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Topics
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                        <li><a href="#">Pressure</a></li>
+                                        <li><a href="#">Relexation</a></li>
+                                        <li><a href="#">Anxiety</a></li>
+                                      </ul>
+                                    </div>
+                                </th>
+                                <th><a href="#" class="save-btn">Save</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4">This is demo message only and demo text content for this line.</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="Unchecked1" class="css-checkbox">
+                                        <label class="css-label" for="Unchecked1"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">This is demo message only and demo text content for this line.</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check8" class="css-checkbox">
+                                        <label class="css-label" for="check8"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">This is demo message only and demo text content for this line.</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check9" class="css-checkbox">
+                                        <label class="css-label" for="check9"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">This is demo message only and demo text content for this line.</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check10" class="css-checkbox">
+                                        <label class="css-label" for="check10"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">This is demo message only and demo text content for this line.</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check11" class="css-checkbox">
+                                        <label class="css-label" for="check11"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">This is demo message only and demo text content for this line.</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check12" class="css-checkbox">
+                                        <label class="css-label" for="check12"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">This is demo message only and demo text content for this line.</td>
+                                <td>
+                                    <div class="panel-group">
+                                        <input type="checkbox" id="check13" class="css-checkbox">
+                                        <label class="css-label" for="check13"></label> 
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>   
+       
+</div>
+
+<script src="assets/fullcalendar/moment.min.js"></script>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="assets/fullcalendar/fullcalendar.js"></script>
+<script src="assets/fullcalendar/fullcalendar-core.js"></script>
+<script src="js/modernizr.custom.js"></script>
+
+<script src="js/core.js"></script>
+</body>
+</html>

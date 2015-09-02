@@ -7,7 +7,11 @@ $_ginfo["funcs"]["getname"] = function($data){
 	return $data;
 };
 
-$_ginfo["funcs"]["onerow"] = 
+$_ginfo["funcs"]["getr"] = "getr";
+
+$_ginfo["funcs"]["gettable"] = function($inp) {
+	return array("rows" => $inp, "sqlo" => true);
+}
 
 	
 ?>

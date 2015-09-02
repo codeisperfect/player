@@ -1,0 +1,225 @@
+/* ====================================== plugin =================================================== */
+
+.fc-header {
+    background: #f0f0f0;
+}
+.fc-header td {
+    padding: 6px 0;
+}
+.fc-header .fc-header-right {
+    padding-right: 10px;
+}
+.fc-header-left {
+    width: 25%;
+    text-align: left;
+}
+.fc-header .fc-header-left {
+    padding-left: 10px;
+}
+.fc-header .fc-button + .fc-button {
+    border-left: 1px solid #ddd;
+}
+.fc-header .fc-button {
+    margin: 5px 0 0;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    background: #fff;
+    border: none;
+    font-size: 12px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    text-shadow: none;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 10px;
+}
+.fc-button .fc-icon {
+    font-size: 22px;
+    line-height: 24px;
+}
+.fc-button .fc-icon {
+    margin: 0 .1em;
+    font-size: 2em;
+    vertical-align: baseline;
+}
+.fc-header-right {
+    width: 25%;
+    text-align: right;
+}
+.fc-header .fc-button.fc-state-down, .fc-header .fc-button.fc-state-active {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background: #2487c9;
+    color: #fff;
+}
+
+/*=============================== CUSTOM CHECKBOX AND RADIO BOX=============================== */
+input[type=checkbox].css-checkbox, input[type=radio].css-radio {
+	display:none;
+}
+input[type=checkbox].css-checkbox + .css-label, input[type=radio].css-radio + .css-label {
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+input[type=checkbox].css-checkbox + .css-label:before, input[type=radio].css-radio + .css-label:before{
+ background-color: #fff;
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    color: #0866c6;
+    content: "";
+    display: inline-block;
+    height: 20px;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    width: 20px;
+   }
+input[type=checkbox].css-checkbox:checked + .css-label:before{
+	background:url(../images/check-mark.png) no-repeat center;
+}
+input[type=checkbox].css-checkbox:disabled + .css-label:before{
+	color:#999; background-color:#CCCCCC;
+}
+input[type=radio].css-radio + .css-label:before{
+	content:'';
+	font-size: 30px;
+    line-height: 19px;	
+	border-radius:50%; 
+	}
+input[type=radio].css-radio:disabled + .css-label:before{
+	color:#999; background-color:#CCCCCC;
+}
+input[type=radio].css-radio:checked + .css-label:before{
+	content:'\2022';
+}
+.panel-group .css-label {margin-right: 15px; font-size: 12px;}
+
+/************************************ Points slider *******************************************/
+.placeholder .ui-slider-horizontal, .catalogue-point .ui-slider-horizontal, .suggest-rewards .ui-slider-horizontal, .point-slide .ui-slider-horizontal{
+	border-color: #ababab;
+	height: 0;
+	margin: 20px 0;
+}
+.placeholder .ui-slider .ui-slider-handle, .catalogue-point .ui-slider .ui-slider-handle, .suggest-rewards  .ui-slider .ui-slider-handle, .point-slide .ui-slider .ui-slider-handle {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background-color: #e25903;
+	border: 1px solid #e25903;
+}
+.placeholder .ui-slider .ui-state-focus, .suggest-rewards .ui-slider .ui-state-focus, .point-slider .ui-slider .ui-state-focus, .points-slider .ui-slider .ui-state-focus{
+	outline: none;
+}
+.placeholder .ui-slider-horizontal .ui-slider-handle, .catalogue-point .ui-slider-horizontal .ui-slider-handle, .suggest-rewards  .ui-slider-horizontal .ui-slider-handle, .point-slide .ui-slider-horizontal .ui-slider-handle{
+	top: -9px;
+}
+.pointer-start, .pointer-end {
+	font-size: 12px;
+	color: #444;
+	position: absolute;
+	top: 10px;
+}
+.pointer-end {
+	right: 0;
+} 
+.placeholder {position: relative;}
+.ques-dt .amount {color: #fff;}
+.ques-dt .pt-value {position: absolute; left: 49%; top: 31px;}
+.weekly-text, .weekly-text-rt {padding-top: 15px;}
+.weekly-text-rt {text-align: right;}
+
+
+
+/************************************ toggle button *******************************************/
+.toggle-slide {
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  direction: ltr;
+}
+.toggle-slide .toggle-on,
+.toggle-slide .toggle-off,
+.toggle-slide .toggle-blob {
+  float: left;
+}
+.toggle-slide .toggle-blob {
+  position: relative;
+  z-index: 99;
+  cursor: hand;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+
+
+.iphone {text-align:center;}
+.iphone .toggle-btn {
+  margin: 10px 0;
+  height: 30px;
+  width: 100px;
+}
+
+.iphone .toggle-slide {
+  border-radius: 9999px;
+  -webkit-box-shadow: 0 0 0 1px #999;
+  box-shadow: 0 0 0 1px #999;
+}
+
+.toggle-slide {
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  direction: ltr;
+}
+.iphone .toggle-on, .toggle-light .toggle-select .toggle-inner .active {
+  background: #06498d;
+  -webkit-box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+.iphone .toggle-blob {
+  border-radius: 50px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#cfcfcf));
+  background: -webkit-linear-gradient(#f5f5f5, #cfcfcf);
+  background: linear-gradient(#f5f5f5, #cfcfcf);
+  -webkit-box-shadow: 1px 1px 2px #888;
+  box-shadow: 1px 1px 2px #888;
+}
+.toggle-slide .toggle-blob {
+  position: relative;
+  z-index: 99;
+  cursor: hand;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+.toggle-slide .toggle-on, .toggle-slide .toggle-off, .toggle-slide .toggle-blob {
+  float: left;
+}
+.iphone .toggle-off, .iphone .toggle-select .toggle-on {
+  color: #fff;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.2);
+  background: #45a31f;
+}
+.iphone .toggle-on, .iphone .toggle-off {
+  font-size: 11px;
+  font-weight: 500;
+}
+.toggle-slide .toggle-on, .toggle-slide .toggle-off, .toggle-slide .toggle-blob {
+  float: left;
+}

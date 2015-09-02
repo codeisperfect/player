@@ -23,4 +23,6 @@ function f_cansend(){
 	return Sqle::getArray($query1);
 }
 
+
+
 ?>

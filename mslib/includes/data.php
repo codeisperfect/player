@@ -23,4 +23,6 @@ $_ginfo["timeformat"] = 'h:i a';
 
 $_ginfo["users"] = array("a", "u");
 
+$_ginfo["table_prifix"] = null;
+
 ?>

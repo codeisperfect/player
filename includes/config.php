@@ -1,6 +1,6 @@
 <?php
 
-$_ginfo["default_user_type"]='f';
+$_ginfo["default_user_type"]='u';
 
 $_ginfo["myname"] = "Players";
 $_ginfo["mysite"] = "www.players.com";
@@ -99,7 +99,9 @@ $view_default=array(
 		"func" => null,
 		"rows" => array(),
 		"tabattr" => array(),
-		"class" => "responsive-table"
+		"class" => "responsive-table",
+		"onlykey" => "all",
+		"keymap" => array()
 		),
 	);
 
@@ -122,15 +124,18 @@ $_ginfo["action_constrain"]=array(
 	"addexercise"=>array("need"=>array("title","content")),
 	"changepassword"=>array("need"=>array("opassword","npassword"),"users"=>"all"),
 	"saveuserdetails"=>array("need"=>array("uid"),"users"=>"all"),
-	"autoscroll"=>array("need"=>array("min", "max", "minl", "maxl", "isloadold"))
+	"autoscroll"=>array("need"=>array("min", "max", "minl", "maxl", "isloadold")),
+	"sechedule" => array("need" => array("sid", "msg", "stime"), "users" => "all", "conv" => array("stime" => "strtotime"), "autoinsert" => true, "table" => "sechedule", "fixed" => array("uid", "time"), "cleanneed" => true),
+	"dsechedule" => array("need" => array("id"), "users" => "all", "autodelete" => true, "table" => "sechedule", "fixed" => array("uid", "time"), "match" => array("uid", "id") ),
+	"dispsechedule" => array()
 );
 
 
-$_ginfo["autoinsert"]=array(
-	"addcontent"=>array("fixed"=>array("time","uid"),"table"=>"content"),
-	"addform"=>array("fixed"=>array("time"),"table"=>"forms"),
-	"addexercise"=>array("fixed"=>array("time","uid"),"table"=>"exercise")
-);
+// $_ginfo["autoinsert"]=array(
+// 	"addcontent"=>array("fixed"=>array("time","uid"),"table"=>"content"),
+// 	"addform"=>array("fixed"=>array("time"),"table"=>"forms"),
+// 	"addexercise"=>array("fixed"=>array("time","uid"),"table"=>"exercise")
+// );
 
 $_ginfo["error"]=array(
 	"-1"=>"Session expired",

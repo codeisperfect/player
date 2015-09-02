@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Miscellaneous Form</title>
+
+<title>User Profile</title>
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="css/reset.css" rel="stylesheet" type="text/css" />
+<link href="css/responsive.css" rel="stylesheet" type="text/css" />
+<link href="css/plugin.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+    
+</head>
+
+<body class="bg">
+
+<header>
+    <div class="header clearfix">
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png"></a>
+        </div>
+        
+        <ul class="top_links">
+            <li><a href="welcome-back.html"><span>3</span>Notification</a></li>
+            <li><a href="admin.html"><span class="fa fa-briefcase"></span>Dashboard</a></li>
+        </ul>
+        
+        <div class="profile-rt">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><span class="fa fa-user"></span>
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li><a href="user_profile.html">Profile</a></li>
+                    <li><a href="#">My messages</a></li>
+                    <li><a href="#">My tasks</a></li>
+                    <li><a href="login_page.html">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+    
+<div class="left-menu">
+    <nav class="side_nav">
+        <ul>
+            <li><a href="explore.html"><span class="fa fa-search"></span><br> Explore</a></li>
+            <li><a href="user_profile.html"><span class="fa fa-user"></span> <br>Profile</a></li>
+            <li><a href="calendar.html"><span class="fa fa-calendar-o"></span> <br>Calendar</a></li>
+            <li class="sub-cate"><a href="#"><span class="fa fa-road"></span><br>Track</a>
+                <div class="sub_panel">
+                    <div class="side_inner">
+                        <h4 class="panel_heading panel_heading_first">Logs</h4>
+                            <ul>
+                                <li><a href="daily-log.html">Daily Logs</a></li>
+                                <li><a href="weekly-review-from.html"> Weekly Review</a></li>
+                                <li><a href="misc-form.html">Misc. Forms</a></li>
+                                <li><a href="graph.html">Graphs</a></li>
+                            </ul>
+
+                        <h4 class="panel_heading">Reference</h4>
+                        <ul>
+                            <li class="add_label"><a href="goal.html">Goals</a></li>
+                            <li class="add_label"><a href="exercise.html">Exercises</a></li>
+                            <li class="add_label"><a href="routines.html">Routines</a></li>
+                            <li class="add_label"><a href="training-history.html">History</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#"><span class="fa fa-gamepad"></span><span class="nav_title">Train</span></a>
+                <div class="sub_panel">
+                    <div class="side_inner">
+                        <h4 class="panel_heading">Pages</h4>
+                        <ul>
+                            <li><a href="#">N Bach</a></li>
+                            <li><a href="#">Intractive Metro</a></li>
+                            <li><a href="#">Breathing Practice</a></li>
+                            <li><a href="#">Meditation</a></li>
+                            <li><a href="#">Sound Track</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#"><span class="fa fa-users"></span><span class="nav_title">Consult</span></a>
+                <div class="sub_panel">
+                    <div class="side_inner">
+                        <h4 class="panel_heading">Pages</h4>
+                        <ul>
+                            <li><a href="chat.html">Instant Massenger</a></li>
+                            <li><a href="post.html">Post A Question</a></li>
+                            <li><a href="challenges.html">Thinking Review Forms</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<div class="profile-box clearfix">
+    <img src="images/avatars/avatar_1.jpg" class="profile-img" />
+    <div class="profile-bx">
+        <h3>Monalisha</h3>
+        <p>Change Photo</p>
+    </div>
+</div>
+
+    
+<div class="container">
+    <div class="main-content-full mt30">
+        <div class="user-tab">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab" data-toggle="tab">General Info</a></li>
+            <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">My Info</a></li>
+            <li role="presentation"><a href="#billing" aria-controls="billing" role="tab" data-toggle="tab">Billing History</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="general">
+                <h3 class="title-dt">User Detail</h3>
+                <form>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Username</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputPassword1" class="label-gp">First Name</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Last Name</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputPassword1" class="label-gp">Date of Birth</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputPassword1" class="label-gp">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                  </div>                  
+                  
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="info">                
+                <form>
+                  <h3 class="title-dt">Address</h3>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">House No. & Street</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputPassword1" class="label-gp">City</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Country</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                    
+                  <h3 class="title-dt mt30">Social</h3>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputPassword1" class="label-gp">Mobile Number</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Alternate Number</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Skype</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>              
+                  
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="billing">
+                <form>
+                  <h3 class="title-dt">Sponsor</h3>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Name of Sponsor</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                    
+                  <h3 class="title-dt mt30">Personal</h3>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Last Payment Amount</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputPassword1" class="label-gp">Last Payment Date</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Payment Amount Due</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>
+                  <div class="form-group clearfix">
+                    <label for="exampleInputEmail1" class="label-gp">Payment Due Date</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                  </div>              
+                  
+                </form>  
+            </div>
+          </div>
+
+        </div>
+        
+        <div class="text-center action-btn">
+            <button class="btn btn-success" style="background-color:#06F;"><i class="fa fa-save"></i> Save profile</button>
+            <button class="btn btn-default"><i class="fa fa-trash-o fa-lg"></i> Delete</button>
+            <button class="btn btn-success" style="background-color:#06F;"><i class="fa fa-save"></i> Change Password</button>
+        </div>
+    </div>    
+</div>
+
+
+<script src="js/jquery-2.0.3.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+<script src="js/core.js"></script>
+
+</body>
+</html>

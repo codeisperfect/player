@@ -1,0 +1,95 @@
+@media screen and (max-width:1366px) {
+.main-content, .main-content-full {width: 1024px; margin: auto; margin-top: 70px !important;}	
+.container .scroll {height: 400px;}
+
+.tab-content .tab-pane .label-gp {width:20%;}
+.tab-content .tab-pane .form-control {width:75%;}
+}
+
+@media screen and (max-width:1024px) {
+.main-content, .container .main-content-full {width: 90%;}	
+.container .main-content-full {padding: 15px; margin-top: 10px !important;}
+.chat-table .table-responsive {margin-bottom:0;}
+}
+
+@media screen and (max-width:800px) {
+.side_nav > ul > li > a > span {font-size: 20px;}
+.sub_panel > ul > li > a > span {font-size: 24px;}	
+.left-menu .side_nav, .left-menu .side_nav > ul {width: 65px;}
+/*.left-menu .side_nav {overflow-x:auto;}*/
+.left-menu .side_nav li a {padding: 0px 5px; font-size:12px;}
+ .left-menu .sub_panel {left: 60px;}
+.left-menu .side_nav li:hover .sub_panel {left: 60px;}
+.left-menu .sub_panel ul > li > a {font-size: 14px; padding: 5px 10px; }
+.container .main-content-full { margin-left: 40px; width: 100%;}
+.panel-group .css-label {margin-bottom:15px;}
+}
+
+
+@media screen and (max-width:768px) {
+.main-content, .container .main-content-full {width: 97%; margin:20px 0 0 30px !important;}	
+.user-tab .nav-tabs {position: relative; padding: 0; right: 0;}
+.user-tab .tab-content {width: 95%;}
+.tab-content .tab-pane .label-gp, .tab-content .tab-pane .form-control {float: none; width: 95%;}
+.profile-box {padding-left: 78px !important;}
+.page-heading {margin-top: 50px;}
+.container .scroll {height:auto; overflow:inherit;}
+.goal-box {margin-bottom:45px;}
+.rout-ex .exercise-bx {margin-bottom:30px;}
+.left-menu .side_nav li a {font-size:11px;}
+}
+
+@media screen and (max-width:640px) {
+.container .main-content, .container .main-content-full {width:100%; min-height:inherit;}
+
+.goal-box .add-btn {margin:15px 0 15px 20px;}
+.chat-table {margin-top:30px;}
+.fc-toolbar .fc-left, .fc-toolbar .fc-right, .fc-toolbar .fc-center {float:none; width:100%;}
+.fc-ltr .fc-view-container {width:97%; margin-left:7px;}
+/*.left-menu .overflowauto {overflow-x:auto !important;}*/
+.left-menu .side_nav > ul > li {margin:5px 0;}
+.left-menu .side_nav > ul > li > a > span {font-size:15px; margin-bottom:5px;}
+.left-menu .side_nav .nav_title {font-size:11px;}
+}
+
+@media screen and (max-width: 480px) {
+
+.main-content-full .action-btn {padding: 15px; text-align: left; margin-top: 10px;}
+.action-btn .btn {display:block; margin-bottom: 10px;}
+.fc-header td {display: block;}
+.fc-header-center {text-align: left;}
+.header .top_links li a {padding-right:4px; text-transform:capitalize; margin:0 3px; font-size:11px;}
+.logo {width:65px; padding:13px 7px;}
+.logo a img {width:100%;}
+
+.submit-box .add-btn {margin:15px 0 15px 0;}
+.submit-box .add-btn.pull-right, .submit-box .input-btn.pull-left {float:none !important;}
+.page-heading {margin-top:30px;}
+.page-heading h2 {font-size:20px;}
+.weekly-text, .weekly-text-rt {font-size:11px;}
+.chat_messages .chat-box {margin-bottom:25px;}
+.ch_right .img-circle, .chat_message .img-circle {width:40px; z-index:999; position:relative;}
+.chat-box .chat_message, .chat-box .chat_message_body {width:100%; margin-top:-12px;}	
+.panel-group .css-label {display:block;}
+.fc-ltr .fc-toolbar .fc-button {padding:0 20px;}
+.fc-ltr .fc-button-group {margin-right:3px;}
+
+}
+
+@media screen and (max-width: 479px) {
+
+}
+
+@media screen and (max-width: 360px) {
+.header .logo {margin-right: 5px;}
+.top_links { float: left;}
+.header .top_links li {padding: 2px 0px; float: left;}
+.top_links li a span { margin-right:4px; padding:3px 4px;}
+.left-menu .side_nav > ul > li {margin:15px 0;}
+.left-menu .side_nav > ul > li > a > span {font-size:25px; margin-bottom:10px;}
+.left-menu .side_nav .nav_title {font-size:13px;}
+
+}
+
+@media screen and (max-width: 320px) {
+}

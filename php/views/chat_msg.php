@@ -43,8 +43,6 @@
 				<img src='photo/icons/loading2.gif' id="loadmoreloadingimg" style='visibility:hidden;' /><br>
 				<a onclick='funcs.loadolder(this);' style="cursor:pointer;display:none;" id="loadmorebutton" >View More</a>
 			</div>
-
-
 		</div>
 	</div>
 </div>

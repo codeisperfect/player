@@ -1,16 +1,18 @@
 <?php
 include "includes/app.php";
 
-// $a = da("mohit", 11, "saini", 22);
+
+// $a = handle_request(array("action" => "sechedule", "msg" => "This is Msg", "sid1" => 11, "stime" => "11-2-2016 16:34"));
 
 
-// load_view("template/top.php");
-// disp_table(getA(table("users")));
-// load_view("template/bottom.php");
-
+// msprint( $a );
 
 
 
+$a = handle_request(array("sid" => 1, "msg" => "Saini", "stime" => "27-07-2015 19:10"), "sechedule");
+
+
+msprint($a);
 
 
 closedb();

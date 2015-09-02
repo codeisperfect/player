@@ -19,6 +19,7 @@ function makesomeaccounts(){
 	print_r(User::signUp(array("email"=>"admin@admin.com","password"=>"p","type"=>"a")));
 	print_r(User::signUp(array("email"=>"mohit@t.com","password"=>"p","type"=>"u")));
 	print_r(User::signUp(array("email"=>"mohit@s.com","password"=>"p","type"=>"f")));
+	Sqle::q("update users set name=concat('name', id) where name is null or name = '' ");
 }
 
 

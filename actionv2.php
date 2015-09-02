@@ -6,7 +6,7 @@ if(server!='server'){
 	sleep(1);
 }
 
-echo json_encode(handle_request($_POST));
+handle_request($_POST, null, true);
 
 closedb();
 

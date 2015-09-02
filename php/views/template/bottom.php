@@ -5,13 +5,13 @@ if($needpopup){
 	load_view("template/success.php");
 }
 ?>
+
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/materialize.min.js"></script>
 	<script src="js/jquery.bxslider.min.js"></script>
 	<script src="js/custom-script.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
 	<script src="js/jquery.raty.js"></script>
-
 
 	<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>

@@ -11,9 +11,29 @@ $_ginfo["query"]["mymsggroupdispordered"]="select * from ".gtable("mymsggroupdis
 
 $_ginfo["query"]["mymsgperson"]="select users.name, users.profilepic, mymsg.* from ".gtable("mymsg")." left join users on users.id=mymsg.sid where personid={pid} order by id desc";
 
+$_ginfo["query"]["dispsechedule"] = "select users.name as whomname, sechedule.* from sechedule left join users on users.id = sechedule.sid order by id desc";
+
+
 if(isset($config["needprofile"])) {
 	$myf = User::myprofile();
 }
+
+foreach(array("sechedule", "dsechedule", "dispsechedule") as $inp) {
+	mius(&$_ginfo["action_constrain"][$inp], array("view" => "template/dispsechedule.php", "dispquery" => "dispsechedule", "dispconv" => array("stime" => "timetostr"), "dispfuncs" => "gettable" ));
+}
+
+// msprint( $_ginfo["action_constrain"]["dispsechedule"] );
+
+// //msprint( $_ginfo["action_constrain"]["sechedule"] );
+
+// // $aa = $_ginfo["action_constrain"]["sechedule"];
+
+// // map(array("mohit", "saini"), function($inp) use($aa) {
+// // 	global $aa;
+// // 	mius(&$aa, array($inp => "Saini"));
+// // });
+
+// // msprint($aa);
 
 
 ?>

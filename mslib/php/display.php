@@ -77,8 +77,11 @@
 			var ecn=<?php echo json_encode($_ginfo["error"]); ?>;
 	<?php
 		closet("script");
-		addall_js(array("js/lib.js","js/mohit.js","js/mohitlib.js","js/main.js"));
+		addall_js(map(array("js/lib.js","js/mohit.js","js/mohitlib.js","js/main.js"), function($inp) {
+			return g("mslib").$inp;
+		}));
 	}
+
 	function readmorecontent($content,$len=100){//assuming $content is not changed to smily already ! 
 		$llen=(strlen($content)>$len ? $len-10:$len);
 		$fhalf=Fun::smilymsg(substr($content,0,$llen));

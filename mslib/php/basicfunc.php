@@ -1,8 +1,16 @@
 <?php
 
-function f_sqltransform($inp = array()) {
-	if(count($inp) > 0)
-		return add(array( array_keys($inp[0]) ), map($inp, f('array_values($inp)') ));
+function f_sqltransform($inp = array(), $onlykey = "all", $keymap = array() ) {
+	if(count($inp) > 0) {
+		if($onlykey === "all") {
+			$onlykey = array_keys($inp[0]);
+		} else if($onlykey === "allm") {
+			$onlykey = array_keys($keymap);
+		}
+		return add(array( array_keys(f_mapkeys( f_getflds( $onlykey, $inp[0]), $keymap ))), map($inp, function($inp) use($onlykey) {
+			return array_values(f_getflds($onlykey, $inp));
+		}));
+	}
 	else
 		return array();
 }
@@ -48,7 +56,7 @@ function f_getflds($arr,$data){
 }
 
 function f_action_constrain_default() {
-	return array("need" => array(), "users" => "", "autodelete" => false, "autoinsert" => false, "autoupdate" => false, "fixed" => array(), "match" => "all", "update" => array(), "insert" => "all", "keymap" => array(), "cleanneed" => false, "funcs" => null, "conv" => array() );
+	return array("need" => array(), "users" => "", "autodelete" => false, "autoinsert" => false, "autoupdate" => false, "fixed" => array(), "match" => "all", "update" => array(), "insert" => "all", "keymap" => array(), "cleanneed" => false, "funcs" => null, "conv" => array(), "view" => null, "dispquery" => null, "dispconv" => array(), "dispfuncs" => null );
 }
 
 
@@ -72,7 +80,7 @@ function f_isvalid_action($post_data, $spec) {//spec is initialized
 
 function f_setinput($post_data, $spec = array()) {//$post_data has action key, $spec is initialized
 	if($spec["cleanneed"]) {
-		$post_data = f_getflds(array_keys($spec["need"]), $post_data);
+		$post_data = f_getflds($spec["need"], $post_data);
 	}
 	$post_data = f_convertinp( f_add_fixed_values( f_mapkeys($post_data, $spec["keymap"]), $spec["fixed"] ), gget("convert", "todb"), $spec["conv"]) ;
 	if( $spec["funcs"] !==null ) {
@@ -108,5 +116,18 @@ function f_deletekeys($inp, $keys = array()) {
 	return $outp;
 }
 
+function f_disp_action($req) {
+	if($req["dispquery"] !== null) {
+		$funcdata = map(Sqle::getA(gtable($req["dispquery"], false), $req["data"]), function($inp) use($req){
+			return f_convertinp($inp, gget("convert", "todisp"), $req["dispconv"]);
+		});
+	} else
+		$funcdata = $req["data"];
+	if( $req["dispfuncs"] !== null ) {
+		$req["dispfuncs"] = giget("funcs", $req["dispfuncs"]);
+		$funcdata = $req["dispfuncs"]($funcdata, $req["data"]);
+	}
+	load_view($req["view"], $funcdata);
+}
 
 ?>

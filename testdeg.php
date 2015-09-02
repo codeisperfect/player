@@ -5,28 +5,16 @@ load_view("template/top.php");
 
 	
 	<div style="margin:100px;" >
-
-	<input id="test"  />
-
+		<button data-action='mohit' data-bid='44' onclick="breq(this);" >Mohit</button>
+		<div>
+			<form onsubmit="return freq(this);" data-action='timepass' data-tid='111' >
+				<input name="mohit" type="text" />
+				<button type="submit" >Submit</button>
+			</form>
+		</div>
 	</div>
 
 <?php
-load_view("template/bottom.php", array("needbody" => false));
-?>
-
-
-<script type="text/javascript">
-
-
-$("#test").datetimepicker({
-	format: 'yyyy-mm-dd hh:ii', 
-	forceParse: true,
-});
-
-</script>
-
-</body></html>
-
-<?php
+load_view("template/bottom.php" );
 closedb();
 ?>

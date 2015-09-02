@@ -1,4 +1,6 @@
 <?php
+	//Bugs: isset have to be replace by array_key_exist
+
 	function div($a, $b) {
 		return ($a-($a%$b))/$b;
 	}
@@ -134,10 +136,11 @@
 		return $_ginfo["action_constrain"][$fname]["need"];
 	}
 
-	function handle_request($post_data, $action=null) {
+	function handle_request($post_data, $action=null, $isdisp = false) {
 		$a=new Actions();
 		$outp=array("ec"=>-7);
 		setift($post_data["action"], $action, $action!==null);
+		$req = null;
 		if(isset($post_data["action"]) ){
 			$func=$post_data["action"];
 			if( getval($post_data["action"], gi("action_constrain") ) !== null ) {
@@ -160,7 +163,15 @@
 					$outp = $a->$func($post_data);
 			}
 		}
-		return $outp;
+		if(!$isdisp )
+			return $outp;
+		else {
+			echo json_encode($outp)."\n";
+//			msprint($req);
+			if($req === null || $req["view"] === null || $outp["ec"] < 0 )
+				return;
+			f_disp_action($req);
+		}
 	}
 
 	function rquery($str, $data) {
@@ -549,6 +560,8 @@
 			return $inp;
 		} else if(gettype($inp) === 'boolean') {
 			return tf($inp);
+		} else if($inp === null) {
+			return "null";
 		} else {
 			$inp = str_replace("'", "\\'", "".$inp);
 			return "'".$inp."'";
@@ -653,4 +666,9 @@
 		$tf = gi("table_prifix");
 		return $tf.rit("_", $tf!==null).$tablename;
 	}
+
+	function getr($inp) {//get one row of sql.
+		return (count($inp)>0) ? $inp[0]:null;
+	}
+
 ?>

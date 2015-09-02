@@ -1,9 +1,10 @@
 <?php
 mius( &$tabattr, array("class" => $class));
 
+
 if($sqlo) {
-	$rows = f_sqltransform($rows);
-} 
+	$rows = f_sqltransform($rows, $onlykey, $keymap);
+}
 setifnn($width, (count($rows)==0 ? 0 : count($rows[0])) );
 setifnn($height,  count($rows)  );
 if($height > 0 ) {

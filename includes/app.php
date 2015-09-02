@@ -40,5 +40,8 @@
 	include $mslib."php/display.php";
 	include "php/displays.php";
 	include_once( $mslib.'includes/dataload.php' ) ;
+	include_once( $mslib.'php/convert.php' ) ;
+	include_once( $mslib.'php/tempfunc.php' ) ;
+
 	include_once( 'includes/dataloads.php' ) ;
 ?>

@@ -1,7 +1,7 @@
 <?php
 load_view("template/top.php");
 load_view("template/navbarnew.php");
-$tabid=1;
+$tabid=2;
 ?>
 	<main class='' >
 		<div class="container-fluid" style='width:100%' >
@@ -10,12 +10,18 @@ $tabid=1;
 					<div class="col s12">
 						<ul class="tabs"  >
 							<li class="tab col s2"><a id="profiletabs1" <?php pit('class="active"', $tabid==1); ?> href="#tab_profile">Messages</a></li>
+							<li class="tab col s2"><a id="profiletabs2" <?php pit('class="active"', $tabid==2); ?> href="#tab_seched">Secheduled</a></li>
 							<li class="tab col s2"><a id="profiletabs5" <?php pit('class="active"', $tabid==5); ?>  href="#tab_topics">Calender</a></li>
 						</ul>
 					</div>
 					<div id="tab_profile" class="col s12">
 					<?php
 						load_view("chat_msg.php", $inp);
+					?>
+					</div>
+					<div id="tab_seched" class="col s12">
+					<?php
+						load_view("chat_seched.php", $inp);
 					?>
 					</div>
 					<div id="tab_topics" class="col s12">

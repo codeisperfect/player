@@ -14,7 +14,7 @@ include "includes/app.php";
 
 
 $temp=Sql::getArray("show tables");
-$need=array("users","msg","msgdata");
+$need=array("users","msg","msgdata", "sechedule");
 
 
 if(1){
